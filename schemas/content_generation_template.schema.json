@@ -1,0 +1,202 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "description": "Unique identifier for the document"
+        },
+        "metadata": {
+            "type": "object",
+            "properties": {
+                "createdDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updatedDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "isActive": {
+                    "type": "boolean"
+                }
+            },
+            "required": ["createdDate", "updatedDate", "isActive"]
+        },
+        "templateInfo": {
+            "type": "object",
+            "properties": {
+                "name": { "type": "string" },
+                "description": { "type": "string" },
+                "brandId": { "type": "string" },
+                "contentType": {
+                    "type": "string",
+                    "enum": ["post", "reel", "carousel", "story"]
+                }
+            },
+            "required": ["name", "brandId", "contentType"]
+        },
+        "schedule": { "$ref": "#/definitions/schedule" },
+        "settings": { "$ref": "#/definitions/templateSettings" }
+    },
+    "required": ["id", "metadata", "templateInfo", "schedule", "settings"],
+    "definitions": {
+        "schedule": {
+            "type": "object",
+            "properties": {
+                "daysOfWeek": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+                    }
+                },
+                "timeSlots": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/timeSlot" }
+                },
+                "frequency": {
+                    "type": "string",
+                    "enum": ["daily", "weekly", "monthly"]
+                },
+                "maxPostsPerDay": { 
+                    "type": "integer",
+                    "minimum": 1
+                }
+            },
+            "required": ["daysOfWeek", "timeSlots"]
+        },
+        "timeSlot": {
+            "type": "object",
+            "properties": {
+                "hour": { 
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 23
+                },
+                "minute": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 59
+                },
+                "timezone": { "type": "string" }
+            },
+            "required": ["hour", "minute", "timezone"]
+        },
+        "templateSettings": {
+            "type": "object",
+            "properties": {
+                "promptTemplate": { "$ref": "#/definitions/promptTemplate" },
+                "visualStyle": { "$ref": "#/definitions/visualStyle" },
+                "contentStrategy": { "$ref": "#/definitions/contentStrategy" },
+                "platformSpecific": { "$ref": "#/definitions/platformSpecific" }
+            },
+            "required": ["promptTemplate"]
+        },
+        "promptTemplate": {
+            "type": "object",
+            "properties": {
+                "systemPrompt": { "type": "string" },
+                "userPrompt": { "type": "string" },
+                "temperature": { "type": "number" },
+                "maxTokens": { "type": "integer" },
+                "model": { "type": "string" },
+                "variables": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/promptVariable" }
+                }
+            },
+            "required": ["systemPrompt", "userPrompt", "model"]
+        },
+        "promptVariable": {
+            "type": "object",
+            "properties": {
+                "name": { "type": "string" },
+                "values": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "description": { "type": "string" }
+            },
+            "required": ["name", "values"]
+        },
+        "visualStyle": {
+            "type": "object",
+            "properties": {
+                "fonts": {
+                    "type": "object",
+                    "properties": {
+                        "primary": { "type": "string" },
+                        "secondary": { "type": "string" }
+                    }
+                },
+                "colors": {
+                    "type": "object",
+                    "properties": {
+                        "primary": { "type": "string" },
+                        "secondary": { "type": "string" },
+                        "background": { "type": "string" },
+                        "text": { "type": "string" }
+                    }
+                },
+                "imageLayout": {
+                    "type": "string",
+                    "enum": ["square", "portrait", "landscape"]
+                },
+                "overlayStyle": {
+                    "type": "object",
+                    "properties": {
+                        "opacity": { "type": "number" },
+                        "position": {
+                            "type": "string",
+                            "enum": ["top", "bottom", "full"]
+                        }
+                    }
+                }
+            }
+        },
+        "contentStrategy": {
+            "type": "object",
+            "properties": {
+                "targetAudience": { "type": "string" },
+                "tone": { "type": "string" },
+                "keywords": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "hashtagStrategy": { "type": "string" },
+                "callToAction": { "type": "string" }
+            }
+        },
+        "platformSpecific": {
+            "type": "object",
+            "properties": {
+                "instagram": {
+                    "type": "object",
+                    "properties": {
+                        "useReels": { "type": "boolean" },
+                        "useCarousel": { "type": "boolean" },
+                        "useStories": { "type": "boolean" }
+                    }
+                },
+                "facebook": {
+                    "type": "object",
+                    "properties": {
+                        "useReels": { "type": "boolean" },
+                        "groupIds": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                        }
+                    }
+                },
+                "tiktok": {
+                    "type": "object",
+                    "properties": {
+                        "useDuets": { "type": "boolean" },
+                        "useStitches": { "type": "boolean" }
+                    }
+                }
+            }
+        }
+    }
+}
