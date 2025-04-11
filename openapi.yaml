@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: AutoGenSocial API
+  version: '1.0.0'
+  description: |
+    API for managing brands and content generation templates for social media automation.
+    
+    ## Authentication
+    This API uses Azure Static Web Apps built-in authentication. For local development,
+    use the Azure Static Web Apps CLI to emulate authentication.
+    
+    ## Rate Limiting
+    API calls are limited to 100 requests per minute per user.
+    
+    ## Pagination
+    List endpoints support pagination using limit and offset parameters.
+  contact:
+    name: AutoGenSocial Support
+    url: https://autogensocial.com/support
+  license:
+    name: Proprietary
+    url: https://autogensocial.com/license
+
+servers:
+  - url: /api
+    description: Azure Static Web Apps API endpoint
+  - url: http://localhost:7071/api
+    description: Local development server
+
+tags:
+  - name: Brands
+    description: Brand management operations
+  - name: Content Templates
+    description: Content generation template operations
+
+components:
+  parameters:
+    $ref: './components/parameters.yaml'
+  responses:
+    $ref: './components/responses.yaml'
+  securitySchemes:
+    $ref: './components/security-schemes.yaml'
+  schemas:
+    Error:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: "An error occurred processing your request"
+        code:
+          type: string
+          description: Error code for machine processing
+          example: "INVALID_INPUT"
+
+paths:
+  /brand_management:
+    post:
+      $ref: './paths/brand/create.yaml#/post'
+      tags: [Brands]
+    get:
+      $ref: './paths/brand/get-all.yaml#/get'
+      tags: [Brands]
+
+  /brand_management/{id}:
+    parameters:
+      - $ref: '#/components/parameters/id'
+    get:
+      $ref: './paths/brand/get-by-id.yaml#/get'
+      tags: [Brands]
+    put:
+      $ref: './paths/brand/update.yaml#/put'
+      tags: [Brands]
+
+  /content_generation_template_management:
+    post:
+      $ref: './paths/content-template/create.yaml#/post'
+      tags: [Content Templates]
+    get:
+      $ref: './paths/content-template/get-all.yaml#/get'
+      tags: [Content Templates]
+
+  /content_generation_template_management/{id}:
+    parameters:
+      - $ref: '#/components/parameters/id'
+    get:
+      $ref: './paths/content-template/get-by-id.yaml#/get'
+      tags: [Content Templates]
+    put:
+      $ref: './paths/content-template/update.yaml#/put'
+      tags: [Content Templates]
+
+security:
+  - StaticWebAppsAuth: []

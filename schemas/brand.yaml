@@ -1,0 +1,124 @@
+openapi: 3.0.0
+components:
+  schemas:
+    SocialAccount:
+      type: object
+      required:
+        - enabled
+        - username
+        - accessToken
+      properties:
+        enabled:
+          type: boolean
+          description: Whether this social account is enabled
+          example: true
+        username:
+          type: string
+          description: Username for the social account
+          example: "@brandaccount"
+        accessToken:
+          type: string
+          description: OAuth access token
+          format: password
+          example: "oauth2_access_token"
+        refreshToken:
+          type: string
+          description: OAuth refresh token
+          format: password
+          example: "oauth2_refresh_token"
+        expiresAt:
+          type: string
+          format: date-time
+          description: Token expiration timestamp
+          example: "2025-04-10T12:00:00Z"
+
+    Brand:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - brandInfo
+          properties:
+            brandInfo:
+              type: object
+              required:
+                - name
+                - userId
+              properties:
+                name:
+                  type: string
+                  description: Name of the brand
+                  minLength: 1
+                  maxLength: 100
+                  example: "Acme Corporation"
+                description:
+                  type: string
+                  description: Optional description of the brand
+                  maxLength: 500
+                  example: "Leading provider of innovative solutions"
+                userId:
+                  type: string
+                  description: ID of the user who owns this brand
+                  format: uuid
+                  example: "123e4567-e89b-12d3-a456-426614174000"
+            socialAccounts:
+              type: object
+              properties:
+                instagram:
+                  $ref: '#/components/schemas/SocialAccount'
+                facebook:
+                  $ref: '#/components/schemas/SocialAccount'
+                tiktok:
+                  $ref: '#/components/schemas/SocialAccount'
+
+    BrandCreate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the brand
+          minLength: 1
+          maxLength: 100
+          example: "New Brand Name"
+
+    BrandUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated name of the brand
+          minLength: 1
+          maxLength: 100
+          example: "Updated Brand Name"
+        description:
+          type: string
+          description: Updated description of the brand
+          maxLength: 500
+          example: "Updated brand description"
+        socialAccounts:
+          type: object
+          properties:
+            instagram:
+              $ref: '#/components/schemas/SocialAccount'
+            facebook:
+              $ref: '#/components/schemas/SocialAccount'
+            tiktok:
+              $ref: '#/components/schemas/SocialAccount'
+
+    BrandNameResponse:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the brand
+          format: uuid
+          example: "123e4567-e89b-12d3-a456-426614174000"
+        name:
+          type: string
+          description: Name of the brand
+          example: "Brand Name"

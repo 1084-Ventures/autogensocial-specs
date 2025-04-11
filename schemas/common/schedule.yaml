@@ -1,0 +1,20 @@
+type: object
+required:
+  - daysOfWeek
+  - timeSlots
+properties:
+  daysOfWeek:
+    type: array
+    items:
+      type: string
+      enum: [monday, tuesday, wednesday, thursday, friday, saturday, sunday]
+  timeSlots:
+    type: array
+    items:
+      $ref: './time-slot.yaml'
+  frequency:
+    type: string
+    enum: [daily, weekly, monthly]
+  maxPostsPerDay:
+    type: integer
+    minimum: 1

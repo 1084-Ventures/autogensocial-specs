@@ -1,0 +1,141 @@
+openapi: 3.0.0
+components:
+  schemas:
+    ContentType:
+      type: string
+      enum: [post, reel, carousel, story]
+      description: Type of content to be generated
+
+    PromptVariable:
+      type: object
+      required:
+        - name
+        - values
+      properties:
+        name:
+          type: string
+          description: Name of the variable
+        values:
+          type: array
+          items:
+            type: string
+          description: Possible values for the variable
+        description:
+          type: string
+          description: Optional description of the variable
+
+    TemplateSettings:
+      type: object
+      required:
+        - promptTemplate
+        - visualStyle
+        - contentStrategy
+      properties:
+        promptTemplate:
+          type: object
+          required:
+            - systemPrompt
+            - userPrompt
+            - model
+          properties:
+            systemPrompt:
+              type: string
+            userPrompt:
+              type: string
+            temperature:
+              type: number
+              minimum: 0
+              maximum: 2
+            maxTokens:
+              type: integer
+            model:
+              type: string
+            variables:
+              type: array
+              items:
+                $ref: '#/components/schemas/PromptVariable'
+        visualStyle:
+          $ref: './common/visual-style.yaml'
+        contentStrategy:
+          type: object
+          properties:
+            targetAudience:
+              type: string
+            tone:
+              type: string
+            keywords:
+              type: array
+              items:
+                type: string
+            hashtagStrategy:
+              type: string
+            callToAction:
+              type: string
+        platformSpecific:
+          $ref: './common/platform-specific.yaml'
+
+    TemplateInfo:
+      type: object
+      required:
+        - name
+        - brandId
+        - contentType
+      properties:
+        name:
+          type: string
+          description: Name of the template
+        description:
+          type: string
+          description: Optional description of the template
+        brandId:
+          type: string
+          description: ID of the brand this template belongs to
+        contentType:
+          $ref: '#/components/schemas/ContentType'
+
+    ContentGenerationTemplate:
+      allOf:
+        - $ref: './base.yaml#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - templateInfo
+            - schedule
+            - settings
+          properties:
+            templateInfo:
+              $ref: '#/components/schemas/TemplateInfo'
+            schedule:
+              $ref: './common/schedule.yaml'
+            settings:
+              $ref: '#/components/schemas/TemplateSettings'
+
+    ContentTemplateCreate:
+      type: object
+      required:
+        - templateInfo
+        - schedule
+        - settings
+      properties:
+        templateInfo:
+          $ref: '#/components/schemas/TemplateInfo'
+        schedule:
+          $ref: './common/schedule.yaml'
+        settings:
+          $ref: '#/components/schemas/TemplateSettings'
+
+    ContentTemplateUpdate:
+      type: object
+      properties:
+        templateInfo:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+            contentType:
+              $ref: '#/components/schemas/ContentType'
+        schedule:
+          $ref: './common/schedule.yaml'
+        settings:
+          $ref: '#/components/schemas/TemplateSettings'

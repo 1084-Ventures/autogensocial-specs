@@ -1,0 +1,144 @@
+NotFound:
+  description: Resource not found
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          error:
+            type: string
+            example: Resource not found
+
+BadRequest:
+  description: Invalid request
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          error:
+            type: string
+            example: Invalid request parameters
+
+Unauthorized:
+  description: Unauthorized access
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          error:
+            type: string
+            example: Unauthorized access
+
+InternalError:
+  description: Internal server error
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          error:
+            type: string
+            example: Internal server error
+
+401Unauthorized:
+  description: Unauthorized - Authentication is required
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/Error'
+      example:
+        error: "Authentication required to access this resource"
+
+403Forbidden:
+  description: Forbidden - Insufficient permissions
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/Error'
+      example:
+        error: "You do not have permission to access this resource"
+
+404NotFound:
+  description: Resource not found
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/Error'
+      example:
+        error: "The requested resource was not found"
+
+422UnprocessableEntity:
+  description: Validation error
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - error
+          - details
+        properties:
+          error:
+            type: string
+          details:
+            type: array
+            items:
+              type: object
+              properties:
+                field:
+                  type: string
+                message:
+                  type: string
+      example:
+        error: "Validation failed"
+        details: [
+          {
+            "field": "name",
+            "message": "Name is required and must be between 1 and 100 characters"
+          }
+        ]
+
+500InternalServer:
+  description: Internal server error
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/Error'
+      example:
+        error: "An unexpected error occurred"
+
+BrandResponse:
+  description: Successfully retrieved brand
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/Brand'
+      example:
+        id: "123e4567-e89b-12d3-a456-426614174000"
+        brandInfo:
+          name: "Acme Corporation"
+          description: "Leading provider of innovative solutions"
+          userId: "user-123"
+        socialAccounts:
+          instagram:
+            enabled: true
+            username: "@acmecorp"
+            accessToken: "instagram_token"
+            expiresAt: "2025-04-10T12:00:00Z"
+        createdAt: "2025-01-01T00:00:00Z"
+        updatedAt: "2025-04-10T12:00:00Z"
+
+BrandListResponse:
+  description: Successfully retrieved list of brands
+  content:
+    application/json:
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/BrandNameResponse'
+      example:
+        - id: "123e4567-e89b-12d3-a456-426614174000"
+          name: "Acme Corporation"
+        - id: "987fde32-c76a-45b3-b456-789012345678"
+          name: "Tech Startup Inc"

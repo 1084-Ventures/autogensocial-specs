@@ -1,0 +1,16 @@
+get:
+  summary: Get all brand names for the current user
+  operationId: getBrandNames
+  responses:
+    '200':
+      description: List of brand names
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../../schemas/brand.yaml#/components/schemas/BrandNameResponse'
+    '500':
+      $ref: '../../components/responses.yaml#/InternalError'
+  security:
+    - StaticWebAppsAuth: []

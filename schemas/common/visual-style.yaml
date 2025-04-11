@@ -1,0 +1,33 @@
+type: object
+properties:
+  fonts:
+    type: object
+    properties:
+      primary:
+        type: string
+      secondary:
+        type: string
+  colors:
+    type: object
+    properties:
+      primary:
+        type: string
+      secondary:
+        type: string
+      background:
+        type: string
+      text:
+        type: string
+  imageLayout:
+    type: string
+    enum: [square, portrait, landscape]
+  overlayStyle:
+    type: object
+    properties:
+      opacity:
+        type: number
+        minimum: 0
+        maximum: 1
+      position:
+        type: string
+        enum: [top, bottom, full]
