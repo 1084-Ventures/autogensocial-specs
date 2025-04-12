@@ -3,110 +3,99 @@ NotFound:
   content:
     application/json:
       schema:
-        type: object
-        properties:
-          error:
-            type: string
-            example: Resource not found
+        $ref: '#/components/schemas/Error'
+      example:
+        error:
+          code: RESOURCE_NOT_FOUND
+          message: The requested resource was not found
 
 BadRequest:
-  description: Invalid request
+  description: Invalid request parameters
   content:
     application/json:
       schema:
-        type: object
-        properties:
-          error:
-            type: string
-            example: Invalid request parameters
+        $ref: '#/components/schemas/Error'
+      example:
+        error:
+          code: INVALID_INPUT
+          message: Invalid request parameters
 
 Unauthorized:
-  description: Unauthorized access
+  description: Authentication required
   content:
     application/json:
       schema:
-        type: object
-        properties:
-          error:
-            type: string
-            example: Unauthorized access
+        $ref: '#/components/schemas/Error'
+      example:
+        error:
+          code: UNAUTHORIZED
+          message: Valid API key required
+
+RateLimitExceeded:
+  description: Rate limit exceeded
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/Error'
+      example:
+        error:
+          code: RATE_LIMIT_EXCEEDED
+          message: Rate limit exceeded
+          details:
+            remaining_requests: 0
 
 InternalError:
   description: Internal server error
   content:
     application/json:
       schema:
-        type: object
-        properties:
-          error:
-            type: string
-            example: Internal server error
+        $ref: '#/components/schemas/Error'
+      example:
+        error:
+          code: INTERNAL_ERROR
+          message: An unexpected error occurred
 
-401Unauthorized:
-  description: Unauthorized - Authentication is required
+ValidationError:
+  description: Request validation failed
   content:
     application/json:
       schema:
         $ref: '#/components/schemas/Error'
       example:
-        error: "Authentication required to access this resource"
-
-403Forbidden:
-  description: Forbidden - Insufficient permissions
-  content:
-    application/json:
-      schema:
-        $ref: '#/components/schemas/Error'
-      example:
-        error: "You do not have permission to access this resource"
-
-404NotFound:
-  description: Resource not found
-  content:
-    application/json:
-      schema:
-        $ref: '#/components/schemas/Error'
-      example:
-        error: "The requested resource was not found"
-
-422UnprocessableEntity:
-  description: Validation error
-  content:
-    application/json:
-      schema:
-        type: object
-        required:
-          - error
-          - details
-        properties:
-          error:
-            type: string
+        error:
+          code: VALIDATION_ERROR
+          message: Request validation failed
           details:
-            type: array
-            items:
-              type: object
-              properties:
-                field:
-                  type: string
-                message:
-                  type: string
-      example:
-        error: "Validation failed"
-        details: [
-          {
-            "field": "name",
-            "message": "Name is required and must be between 1 and 100 characters"
-          }
-        ]
+            field: name
+            message: Field is required
 
-500InternalServer:
-  description: Internal server error
-  content:
-    application/json:
-      schema:
-        $ref: '#/components/schemas/Error'
-      example:
-        error: "An unexpected error occurred"
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: object
+          required:
+            - code
+            - message
+          properties:
+            code:
+              type: string
+              enum:
+                - UNAUTHORIZED
+                - RATE_LIMIT_EXCEEDED
+                - INVALID_INPUT
+                - VALIDATION_ERROR
+                - RESOURCE_NOT_FOUND
+                - INTERNAL_ERROR
+            message:
+              type: string
+            details:
+              type: object
+              additionalProperties: true
 
 BrandResponse:
   description: Successfully retrieved brand

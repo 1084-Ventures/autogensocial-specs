@@ -6,24 +6,32 @@ info:
     API for managing brands and content generation templates for social media automation.
     
     ## Authentication
-    This API uses Azure Static Web Apps built-in authentication. For local development,
-    use the Azure Static Web Apps CLI to emulate authentication.
+    This API uses API key authentication. Include your API key in the X-API-Key header.
     
     ## Rate Limiting
-    API calls are limited to 100 requests per minute per user.
+    API calls are limited to 100 requests per minute per API key.
     
-    ## Pagination
-    List endpoints support pagination using limit and offset parameters.
+    ## Error Handling
+    All errors follow a standard format:
+    ```json
+    {
+      "error": {
+        "code": "ERROR_CODE",
+        "message": "Human readable message",
+        "details": {} // Optional additional information
+      }
+    }
+    ```
   contact:
     name: AutoGenSocial Support
     url: https://autogensocial.com/support
   license:
-    name: Proprietary
-    url: https://autogensocial.com/license
+    name: MIT
+    url: https://opensource.org/licenses/MIT
 
 servers:
   - url: /api
-    description: Azure Static Web Apps API endpoint
+    description: Azure Functions API endpoint
   - url: http://localhost:7071/api
     description: Local development server
 
@@ -40,20 +48,6 @@ components:
     $ref: './components/responses.yaml'
   securitySchemes:
     $ref: './components/security-schemes.yaml'
-  schemas:
-    Error:
-      type: object
-      required:
-        - error
-      properties:
-        error:
-          type: string
-          description: Error message
-          example: "An error occurred processing your request"
-        code:
-          type: string
-          description: Error code for machine processing
-          example: "INVALID_INPUT"
 
 paths:
   /brand_management:
@@ -63,6 +57,8 @@ paths:
     get:
       $ref: './paths/brand/get-all.yaml#/get'
       tags: [Brands]
+      parameters:
+        - $ref: '#/components/parameters/pagination'
 
   /brand_management/{id}:
     parameters:
@@ -81,6 +77,9 @@ paths:
     get:
       $ref: './paths/content-template/get-all.yaml#/get'
       tags: [Content Templates]
+      parameters:
+        - $ref: '#/components/parameters/brandId'
+        - $ref: '#/components/parameters/pagination'
 
   /content_generation_template_management/{id}:
     parameters:
@@ -92,5 +91,63 @@ paths:
       $ref: './paths/content-template/update.yaml#/put'
       tags: [Content Templates]
 
+  /generate_content:
+    post:
+      summary: Generate content using a template
+      tags: [Content Templates]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - brandId
+                - templateId
+              properties:
+                brandId:
+                  type: string
+                  format: uuid
+                templateId:
+                  type: string
+                  format: uuid
+                variableValues:
+                  type: object
+                  additionalProperties:
+                    type: string
+      responses:
+        '201':
+          description: Content generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  content:
+                    type: object
+                    properties:
+                      mainText:
+                        type: string
+                      caption:
+                        type: string
+                      hashtags:
+                        type: array
+                        items:
+                          type: string
+                      callToAction:
+                        type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
 security:
-  - StaticWebAppsAuth: []
+  - ApiKeyAuth: []

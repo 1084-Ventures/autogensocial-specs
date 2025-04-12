@@ -4,7 +4,8 @@ brandId:
   required: true
   schema:
     type: string
-  description: Brand ID to filter results
+    format: uuid
+  description: Brand identifier (UUID)
 
 id:
   name: id
@@ -13,54 +14,33 @@ id:
   schema:
     type: string
     format: uuid
-    pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$'
-  description: Resource identifier (UUID v4)
-  example: "123e4567-e89b-12d3-a456-426614174000"
+  description: Resource identifier (UUID)
 
-limit:
-  name: limit
+pagination:
   in: query
+  name: pagination
   required: false
   schema:
-    type: integer
-    minimum: 1
-    maximum: 100
-    default: 20
-  description: Maximum number of items to return per page
-  example: 20
-
-offset:
-  name: offset
-  in: query
-  required: false
-  schema:
-    type: integer
-    minimum: 0
-    default: 0
-  description: Number of items to skip for pagination
-  example: 0
-
-sortBy:
-  name: sortBy
-  in: query
-  required: false
-  schema:
-    type: string
-    enum: [createdAt, updatedAt, name]
-    default: createdAt
-  description: Field to sort results by
-  example: "createdAt"
-
-sortOrder:
-  name: sortOrder
-  in: query
-  required: false
-  schema:
-    type: string
-    enum: [asc, desc]
-    default: desc
-  description: Sort order (ascending or descending)
-  example: "desc"
+    type: object
+    properties:
+      limit:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+      offset:
+        type: integer
+        minimum: 0
+        default: 0
+      sortBy:
+        type: string
+        enum: [createdAt, updatedAt, name]
+        default: createdAt
+      sortOrder:
+        type: string
+        enum: [asc, desc]
+        default: desc
+  description: Pagination and sorting parameters
 
 filter:
   name: filter

@@ -1,23 +1,6 @@
-StaticWebAppsAuth:
+ApiKeyAuth:
   type: apiKey
-  description: |
-    Azure Static Web Apps built-in authentication.
-    The token is automatically handled by the Static Web Apps runtime.
-    For local development, use the Azure Static Web Apps CLI to emulate authentication.
-  name: X-MS-CLIENT-PRINCIPAL
+  description: API key authentication for all endpoints
+  name: X-API-Key
   in: header
-  x-example: |
-    {
-      "identityProvider": "aad",
-      "userId": "user-123",
-      "userDetails": "user@example.com",
-      "userRoles": ["authenticated"]
-    }
-
-BearerAuth:
-  type: http
-  scheme: bearer
-  bearerFormat: JWT
-  description: |
-    JWT token authentication for external API access.
-    Required for programmatic API access outside of Static Web Apps runtime.
+  x-example: "your-api-key-here"
