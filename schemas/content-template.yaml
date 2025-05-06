@@ -3,8 +3,13 @@ components:
   schemas:
     ContentType:
       type: string
-      enum: [post, reel, carousel, story]
-      description: Type of content to be generated
+      enum: [text, video, multi-image, image]
+      description: Type of content to be generated - text (text-only post), video (video content), multi-image (multiple images), image (single image)
+
+    Platform:
+      type: string
+      enum: [instagram, facebook, tiktok, twitter]
+      description: Social media platform for the content
 
     PromptVariable:
       type: object
@@ -30,6 +35,7 @@ components:
         - promptTemplate
         - visualStyle
         - contentStrategy
+        - platforms
       properties:
         promptTemplate:
           type: object
@@ -71,8 +77,27 @@ components:
               type: string
             callToAction:
               type: string
-        platformSpecific:
-          $ref: './common/platform-specific.yaml'
+        platforms:
+          type: object
+          description: Platform-specific settings
+          additionalProperties: false
+          properties:
+            instagram:
+              $ref: './platforms/instagram.yaml'
+            facebook:
+              $ref: './platforms/facebook.yaml'
+            tiktok:
+              $ref: './platforms/tiktok.yaml'
+            twitter:
+              $ref: './platforms/twitter.yaml'
+        contentTypeSettings:
+          type: object
+          description: Settings specific to each content type
+          oneOf:
+            - $ref: './content-types/text.yaml'
+            - $ref: './content-types/video.yaml'
+            - $ref: './content-types/multi-image.yaml'
+            - $ref: './content-types/image.yaml'
 
     TemplateInfo:
       type: object
@@ -80,6 +105,7 @@ components:
         - name
         - brandId
         - contentType
+        - targetPlatforms
       properties:
         name:
           type: string
@@ -92,6 +118,12 @@ components:
           description: ID of the brand this template belongs to
         contentType:
           $ref: '#/components/schemas/ContentType'
+        targetPlatforms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Platform'
+          minItems: 1
+          description: List of platforms this template targets
 
     ContentGenerationTemplate:
       allOf:

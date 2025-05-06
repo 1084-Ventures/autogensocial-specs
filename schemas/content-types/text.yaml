@@ -1,0 +1,34 @@
+type: object
+description: Settings specific to text-based content
+properties:
+  maxLength:
+    type: integer
+    description: Maximum length of the text content in characters
+  mediaAttachments:
+    type: object
+    properties:
+      allowed:
+        type: boolean
+        description: Whether media attachments are allowed with this text content
+      maxCount:
+        type: integer
+        description: Maximum number of media attachments allowed
+      types:
+        type: array
+        items:
+          type: string
+          enum: [image, gif, video]
+        description: Types of media attachments allowed
+  formatting:
+    type: object
+    properties:
+      allowMarkdown:
+        type: boolean
+        description: Whether markdown formatting is allowed
+      allowHtml:
+        type: boolean
+        description: Whether HTML formatting is allowed
+      allowEmoji:
+        type: boolean
+        default: true
+        description: Whether emoji are allowed in the text

@@ -1,0 +1,56 @@
+type: object
+description: Settings specific to video content
+properties:
+  duration:
+    type: object
+    properties:
+      min:
+        type: integer
+        description: Minimum duration in seconds
+      max:
+        type: integer
+        description: Maximum duration in seconds
+  format:
+    type: object
+    properties:
+      aspectRatio:
+        type: string
+        enum: [square, portrait, landscape, vertical]
+        default: vertical
+        description: Video aspect ratio
+      resolution:
+        type: object
+        properties:
+          width:
+            type: integer
+            description: Video width in pixels
+          height:
+            type: integer
+            description: Video height in pixels
+  audio:
+    type: object
+    properties:
+      required:
+        type: boolean
+        description: Whether audio is required
+      backgroundMusic:
+        type: boolean
+        description: Whether background music should be included
+      voiceover:
+        type: boolean
+        description: Whether voiceover should be included
+  captions:
+    type: object
+    properties:
+      required:
+        type: boolean
+        description: Whether captions are required
+      style:
+        type: string
+        enum: [subtitle, overlay, none]
+        description: Style of captions to use
+  visualEffects:
+    type: array
+    items:
+      type: string
+    description: List of allowed visual effects

@@ -1,0 +1,48 @@
+type: object
+description: Settings specific to multiple image content
+properties:
+  images:
+    type: object
+    required: [min, max]
+    properties:
+      min:
+        type: integer
+        minimum: 2
+        default: 2
+        description: Minimum number of images required
+      max:
+        type: integer
+        maximum: 10
+        default: 10
+        description: Maximum number of images allowed
+  format:
+    type: object
+    properties:
+      aspectRatio:
+        type: string
+        enum: [square, portrait, landscape]
+        default: square
+        description: Required aspect ratio for all images
+      consistent:
+        type: boolean
+        default: true
+        description: Whether all images must have the same dimensions
+      maxFileSize:
+        type: integer
+        description: Maximum file size per image in bytes
+  perImageText:
+    type: boolean
+    default: false
+    description: Whether each image can have its own caption/description
+  transitions:
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [slide, fade, none]
+        default: slide
+        description: Type of transition between images
+      autoPlay:
+        type: boolean
+        default: false
+        description: Whether to auto-advance through images

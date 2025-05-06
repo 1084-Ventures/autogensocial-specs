@@ -1,0 +1,50 @@
+type: object
+description: Settings specific to single image content
+properties:
+  format:
+    type: object
+    properties:
+      aspectRatio:
+        type: string
+        enum: [square, portrait, landscape]
+        default: square
+        description: Required aspect ratio for the image
+      minResolution:
+        type: object
+        properties:
+          width:
+            type: integer
+            description: Minimum width in pixels
+          height:
+            type: integer
+            description: Minimum height in pixels
+      maxFileSize:
+        type: integer
+        description: Maximum file size in bytes
+  overlay:
+    type: object
+    properties:
+      text:
+        type: object
+        properties:
+          allowed:
+            type: boolean
+            default: true
+            description: Whether text overlay is allowed
+          maxLength:
+            type: integer
+            description: Maximum text length for overlay
+      position:
+        type: string
+        enum: [top, center, bottom]
+        default: center
+        description: Position of the overlay content
+  filters:
+    type: array
+    items:
+      type: string
+    description: List of allowed image filters
+  altText:
+    type: boolean
+    default: true
+    description: Whether alt text is required for accessibility
