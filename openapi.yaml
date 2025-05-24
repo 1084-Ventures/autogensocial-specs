@@ -48,6 +48,33 @@ components:
     $ref: './components/responses.yaml'
   securitySchemes:
     $ref: './components/security-schemes.yaml'
+  schemas:
+    GenerateContentRequest:
+      type: object
+      required:
+        - brandId
+        - templateId
+      properties:
+        brandId:
+          type: string
+          format: uuid
+        templateId:
+          type: string
+          format: uuid
+        variableValues:
+          type: object
+          additionalProperties:
+            type: string
+    GenerateContentResponse:
+      type: object
+      required:
+        - id
+        - content
+      properties:
+        id:
+          type: string
+        content:
+          $ref: './schemas/responses/openai-content-response.yaml#/components/schemas/OpenAIContentResponse'
 
 paths:
   /brand_management:
@@ -100,44 +127,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - brandId
-                - templateId
-              properties:
-                brandId:
-                  type: string
-                  format: uuid
-                templateId:
-                  type: string
-                  format: uuid
-                variableValues:
-                  type: object
-                  additionalProperties:
-                    type: string
+              $ref: '#/components/schemas/GenerateContentRequest'
       responses:
         '201':
           description: Content generated successfully
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                  content:
-                    type: object
-                    properties:
-                      mainText:
-                        type: string
-                      caption:
-                        type: string
-                      hashtags:
-                        type: array
-                        items:
-                          type: string
-                      callToAction:
-                        type: string
+                $ref: '#/components/schemas/GenerateContentResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':

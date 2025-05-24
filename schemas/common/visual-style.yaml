@@ -30,4 +30,4 @@ properties:
         maximum: 1
       position:
         type: string
-        enum: [top, bottom, full]
+        enum: [top, bottom, center, full]

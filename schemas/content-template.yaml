@@ -7,9 +7,11 @@ components:
       description: Type of content to be generated - text (text-only post), video (video content), multi-image (multiple images), image (single image)
 
     Platform:
-      type: string
-      enum: [instagram, facebook, tiktok, twitter]
-      description: Social media platform for the content
+      type: array
+      items:
+        type: string
+        enum: [instagram, facebook, tiktok, twitter]
+        description: Social media platform(s) for the content
 
     PromptVariable:
       type: object
@@ -46,20 +48,49 @@ components:
           properties:
             systemPrompt:
               type: string
+              description: |
+                System-level instructions for the AI (e.g., persona, rules, or context).
+                You can reference variables from visualStyle, contentStrategy, platforms, and contentTypeSettings using {{variable}} syntax.
+                Always respond ONLY with a valid JSON object containing these fields:
+                - text: the main post text
+                - comment: a suggested comment for the post
+                - hashtags: an array of relevant hashtags (as strings)
+                Do not include any other text or formatting.
             userPrompt:
               type: string
+              description: |
+                The main prompt for content generation. Use {{variable}} syntax to insert dynamic values from visualStyle, contentStrategy, platforms, and contentTypeSettings.
+                Example: "Create a post for {{platform}} using the {{visualStyle.colors.primary}} color scheme and a {{contentStrategy.tone}} tone. Return only a JSON object with fields: text, comment, hashtags."
             temperature:
               type: number
               minimum: 0
               maximum: 2
+              default: 1
+              description: Controls randomness. Lower is more focused, higher is more creative.
             maxTokens:
               type: integer
+              description: Maximum length of the generated content.
             model:
               type: string
+              description: The AI model to use (e.g., gpt-4, gpt-3.5-turbo).
             variables:
               type: array
               items:
                 $ref: '#/components/schemas/PromptVariable'
+              description: |
+                List of variables available for use in the userPrompt and systemPrompt. Variables can reference properties from visualStyle, contentStrategy, platforms, and contentTypeSettings.
+            example:
+              type: object
+              description: Example usage of the prompt template referencing other sections.
+              properties:
+                systemPrompt:
+                  type: string
+                  example: |
+                    You are an API that generates social media content. Always respond ONLY with a valid JSON object containing these fields: text, comment, hashtags.
+                userPrompt:
+                  type: string
+                  example: |
+                    Generate a post for {{platform}} using the {{visualStyle.colors.primary}} color scheme and a {{contentStrategy.tone}} tone. Return only a JSON object with fields: text, comment, hashtags.
         visualStyle:
           $ref: './common/visual-style.yaml'
         contentStrategy:
