@@ -12,9 +12,3 @@ properties:
     type: array
     items:
       $ref: './time-slot.yaml'
-  frequency:
-    type: string
-    enum: [daily, weekly, monthly]
-  maxPostsPerDay:
-    type: integer
-    minimum: 1

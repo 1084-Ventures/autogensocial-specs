@@ -27,17 +27,12 @@ components:
           items:
             type: string
           description: Possible values for the variable
-        description:
-          type: string
-          description: Optional description of the variable
 
     TemplateSettings:
       type: object
       required:
         - promptTemplate
         - visualStyle
-        - contentStrategy
-        - platforms
       properties:
         promptTemplate:
           type: object
@@ -45,90 +40,37 @@ components:
             - systemPrompt
             - userPrompt
             - model
+            - temperature
+            - maxTokens
           properties:
             systemPrompt:
               type: string
               description: |
-                System-level instructions for the AI (e.g., persona, rules, or context).
-                You can reference variables from visualStyle, contentStrategy, platforms, and contentTypeSettings using {{variable}} syntax.
-                Always respond ONLY with a valid JSON object containing these fields:
-                - text: the main post text
-                - comment: a suggested comment for the post
-                - hashtags: an array of relevant hashtags (as strings)
-                Do not include any other text or formatting.
+                System-level instructions for the AI. (Set automatically based on content type.)
             userPrompt:
               type: string
               description: |
-                The main prompt for content generation. Use {{variable}} syntax to insert dynamic values from visualStyle, contentStrategy, platforms, and contentTypeSettings.
-                Example: "Create a post for {{platform}} using the {{visualStyle.colors.primary}} color scheme and a {{contentStrategy.tone}} tone. Return only a JSON object with fields: text, comment, hashtags."
+                The main prompt for content generation. Uses {{variable}} syntax.
             temperature:
               type: number
               minimum: 0
               maximum: 2
               default: 1
-              description: Controls randomness. Lower is more focused, higher is more creative.
+              description: Set automatically.
             maxTokens:
               type: integer
-              description: Maximum length of the generated content.
+              description: Set automatically.
             model:
               type: string
-              description: The AI model to use (e.g., gpt-4, gpt-3.5-turbo).
+              description: Set automatically.
             variables:
               type: array
               items:
                 $ref: '#/components/schemas/PromptVariable'
               description: |
-                List of variables available for use in the userPrompt and systemPrompt. Variables can reference properties from visualStyle, contentStrategy, platforms, and contentTypeSettings.
-            example:
-              type: object
-              description: Example usage of the prompt template referencing other sections.
-              properties:
-                systemPrompt:
-                  type: string
-                  example: |
-                    You are an API that generates social media content. Always respond ONLY with a valid JSON object containing these fields: text, comment, hashtags.
-                userPrompt:
-                  type: string
-                  example: |
-                    Generate a post for {{platform}} using the {{visualStyle.colors.primary}} color scheme and a {{contentStrategy.tone}} tone. Return only a JSON object with fields: text, comment, hashtags.
+                List of variables available for use in the userPrompt and systemPrompt.
         visualStyle:
           $ref: './common/visual-style.yaml'
-        contentStrategy:
-          type: object
-          properties:
-            targetAudience:
-              type: string
-            tone:
-              type: string
-            keywords:
-              type: array
-              items:
-                type: string
-            hashtagStrategy:
-              type: string
-            callToAction:
-              type: string
-        platforms:
-          type: object
-          description: Platform-specific settings
-          additionalProperties: false
-          properties:
-            instagram:
-              $ref: './platforms/instagram.yaml'
-            facebook:
-              $ref: './platforms/facebook.yaml'
-            tiktok:
-              $ref: './platforms/tiktok.yaml'
-            twitter:
-              $ref: './platforms/twitter.yaml'
-        contentTypeSettings:
-          type: object
-          description: Settings specific to each content type
-          oneOf:
-            - $ref: './content-types/text.yaml'
-            - $ref: './content-types/video.yaml'
-            - $ref: './content-types/multi-image.yaml'
-            - $ref: './content-types/image.yaml'
 
     TemplateInfo:
       type: object

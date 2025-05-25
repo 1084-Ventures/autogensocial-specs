@@ -1,33 +1,45 @@
 type: object
 properties:
-  fonts:
+  container:
     type: object
+    description: Layout container properties
     properties:
-      primary:
+      align:
         type: string
-      secondary:
+        enum: [left, center, right]
+        description: Horizontal alignment for the container
+      vertical:
         type: string
-  colors:
-    type: object
-    properties:
-      primary:
-        type: string
-      secondary:
-        type: string
-      background:
-        type: string
-      text:
-        type: string
-  imageLayout:
-    type: string
-    enum: [square, portrait, landscape]
-  overlayStyle:
-    type: object
-    properties:
+        enum: [top, middle, bottom]
+        description: Vertical alignment for the container
       opacity:
         type: number
         minimum: 0
         maximum: 1
-      position:
-        type: string
-        enum: [top, bottom, center, full]
+        description: Opacity of the overlay
+  themes:
+    type: array
+    description: List of visual themes, each with its own style settings
+    items:
+      type: object
+      properties:
+        font:
+          type: string
+          description: Font family for the theme
+        fontSize:
+          type: string
+          description: Font size for the theme (e.g., '16px', '1em')
+        fontWeight:
+          type: string
+          enum: [normal, bold]
+          description: Font weight for the theme
+        fontStyle:
+          type: string
+          enum: [normal, italic]
+          description: Font style for the theme
+        fontColor:
+          type: string
+          description: Font color for the theme
+        backgroundColor:
+          type: string
+          description: Background color for the theme
