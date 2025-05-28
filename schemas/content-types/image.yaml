@@ -1,14 +1,26 @@
 type: object
 description: Settings specific to single image content
 properties:
-  format:
+  container:
     type: object
+    description: Layout and sizing for the image container
     properties:
+      width:
+        type: integer
+        description: Width of the image in pixels
+      height:
+        type: integer
+        description: Height of the image in pixels
       aspectRatio:
         type: string
         enum: [square, portrait, landscape]
-        default: square
-        description: Required aspect ratio for the image
+        description: Aspect ratio for the image
+      padding:
+        type: integer
+        description: Padding around the content in pixels
+  format:
+    type: object
+    properties:
       minResolution:
         type: object
         properties:
