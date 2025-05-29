@@ -1,0 +1,51 @@
+openapi: 3.0.0
+info:
+  title: Brand API
+  version: 1.0.0
+paths:
+  /brands:
+    get:
+      operationId: getBrands
+      summary: List all brands
+      description: Retrieves a paginated list of all brands.
+      tags:
+        - Brand
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Number of results to return (pagination).
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Offset for pagination.
+      responses:
+        '200':
+          description: List of brand names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '../../schemas/brand.yaml#/components/schemas/BrandNameResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

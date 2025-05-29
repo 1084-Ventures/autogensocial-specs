@@ -1,0 +1,85 @@
+openapi: 3.0.0
+info:
+  title: Content Orchestrator API
+  version: 1.0.0
+paths:
+  /orchestrate-content:
+    post:
+      operationId: generateContentOrchestrator
+      summary: Orchestrate content generation and posting
+      description: Orchestrates the generation of content and optionally posts it to external platforms.
+      tags:
+        - Orchestration
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - templateId
+                - brandId
+              properties:
+                templateId:
+                  type: string
+                  description: The template ID to use for content generation
+                brandId:
+                  type: string
+                  description: The brand ID for which to generate content
+                variableValues:
+                  type: object
+                  description: Variable values for the template
+                  additionalProperties:
+                    type: string
+      responses:
+        '201':
+          description: Content generated and orchestrated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Post ID
+                  content:
+                    type: object
+                    description: Generated content (text, hashtags, etc.)
+                  imageUrl:
+                    type: string
+                    description: URL of the generated image (if any)
+                  instagramResult:
+                    type: object
+                    description: Instagram API result (if posted)
+                  instagramPostId:
+                    type: string
+                    description: Instagram post ID (if posted)
+                  postStatus:
+                    type: string
+                    description: Status of the post (e.g., posted, failed)
+        '404':
+          description: Template or brand not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

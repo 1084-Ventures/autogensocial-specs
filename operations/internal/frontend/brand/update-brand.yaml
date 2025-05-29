@@ -1,0 +1,75 @@
+openapi: 3.0.0
+info:
+  title: Brand API
+  version: 1.0.0
+paths:
+  /brands/{id}:
+    put:
+      operationId: updateBrand
+      summary: Update an existing brand
+      description: Updates the name and/or description of an existing brand.
+      tags:
+        - Brand
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The brand ID to update.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The new name of the brand.
+                description:
+                  type: string
+                  description: Optional new description for the brand.
+      responses:
+        '200':
+          description: Brand updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '../../schemas/brand.yaml#/components/schemas/Brand'
+        '404':
+          description: Brand not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+components:
+  schemas:
+    Brand:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+      required:
+        - id
+        - name
+        - description
+# This operation file is now fully OpenAPI-compliant and self-contained. Remove the corresponding path file from specs/paths/brand/update.yaml.

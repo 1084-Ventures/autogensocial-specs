@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: Content Template API
+  version: 1.0.0
+paths:
+  /content-templates/{id}:
+    put:
+      operationId: updateContentTemplate
+      summary: Update an existing content template
+      description: Updates the details of an existing content generation template.
+      tags:
+        - ContentTemplate
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The template ID to update.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                templateInfo:
+                  $ref: '../../schemas/content-template.yaml#/components/schemas/TemplateInfo'
+                schedule:
+                  $ref: '../../schemas/content-template.yaml#/components/schemas/Schedule'
+                settings:
+                  $ref: '../../schemas/content-template.yaml#/components/schemas/TemplateSettings'
+      responses:
+        '200':
+          description: Template updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '../../schemas/content-template.yaml#/components/schemas/ContentGenerationTemplate'
+        '404':
+          description: Template not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string

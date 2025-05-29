@@ -1,0 +1,69 @@
+openapi: 3.0.0
+info:
+  title: Content Template API
+  version: 1.0.0
+paths:
+  /content-templates/{id}:
+    get:
+      operationId: getContentTemplateById
+      summary: Get a content template by ID
+      description: Retrieves the details of a content generation template by its unique ID.
+      tags:
+        - ContentTemplate
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The template ID to fetch.
+      responses:
+        '200':
+          description: Template details
+          content:
+            application/json:
+              schema:
+                $ref: '../../schemas/content-template.yaml#/components/schemas/ContentGenerationTemplate'
+        '404':
+          description: Template not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+components:
+  schemas:
+    ContentGenerationTemplate:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - description
+        - createdAt
+        - updatedAt

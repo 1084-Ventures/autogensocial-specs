@@ -1,0 +1,64 @@
+openapi: 3.0.0
+info:
+  title: Content Generation API
+  version: 1.0.0
+paths:
+  /generate-text-content:
+    post:
+      operationId: generateTextContent
+      summary: Generate text content
+      description: Generates text content based on a template and variable values.
+      tags:
+        - ContentGeneration
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - template
+              properties:
+                template:
+                  type: object
+                  description: Template object for text generation
+                variableValues:
+                  type: object
+                  description: Variable values for the template
+                  additionalProperties:
+                    type: string
+      responses:
+        '200':
+          description: Text content generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  text:
+                    type: string
+                    description: Generated text content
+                  hashtags:
+                    type: array
+                    items:
+                      type: string
+                  comment:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+# This operation file is now fully OpenAPI-compliant and self-contained.

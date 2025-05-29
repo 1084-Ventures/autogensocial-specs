@@ -33,6 +33,15 @@ properties:
       maxFileSize:
         type: integer
         description: Maximum file size in bytes
+      imageFormat:
+        type: string
+        enum: [png, jpeg]
+        description: Output image format.
+  effects:
+    type: array
+    items:
+      type: string
+    description: List of effects to apply (e.g., "blur", "grayscale").
   overlay:
     type: object
     properties:

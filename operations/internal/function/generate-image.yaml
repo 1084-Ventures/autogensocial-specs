@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+  title: Image Generation API
+  version: 1.0.0
+paths:
+  /generate-image:
+    post:
+      operationId: generateImage
+      summary: Generate an image
+      description: Generates an image based on provided text and style options.
+      tags:
+        - ContentGeneration
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - text
+              properties:
+                text:
+                  type: string
+                  description: Main text to render on the image.
+                boxText:
+                  type: string
+                  description: Optional secondary text or caption.
+                visualStyle:
+                  $ref: '../../schemas/common/visual-style.yaml'
+                image:
+                  $ref: '../../schemas/content-types/image.yaml'
+      responses:
+        '200':
+          description: Image generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imageUrl:
+                    type: string
+                    description: URL of the generated image
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+# This operation file now references the refactored visualStyle and image schemas, which use nested categories for style and image properties.

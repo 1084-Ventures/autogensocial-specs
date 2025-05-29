@@ -71,6 +71,8 @@ components:
                 List of variables available for use in the userPrompt and systemPrompt.
         visualStyle:
           $ref: './common/visual-style.yaml'
+        image:
+          $ref: './content-types/image.yaml'
 
     TemplateInfo:
       type: object

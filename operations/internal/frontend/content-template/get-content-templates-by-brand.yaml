@@ -1,0 +1,81 @@
+openapi: 3.0.0
+info:
+  title: Content Template API
+  version: 1.0.0
+paths:
+  /content-templates:
+    get:
+      operationId: getContentTemplatesByBrand
+      summary: List content templates for a brand
+      description: Retrieves a paginated list of content generation templates for a specific brand.
+      tags:
+        - ContentTemplate
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: brandId
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The brand ID to filter templates by.
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Number of results to return (pagination).
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Offset for pagination.
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [createdAt, updatedAt, name]
+          description: Field to sort by.
+        - name: sortOrder
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+          description: Sort order.
+      responses:
+        '200':
+          description: List of templates
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '../../schemas/content-template.yaml#/components/schemas/ContentGenerationTemplate'
+        '400':
+          description: Brand ID is required
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+# This operation file is now fully OpenAPI-compliant and self-contained. Remove the corresponding path file from specs/paths/content-template/get-all.yaml.

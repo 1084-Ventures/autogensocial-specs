@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: Brand API
+  version: 1.0.0
+paths:
+  /brands/{id}:
+    get:
+      operationId: getBrandById
+      summary: Get a brand by ID
+      description: Retrieves the details of a brand by its unique ID.
+      tags:
+        - Brand
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The brand ID to fetch.
+      responses:
+        '200':
+          description: Brand details
+          content:
+            application/json:
+              schema:
+                $ref: '../../schemas/brand.yaml#/components/schemas/Brand'
+        '404':
+          description: Brand not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+# This operation file is now fully OpenAPI-compliant and self-contained. Remove the corresponding path file from specs/paths/brand/get-by-id.yaml.

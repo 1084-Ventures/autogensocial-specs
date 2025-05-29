@@ -1,0 +1,55 @@
+openapi: 3.0.0
+info:
+  title: Content Template API
+  version: 1.0.0
+paths:
+  /content-templates:
+    post:
+      operationId: createContentTemplate
+      summary: Create a new content template
+      description: Creates a new content generation template for a brand.
+      tags:
+        - ContentTemplate
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - templateInfo
+                - settings
+              properties:
+                templateInfo:
+                  $ref: '../../schemas/content-template.yaml#/components/schemas/TemplateInfo'
+                schedule:
+                  $ref: '../../schemas/content-template.yaml#/components/schemas/Schedule'
+                settings:
+                  $ref: '../../schemas/content-template.yaml#/components/schemas/TemplateSettings'
+      responses:
+        '201':
+          description: Template created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '../../schemas/content-template.yaml#/components/schemas/ContentGenerationTemplate'
+        '403':
+          description: Not authorized to create templates for this brand
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
