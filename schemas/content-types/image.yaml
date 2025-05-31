@@ -18,6 +18,9 @@ properties:
       padding:
         type: integer
         description: Padding around the content in pixels
+  background:
+    type: string
+    description: URL or local path to a background image. The image will be centered on the canvas without distortion or resizing. If the image is smaller than the canvas, it will be surrounded by the background color; if larger, it will be cropped.
   format:
     type: object
     properties:

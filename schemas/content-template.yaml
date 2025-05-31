@@ -71,8 +71,34 @@ components:
                 List of variables available for use in the userPrompt and systemPrompt.
         visualStyle:
           $ref: './common/visual-style.yaml'
+          description: |
+            Visual style settings for the generated image, including font family, size, weight, style, color, outline, alignment, and transparency. Must match the structure required by the image generation API.
         image:
           $ref: './content-types/image.yaml'
+          description: |
+            Image settings, including container size, background image (centered, not distorted), format, effects, overlays, and filters. Must match the structure required by the image generation API.
+        boxText:
+          type: string
+          description: Optional secondary text or caption. If provided, a box is drawn below the image.
+        textBox:
+          type: object
+          description: Optional box behind the main text with customizable color, outline, and transparency. Must match the structure required by the image generation API.
+          properties:
+            color:
+              type: string
+              description: Background color of the text box (e.g., '#FFFFFF').
+            alpha:
+              type: integer
+              description: Alpha (transparency) value for the text box (0-255).
+            outlineColor:
+              type: string
+              description: Outline color for the text box.
+            outlineWidth:
+              type: integer
+              description: Outline width for the text box.
+            padding:
+              type: integer
+              description: Padding inside the text box.
 
     TemplateInfo:
       type: object

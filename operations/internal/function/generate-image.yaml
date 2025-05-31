@@ -7,7 +7,7 @@ paths:
     post:
       operationId: generateImage
       summary: Generate an image
-      description: Generates an image based on provided text and style options.
+      description: Generates an image based on provided text and style options, including advanced font management and background image centering.
       tags:
         - ContentGeneration
       security:
@@ -26,11 +26,30 @@ paths:
                   description: Main text to render on the image.
                 boxText:
                   type: string
-                  description: Optional secondary text or caption.
+                  description: Optional secondary text or caption. If provided, a box is drawn below the image.
                 visualStyle:
                   $ref: '../../schemas/common/visual-style.yaml'
                 image:
                   $ref: '../../schemas/content-types/image.yaml'
+                textBox:
+                  type: object
+                  description: Optional box behind the main text with customizable color, outline, and transparency.
+                  properties:
+                    color:
+                      type: string
+                      description: Background color of the text box (e.g., '#FFFFFF').
+                    alpha:
+                      type: integer
+                      description: Alpha (transparency) value for the text box (0-255).
+                    outlineColor:
+                      type: string
+                      description: Outline color for the text box.
+                    outlineWidth:
+                      type: integer
+                      description: Outline width for the text box.
+                    padding:
+                      type: integer
+                      description: Padding inside the text box.
       responses:
         '200':
           description: Image generated successfully
@@ -57,4 +76,4 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-# This operation file now references the refactored visualStyle and image schemas, which use nested categories for style and image properties.
+# Updated to align with advanced font management, text box support, and background image centering.
