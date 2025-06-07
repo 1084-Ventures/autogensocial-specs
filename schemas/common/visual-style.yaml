@@ -1,82 +1,53 @@
 type: object
 properties:
-  themes:
-    type: array
-    minItems: 1
-    description: List of visual themes, each with its own style settings
-    items:
-      type: object
-      required:
-        - font
-        - color
-        - box
-      properties:
-        font:
-          type: object
-          required:
-            - family
-            - size
-          properties:
-            family:
-              type: string
-              description: Font family for the main text (e.g., Arial).
-            size:
-              type: string
-              description: Font size (e.g., "32px").
-            weight:
-              type: string
-              enum: [normal, bold]
-              description: Font weight for the main text.
-            style:
-              type: string
-              enum: [normal, italic]
-              description: Font style for the main text.
-        color:
-          type: object
-          required:
-            - text
-            - background
-            - box
-          properties:
-            text:
-              type: string
-              description: Color for the main text (e.g., "#000000").
-            background:
-              type: string
-              description: Background color for the image (e.g., "#FFFFFF").
-            box:
-              type: string
-              description: Color for the box below the image (e.g., "#333333").
-            boxText:
-              type: string
-              description: Color for the box text (default "#FFFFFF").
-            outline:
-              type: string
-              description: Color for text outline (if supported by Pillow and font).
-        box:
-          type: object
-          required:
-            - color
-          properties:
-            color:
-              type: string
-              description: Color for the box below the image (e.g., "#333333").
-            textColor:
-              type: string
-              description: Color for the box text (default "#FFFFFF").
-        outline:
-          type: object
-          properties:
-            color:
-              type: string
-              description: Color for text outline (if supported by Pillow and font).
-            width:
-              type: integer
-              description: Width of the text outline in pixels (if supported).
-        alignment:
-          type: object
-          properties:
-            textAlign:
-              type: string
-              enum: [left, center, right]
-              description: Text alignment.
+  font:
+    type: object
+    required:
+      - family
+      - size
+    properties:
+      family:
+        type: string
+        description: Font family for the overlay text (e.g., Arial).
+      size:
+        type: string
+        description: Font size (e.g., "32px").
+      weight:
+        type: string
+        enum: [normal, bold]
+        description: Font weight for the overlay text.
+      style:
+        type: string
+        enum: [normal, italic]
+        description: Font style for the overlay text.
+  color:
+    type: object
+    required:
+      - text
+      - background
+    properties:
+      text:
+        type: string
+        description: Color for the overlay text (e.g., "#000000").
+      background:
+        type: string
+        description: Background color for the overlay area (e.g., "#FFFFFF").
+      outline:
+        type: string
+        description: Color for text outline (if supported).
+  outline:
+    type: object
+    properties:
+      color:
+        type: string
+        description: Color for text outline (if supported).
+      width:
+        type: integer
+        description: Width of the text outline in pixels (if supported).
+  alignment:
+    type: object
+    properties:
+      textAlign:
+        type: string
+        enum: [left, center, right]
+        description: Text alignment for overlay text.

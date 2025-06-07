@@ -11,16 +11,16 @@ properties:
       height:
         type: integer
         description: Height of the image in pixels
-      aspectRatio:
-        type: string
-        enum: [square, portrait, landscape]
-        description: Aspect ratio for the image
       padding:
         type: integer
         description: Padding around the content in pixels
   background:
     type: string
-    description: URL or local path to a background image. The image will be centered on the canvas without distortion or resizing. If the image is smaller than the canvas, it will be surrounded by the background color; if larger, it will be cropped.
+    description: Color code or URL/local path to a background image. If an image, it will be centered on the canvas without distortion or resizing. If smaller than the canvas, it will be surrounded by the background color; if larger, it will be cropped.
+  backgroundType:
+    type: string
+    enum: [color, image]
+    description: Whether the background is a color or an image.
   format:
     type: object
     properties:
@@ -45,30 +45,26 @@ properties:
     items:
       type: string
     description: List of effects to apply (e.g., "blur", "grayscale").
-  overlay:
+  imageType:
+    type: string
+    enum: [portrait, landscape, square]
+    description: Standardized image type, which maps to a specific pixel size/aspect ratio.
+  transparent:
+    type: boolean
+    description: Whether the image background should be transparent (if supported by format).
+  textOverlay:
     type: object
+    description: Overlay text and its styling.
     properties:
       text:
+        type: string
+        description: The main overlay text.
+      visualStyle:
+        $ref: '../../schemas/common/visual-style.yaml'
+      alignment:
         type: object
         properties:
-          allowed:
-            type: boolean
-            default: true
-            description: Whether text overlay is allowed
-          maxLength:
-            type: integer
-            description: Maximum text length for overlay
-      position:
-        type: string
-        enum: [top, center, bottom]
-        default: center
-        description: Position of the overlay content
-  filters:
-    type: array
-    items:
-      type: string
-    description: List of allowed image filters
-  altText:
-    type: boolean
-    default: true
-    description: Whether alt text is required for accessibility
+          textAlign:
+            type: string
+            enum: [left, center, right]
+            description: Text alignment for overlay text.
