@@ -27,12 +27,16 @@ components:
           items:
             type: string
           description: Possible values for the variable
+        description:
+          type: string
+          description: Optional description of the variable
 
     TemplateSettings:
       type: object
       required:
         - promptTemplate
         - visualStyle
+        - image
       properties:
         promptTemplate:
           type: object
@@ -40,115 +44,36 @@ components:
             - systemPrompt
             - userPrompt
             - model
-            - temperature
-            - maxTokens
           properties:
             systemPrompt:
               type: string
-              description: |
-                System-level instructions for the AI. (Set automatically based on content type.)
+              description: System-level instructions for the AI.
             userPrompt:
               type: string
-              description: |
-                The main prompt for content generation. Uses {{variable}} syntax.
+              description: The main prompt for content generation. Uses {{variable}} syntax.
             temperature:
               type: number
               minimum: 0
               maximum: 2
               default: 1
-              description: Set automatically.
             maxTokens:
               type: integer
-              description: Set automatically.
             model:
               type: string
-              description: Set automatically.
             variables:
               type: array
               items:
                 $ref: '#/components/schemas/PromptVariable'
-              description: |
-                List of variables available for use in the userPrompt and systemPrompt.
         visualStyle:
           type: object
-          description: |
-            One or more visual style themes for the generated image. Each theme must match the structure in visual-style.yaml.
           properties:
             themes:
               type: array
               minItems: 1
               items:
-                type: object
-                properties:
-                  font:
-                    $ref: './common/fonts.yaml'
-                  fontSize:
-                    type: integer
-                    description: Font size for the theme
-                  color:
-                    type: string
-                    description: Main text color for the theme
-                  outlineColor:
-                    type: string
-                    description: Outline color for the theme
-                  outlineWidth:
-                    type: integer
-                    description: Outline width for the theme
-                  alignment:
-                    type: string
-                    enum: [left, center, right]
-                    description: Text alignment for the theme
-                  backgroundColor:
-                    type: string
-                    description: Background color for the theme (used if image.backgroundType is 'color')
-                required:
-                  - font
-                  - fontSize
-                  - color
-                  - backgroundColor
-                description: Visual style theme for the template, including background color.
-              description: List of visual style themes for this template.
+                $ref: '../../schemas/common/visual-style.yaml'
         image:
-          type: object
-          properties:
-            aspectRatio:
-              type: string
-              enum: ["1:1", "4:5", "16:9", "9:16"]
-              description: Aspect ratio for the generated image
-            backgroundType:
-              type: string
-              enum: [color, image]
-              description: Whether the background is a color or an image
-            backgroundImageUrl:
-              type: string
-              description: Background image URL (if backgroundType is image and imageSourceType is set)
-            imageSourceType:
-              type: string
-              enum: [set, variable]
-              description: If backgroundType is image, determines if the image is a fixed URL (set) or variable (variable)
-            variableImageType:
-              type: string
-              enum: [uploaded, online]
-              description: If imageSourceType is variable, determines if the image is uploaded or online
-            containerPadding:
-              type: integer
-              minimum: 0
-              maximum: 100
-              description: Padding inside the image container
-            textBoxHorizontalAlignment:
-              type: string
-              enum: [left, center, right]
-              description: Horizontal alignment for the text box
-            textBoxVerticalAlignment:
-              type: string
-              enum: [top, center, bottom]
-              description: Vertical alignment for the text box
-          required:
-            - aspectRatio
-            - backgroundType
-            - containerPadding
-          description: |
-            Image settings for the generated image. If backgroundType is 'color', the background color is taken from the selected visual style theme's backgroundColor. If backgroundType is 'image', you must specify imageSourceType. If imageSourceType is 'variable', you must specify variableImageType.
+          $ref: '../../schemas/content-types/image.yaml'
 
     TemplateInfo:
       type: object
@@ -160,21 +85,17 @@ components:
       properties:
         name:
           type: string
-          description: Name of the template
         description:
           type: string
-          description: Optional description of the template
         brandId:
           type: string
-          description: ID of the brand this template belongs to
         contentType:
           $ref: '#/components/schemas/ContentType'
         targetPlatforms:
           type: array
           items:
-            $ref: '#/components/schemas/Platform'
-          minItems: 1
-          description: List of platforms this template targets
+            type: string
+            enum: [instagram, facebook, tiktok, twitter]
 
     ContentGenerationTemplate:
       allOf:
@@ -188,7 +109,7 @@ components:
             templateInfo:
               $ref: '#/components/schemas/TemplateInfo'
             schedule:
-              $ref: './common/schedule.yaml'
+              $ref: '../../schemas/common/schedule.yaml'
             settings:
               $ref: '#/components/schemas/TemplateSettings'
 
@@ -202,7 +123,7 @@ components:
         templateInfo:
           $ref: '#/components/schemas/TemplateInfo'
         schedule:
-          $ref: './common/schedule.yaml'
+          $ref: '../../schemas/common/schedule.yaml'
         settings:
           $ref: '#/components/schemas/TemplateSettings'
 
@@ -218,7 +139,9 @@ components:
               type: string
             contentType:
               $ref: '#/components/schemas/ContentType'
+            brandId:
+              type: string
         schedule:
-          $ref: './common/schedule.yaml'
+          $ref: '../../schemas/common/schedule.yaml'
         settings:
           $ref: '#/components/schemas/TemplateSettings'

@@ -32,6 +32,9 @@ properties:
       background:
         type: string
         description: Background color for the overlay area (e.g., "#FFFFFF").
+      box:
+        type: string
+        description: Color of the text box background (e.g., "#000000").
       outline:
         type: string
         description: Color for text outline (if supported).

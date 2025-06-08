@@ -11,47 +11,51 @@ properties:
       height:
         type: integer
         description: Height of the image in pixels
+      aspectRatio:
+        type: string
+        enum: [square, portrait, landscape]
+        description: Aspect ratio for the image
       padding:
         type: integer
         description: Padding around the content in pixels
   background:
-    type: object
-    description: Background settings for the image.
-    properties:
-      type:
-        type: string
-        enum: [color, image]
-        description: Whether the background is a color or an image.
-      value:
-        type: string
-        description: Color code (if type=color) or URL/local path (if type=image) for the background.
-      filters:
-        type: array
-        items:
-          type: string
-          enum: [grayscale, blur, contour, edge_enhance, sharpen, emboss, invert, sepia]
-        description: List of filters to apply to the background image (only used if type=image).
+    type: string
+    description: URL or local path to a background image
   format:
     type: object
     properties:
+      minResolution:
+        type: object
+        properties:
+          width:
+            type: integer
+          height:
+            type: integer
+      maxFileSize:
+        type: integer
       imageFormat:
         type: string
         enum: [png, jpeg]
-        description: Output image format.
-  textOverlay:
+  overlay:
     type: object
-    description: Overlay text and its styling.
     properties:
       text:
+        type: object
+        properties:
+          allowed:
+            type: boolean
+          maxLength:
+            type: integer
+      position:
         type: string
-        description: The main overlay text.
-      visualStyle:
-        $ref: '../../schemas/common/visual-style.yaml'
-      horizontalAlign:
-        type: string
-        enum: [left, center, right]
-        description: Horizontal alignment of the textbox on the image.
-      verticalAlign:
-        type: string
-        enum: [top, middle, bottom]
-        description: Vertical alignment of the textbox on the image.
+        enum: [top, center, bottom]
+  filters:
+    type: array
+    items:
+      type: string
+  altText:
+    type: boolean
+  effects:
+    type: array
+    items:
+      type: string
