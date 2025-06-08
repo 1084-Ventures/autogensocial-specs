@@ -15,43 +15,29 @@ properties:
         type: integer
         description: Padding around the content in pixels
   background:
-    type: string
-    description: Color code or URL/local path to a background image. If an image, it will be centered on the canvas without distortion or resizing. If smaller than the canvas, it will be surrounded by the background color; if larger, it will be cropped.
-  backgroundType:
-    type: string
-    enum: [color, image]
-    description: Whether the background is a color or an image.
+    type: object
+    description: Background settings for the image.
+    properties:
+      type:
+        type: string
+        enum: [color, image]
+        description: Whether the background is a color or an image.
+      value:
+        type: string
+        description: Color code (if type=color) or URL/local path (if type=image) for the background.
+      filters:
+        type: array
+        items:
+          type: string
+          enum: [grayscale, blur, contour, edge_enhance, sharpen, emboss, invert, sepia]
+        description: List of filters to apply to the background image (only used if type=image).
   format:
     type: object
     properties:
-      minResolution:
-        type: object
-        properties:
-          width:
-            type: integer
-            description: Minimum width in pixels
-          height:
-            type: integer
-            description: Minimum height in pixels
-      maxFileSize:
-        type: integer
-        description: Maximum file size in bytes
       imageFormat:
         type: string
         enum: [png, jpeg]
         description: Output image format.
-  effects:
-    type: array
-    items:
-      type: string
-    description: List of effects to apply (e.g., "blur", "grayscale").
-  imageType:
-    type: string
-    enum: [portrait, landscape, square]
-    description: Standardized image type, which maps to a specific pixel size/aspect ratio.
-  transparent:
-    type: boolean
-    description: Whether the image background should be transparent (if supported by format).
   textOverlay:
     type: object
     description: Overlay text and its styling.
@@ -61,10 +47,11 @@ properties:
         description: The main overlay text.
       visualStyle:
         $ref: '../../schemas/common/visual-style.yaml'
-      alignment:
-        type: object
-        properties:
-          textAlign:
-            type: string
-            enum: [left, center, right]
-            description: Text alignment for overlay text.
+      horizontalAlign:
+        type: string
+        enum: [left, center, right]
+        description: Horizontal alignment of the textbox on the image.
+      verticalAlign:
+        type: string
+        enum: [top, middle, bottom]
+        description: Vertical alignment of the textbox on the image.

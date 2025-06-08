@@ -22,13 +22,10 @@ paths:
         '200':
           description: Image generated successfully
           content:
-            application/json:
+            image/png:
               schema:
-                type: object
-                properties:
-                  imageUrl:
-                    type: string
-                    description: URL of the generated image
+                type: string
+                format: binary
         '500':
           description: Internal server error
           content:
