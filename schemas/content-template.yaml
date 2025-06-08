@@ -70,35 +70,85 @@ components:
               description: |
                 List of variables available for use in the userPrompt and systemPrompt.
         visualStyle:
-          $ref: './common/visual-style.yaml'
-          description: |
-            Visual style settings for the generated image, including font family, size, weight, style, color, outline, alignment, and transparency. Must match the structure required by the image generation API.
-        image:
-          $ref: './content-types/image.yaml'
-          description: |
-            Image settings, including container size, background image (centered, not distorted), format, effects, overlays, and filters. Must match the structure required by the image generation API.
-        boxText:
-          type: string
-          description: Optional secondary text or caption. If provided, a box is drawn below the image.
-        textBox:
           type: object
-          description: Optional box behind the main text with customizable color, outline, and transparency. Must match the structure required by the image generation API.
+          description: |
+            One or more visual style themes for the generated image. Each theme must match the structure in visual-style.yaml.
           properties:
-            color:
+            themes:
+              type: array
+              minItems: 1
+              items:
+                type: object
+                properties:
+                  font:
+                    $ref: './common/fonts.yaml'
+                  fontSize:
+                    type: integer
+                    description: Font size for the theme
+                  color:
+                    type: string
+                    description: Main text color for the theme
+                  outlineColor:
+                    type: string
+                    description: Outline color for the theme
+                  outlineWidth:
+                    type: integer
+                    description: Outline width for the theme
+                  alignment:
+                    type: string
+                    enum: [left, center, right]
+                    description: Text alignment for the theme
+                  backgroundColor:
+                    type: string
+                    description: Background color for the theme (used if image.backgroundType is 'color')
+                required:
+                  - font
+                  - fontSize
+                  - color
+                  - backgroundColor
+                description: Visual style theme for the template, including background color.
+              description: List of visual style themes for this template.
+        image:
+          type: object
+          properties:
+            aspectRatio:
               type: string
-              description: Background color of the text box (e.g., '#FFFFFF').
-            alpha:
-              type: integer
-              description: Alpha (transparency) value for the text box (0-255).
-            outlineColor:
+              enum: ["1:1", "4:5", "16:9", "9:16"]
+              description: Aspect ratio for the generated image
+            backgroundType:
               type: string
-              description: Outline color for the text box.
-            outlineWidth:
+              enum: [color, image]
+              description: Whether the background is a color or an image
+            backgroundImageUrl:
+              type: string
+              description: Background image URL (if backgroundType is image and imageSourceType is set)
+            imageSourceType:
+              type: string
+              enum: [set, variable]
+              description: If backgroundType is image, determines if the image is a fixed URL (set) or variable (variable)
+            variableImageType:
+              type: string
+              enum: [uploaded, online]
+              description: If imageSourceType is variable, determines if the image is uploaded or online
+            containerPadding:
               type: integer
-              description: Outline width for the text box.
-            padding:
-              type: integer
-              description: Padding inside the text box.
+              minimum: 0
+              maximum: 100
+              description: Padding inside the image container
+            textBoxHorizontalAlignment:
+              type: string
+              enum: [left, center, right]
+              description: Horizontal alignment for the text box
+            textBoxVerticalAlignment:
+              type: string
+              enum: [top, center, bottom]
+              description: Vertical alignment for the text box
+          required:
+            - aspectRatio
+            - backgroundType
+            - containerPadding
+          description: |
+            Image settings for the generated image. If backgroundType is 'color', the background color is taken from the selected visual style theme's backgroundColor. If backgroundType is 'image', you must specify imageSourceType. If imageSourceType is 'variable', you must specify variableImageType.
 
     TemplateInfo:
       type: object
