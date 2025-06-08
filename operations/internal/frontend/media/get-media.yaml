@@ -1,0 +1,39 @@
+openapi: 3.0.3
+info:
+  title: List Media
+  version: 1.0.0
+  description: List media files for a brand/user.
+servers:
+  - url: /api
+paths:
+  /media:
+    get:
+      summary: List media files for a brand/user
+      parameters:
+        - in: query
+          name: brandId
+          schema:
+            type: string
+          required: true
+          description: Brand ID to filter media
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 20
+          required: false
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          required: false
+      responses:
+        '200':
+          description: List of media files
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '../../../../../schemas/media.yaml#/MediaDocument'

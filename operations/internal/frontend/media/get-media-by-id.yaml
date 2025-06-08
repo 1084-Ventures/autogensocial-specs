@@ -1,0 +1,26 @@
+openapi: 3.0.3
+info:
+  title: Get Media By Id
+  version: 1.0.0
+  description: Get a single media file's metadata.
+servers:
+  - url: /api
+paths:
+  /media/{id}:
+    get:
+      summary: Get a single media file's metadata
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Media metadata
+          content:
+            application/json:
+              schema:
+                $ref: '../../../../../schemas/media.yaml#/MediaDocument'
+        '404':
+          description: Not found

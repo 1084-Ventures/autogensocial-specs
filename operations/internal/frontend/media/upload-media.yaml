@@ -1,0 +1,33 @@
+openapi: 3.0.3
+info:
+  title: Upload Media
+  version: 1.0.0
+  description: Upload a new media file.
+servers:
+  - url: /api
+paths:
+  /media:
+    post:
+      summary: Upload a new media file
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                brandId:
+                  type: string
+              required:
+                - file
+                - brandId
+      responses:
+        '201':
+          description: Media uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '../../../../../schemas/media.yaml#/MediaDocument'

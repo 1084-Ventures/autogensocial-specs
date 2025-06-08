@@ -1,0 +1,60 @@
+# Media Model Spec
+# This YAML defines the Cosmos DB document structure for media files
+
+MediaDocument:
+  type: object
+  required:
+    - id
+    - userId
+    - brandId
+    - fileName
+    - blobUrl
+    - mediaType
+    - metadata
+    - createdAt
+    - updatedAt
+  properties:
+    id:
+      type: string
+    userId:
+      type: string
+    brandId:
+      type: string
+    fileName:
+      type: string
+    blobUrl:
+      type: string
+    mediaType:
+      type: string
+      enum: [image, video]
+    metadata:
+      $ref: '#/MediaMetadata'
+    createdAt:
+      type: string
+      format: date-time
+    updatedAt:
+      type: string
+      format: date-time
+
+MediaMetadata:
+  type: object
+  properties:
+    name:
+      type: string
+    description:
+      type: string
+    tags:
+      type: array
+      items:
+        type: string
+    cognitiveData:
+      type: object
+      additionalProperties: true
+
+MediaUpdate:
+  type: object
+  properties:
+    metadata:
+      $ref: '#/MediaMetadata'
+    fileName:
+      type: string

@@ -1,0 +1,22 @@
+openapi: 3.0.3
+info:
+  title: Delete Media
+  version: 1.0.0
+  description: Delete a media file.
+servers:
+  - url: /api
+paths:
+  /media/{id}:
+    delete:
+      summary: Delete a media file
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Deleted
+        '404':
+          description: Not found
