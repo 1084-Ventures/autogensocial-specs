@@ -1,17 +1,17 @@
 type: object
 required:
-  - createdDate
-  - updatedDate
-  - isActive
+  - created_date
+  - updated_date
+  - is_active
 properties:
-  createdDate:
+  created_date:
     type: string
     format: date-time
     description: Creation timestamp
-  updatedDate:
+  updated_date:
     type: string
     format: date-time
     description: Last update timestamp
-  isActive:
+  is_active:
     type: boolean
     description: Whether the record is active or soft-deleted

@@ -34,21 +34,21 @@ components:
     TemplateSettings:
       type: object
       required:
-        - promptTemplate
-        - visualStyle
+        - prompt_template
+        - visual_style
         - image
       properties:
-        promptTemplate:
+        prompt_template:
           type: object
           required:
-            - systemPrompt
-            - userPrompt
+            - system_prompt
+            - user_prompt
             - model
           properties:
-            systemPrompt:
+            system_prompt:
               type: string
               description: System-level instructions for the AI.
-            userPrompt:
+            user_prompt:
               type: string
               description: The main prompt for content generation. Uses {{variable}} syntax.
             temperature:
@@ -56,7 +56,7 @@ components:
               minimum: 0
               maximum: 2
               default: 1
-            maxTokens:
+            max_tokens:
               type: integer
             model:
               type: string
@@ -64,7 +64,7 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/PromptVariable'
-        visualStyle:
+        visual_style:
           type: object
           properties:
             themes:

@@ -6,7 +6,7 @@ components:
       required:
         - enabled
         - username
-        - accessToken
+        - access_token
       properties:
         enabled:
           type: boolean
@@ -16,17 +16,17 @@ components:
           type: string
           description: Username for the social account
           example: "@brandaccount"
-        accessToken:
+        access_token:
           type: string
           description: access token
           format: string
           example: "oauth2_access_token"
-        refreshToken:
+        refresh_token:
           type: string
           description: refresh token
           format: string
           example: "oauth2_refresh_token"
-        expiresAt:
+        expires_at:
           type: string
           format: date-time
           description: Token expiration timestamp
@@ -37,13 +37,13 @@ components:
         - $ref: '#/components/schemas/BaseModel'
         - type: object
           required:
-            - brandInfo
+            - brand_info
           properties:
-            brandInfo:
+            brand_info:
               type: object
               required:
                 - name
-                - userId
+                - user_id
               properties:
                 name:
                   type: string
@@ -56,7 +56,7 @@ components:
                   description: Optional description of the brand
                   maxLength: 500
                   example: "Leading provider of innovative solutions"
-                userId:
+                user_id:
                   type: string
                   description: ID of the user who owns this brand
                   format: uuid

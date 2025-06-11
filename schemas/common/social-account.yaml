@@ -2,7 +2,7 @@ type: object
 required:
   - enabled
   - username
-  - accessToken
+  - access_token
 properties:
   enabled:
     type: boolean
@@ -10,13 +10,13 @@ properties:
   username:
     type: string
     description: Username for the social account
-  accessToken:
+  access_token:
     type: string
     description: OAuth access token
-  refreshToken:
+  refresh_token:
     type: string
     description: OAuth refresh token
-  expiresAt:
+  expires_at:
     type: string
     format: date-time
     description: Token expiration timestamp

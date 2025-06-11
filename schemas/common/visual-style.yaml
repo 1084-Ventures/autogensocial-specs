@@ -50,7 +50,7 @@ properties:
   alignment:
     type: object
     properties:
-      textAlign:
+      text_align:
         type: string
         enum: [left, center, right]
         description: Text alignment for overlay text.

@@ -11,7 +11,7 @@ properties:
       height:
         type: integer
         description: Height of the image in pixels
-      aspectRatio:
+      aspect_ratio:
         type: string
         enum: [square, portrait, landscape]
         description: Aspect ratio for the image
@@ -24,16 +24,16 @@ properties:
   format:
     type: object
     properties:
-      minResolution:
+      min_resolution:
         type: object
         properties:
           width:
             type: integer
           height:
             type: integer
-      maxFileSize:
+      max_file_size:
         type: integer
-      imageFormat:
+      image_format:
         type: string
         enum: [png, jpeg]
   overlay:
@@ -44,7 +44,7 @@ properties:
         properties:
           allowed:
             type: boolean
-          maxLength:
+          max_length:
             type: integer
       position:
         type: string
@@ -53,7 +53,7 @@ properties:
     type: array
     items:
       type: string
-  altText:
+  alt_text:
     type: boolean
   effects:
     type: array
