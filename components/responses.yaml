@@ -102,10 +102,10 @@ BrandResponse:
   content:
     application/json:
       schema:
-        $ref: '#/components/schemas/Brand'
+        $ref: '#/components/schemas/brand'
       example:
         id: "123e4567-e89b-12d3-a456-426614174000"
-        brandInfo:
+        brand_info:
           name: "Acme Corporation"
           description: "Leading provider of innovative solutions"
           user_id: "user-123"
@@ -118,14 +118,14 @@ BrandResponse:
         created_at: "2025-01-01T00:00:00Z"
         updated_at: "2025-04-10T12:00:00Z"
 
-BrandListResponse:
-  description: Successfully retrieved list of brands
+brand_list_response:
+  description: successfully retrieved list of brands
   content:
     application/json:
       schema:
         type: array
         items:
-          $ref: '#/components/schemas/BrandNameResponse'
+          $ref: '#/components/schemas/brand_name_response'
       example:
         - id: "123e4567-e89b-12d3-a456-426614174000"
           name: "Acme Corporation"

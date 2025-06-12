@@ -1,11 +1,11 @@
-brandId:
-  name: brandId
+brand_id:
+  name: brand_id
   in: query
   required: true
   schema:
     type: string
     format: uuid
-  description: Brand identifier (UUID)
+  description: brand identifier (uuid)
 
 id:
   name: id
@@ -14,7 +14,7 @@ id:
   schema:
     type: string
     format: uuid
-  description: Resource identifier (UUID)
+  description: resource identifier (uuid)
 
 pagination:
   in: query
@@ -32,15 +32,15 @@ pagination:
         type: integer
         minimum: 0
         default: 0
-      sortBy:
+      sort_by:
         type: string
-        enum: [createdAt, updatedAt, name]
-        default: createdAt
-      sortOrder:
+        enum: [created_at, updated_at, name]
+        default: created_at
+      sort_order:
         type: string
         enum: [asc, desc]
         default: desc
-  description: Pagination and sorting parameters
+  description: pagination and sorting parameters
 
 filter:
   name: filter
@@ -48,5 +48,5 @@ filter:
   required: false
   schema:
     type: string
-  description: Filter criteria in the format field:operator:value (e.g., name:contains:test)
+  description: filter criteria in the format field:operator:value (e.g., name:contains:test)
   example: "name:contains:acme"

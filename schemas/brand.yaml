@@ -1,7 +1,7 @@
 openapi: 3.0.0
 components:
   schemas:
-    SocialAccount:
+    social_account:
       type: object
       required:
         - enabled
@@ -10,11 +10,11 @@ components:
       properties:
         enabled:
           type: boolean
-          description: Whether this social account is enabled
+          description: whether this social account is enabled
           example: true
         username:
           type: string
-          description: Username for the social account
+          description: username for the social account
           example: "@brandaccount"
         access_token:
           type: string
@@ -29,8 +29,8 @@ components:
         expires_at:
           type: string
           format: date-time
-          description: Token expiration timestamp
-          example: "2025-04-10T12:00:00Z"
+          description: token expiration timestamp
+          example: "2025-04-10t12:00:00z"
 
     Brand:
       allOf:
@@ -65,11 +65,11 @@ components:
               type: object
               properties:
                 instagram:
-                  $ref: '#/components/schemas/SocialAccount'
+                  $ref: '#/components/schemas/social_account'
                 facebook:
-                  $ref: '#/components/schemas/SocialAccount'
+                  $ref: '#/components/schemas/social_account'
                 tiktok:
-                  $ref: '#/components/schemas/SocialAccount'
+                  $ref: '#/components/schemas/social_account'
 
     BrandCreate:
       type: object
@@ -101,11 +101,11 @@ components:
           type: object
           properties:
             instagram:
-              $ref: '#/components/schemas/SocialAccount'
+              $ref: '#/components/schemas/social_account'
             facebook:
-              $ref: '#/components/schemas/SocialAccount'
+              $ref: '#/components/schemas/social_account'
             tiktok:
-              $ref: '#/components/schemas/SocialAccount'
+              $ref: '#/components/schemas/social_account'
 
     BrandNameResponse:
       type: object

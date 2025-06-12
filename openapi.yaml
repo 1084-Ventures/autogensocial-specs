@@ -1,33 +1,33 @@
 openapi: 3.0.0
 info:
-  title: AutoGenSocial API
+  title: autogen_social_api
   version: '1.0.0'
   description: |
-    API for managing brands and content generation templates for social media automation.
+    api for managing brands and content generation templates for social media automation.
     
-    ## Authentication
-    This API uses API key authentication. Include your API key in the X-API-Key header.
+    ## authentication
+    this api uses api key authentication. include your api key in the x-api-key header.
     
-    ## Rate Limiting
-    API calls are limited to 100 requests per minute per API key.
+    ## rate_limiting
+    api calls are limited to 100 requests per minute per api key.
     
-    ## Error Handling
-    All errors follow a standard format:
+    ## error_handling
+    all errors follow a standard format:
     ```json
     {
       "error": {
-        "code": "ERROR_CODE",
-        "message": "Human readable message",
-        "details": {} // Optional additional information
+        "code": "error_code",
+        "message": "human readable message",
+        "details": {} // optional additional information
       }
     }
     ```
   contact:
-    name: AutoGenSocial Support
+    name: autogen_social_support
     url: https://autogensocial.com/support
   license:
-    name: MIT
-    url: https://opensource.org/licenses/MIT
+    name: mit
+    url: https://opensource.org/licenses/mit
 
 servers:
   - url: /api

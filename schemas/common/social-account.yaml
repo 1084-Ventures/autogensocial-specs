@@ -6,17 +6,17 @@ required:
 properties:
   enabled:
     type: boolean
-    description: Whether this social account is enabled
+    description: whether this social account is enabled
   username:
     type: string
-    description: Username for the social account
+    description: username for the social account
   access_token:
     type: string
-    description: OAuth access token
+    description: oauth access token
   refresh_token:
     type: string
-    description: OAuth refresh token
+    description: oauth refresh token
   expires_at:
     type: string
     format: date-time
-    description: Token expiration timestamp
+    description: token expiration timestamp

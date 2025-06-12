@@ -1,80 +1,80 @@
 # Media Model Spec
 # Updated to match latest backend and frontend models
 
-MediaDocument:
+media_document:
   type: object
   required:
     - id
-    - userId
-    - brandId
-    - blobUrl
-    - mediaType
+    - user_id
+    - brand_id
+    - blob_url
+    - media_type
     - metadata
-    - createdAt
-    - updatedAt
+    - created_at
+    - updated_at
   properties:
     id:
       type: string
-    userId:
+    user_id:
       type: string
-    brandId:
+    brand_id:
       type: string
-    blobUrl:
+    blob_url:
       type: string
-    mediaType:
+    media_type:
       type: string
       enum: [image, video]
     metadata:
-      $ref: '#/MediaMetadata'
-    createdAt:
+      $ref: '#/media_metadata'
+    created_at:
       type: string
       format: date-time
-    updatedAt:
+    updated_at:
       type: string
       format: date-time
 
-MediaMetadata:
+media_metadata:
   type: object
   properties:
-    fileName:
+    file_name:
       type: string
     description:
       type: string
-    suggestedName:
+    suggested_name:
       type: string
     tags:
       type: array
       items:
-        $ref: '#/CognitiveTag'
+        $ref: '#/cognitive_tag'
     categories:
       type: array
       items:
-        $ref: '#/CognitiveCategory'
+        $ref: '#/cognitive_category'
     objects:
       type: array
       items:
-        $ref: '#/CognitiveObject'
+        $ref: '#/cognitive_object'
     caption:
-      $ref: '#/CognitiveCaption'
-    denseCaptions:
+      $ref: '#/cognitive_caption'
+    dense_captions:
       type: array
       items:
-        $ref: '#/CognitiveDenseCaption'
+        $ref: '#/cognitive_dense_caption'
     brands:
       type: array
       items:
-        $ref: '#/CognitiveBrand'
+        $ref: '#/cognitive_brand'
     people:
       type: array
       items:
-        $ref: '#/CognitivePerson'
-    ocrText:
+        $ref: '#/cognitive_person'
+    ocr_text:
       type: string
-    cognitiveData:
+    cognitive_data:
       type: object
       additionalProperties: true
 
-CognitiveTag:
+cognitive_tag:
   type: object
   properties:
     name:
@@ -82,7 +82,7 @@ CognitiveTag:
     confidence:
       type: number
 
-CognitiveCategory:
+cognitive_category:
   type: object
   properties:
     name:
@@ -90,7 +90,7 @@ CognitiveCategory:
     confidence:
       type: number
 
-CognitiveObject:
+cognitive_object:
   type: object
   properties:
     object:
@@ -98,9 +98,9 @@ CognitiveObject:
     confidence:
       type: number
     rectangle:
-      $ref: '#/Rectangle'
+      $ref: '#/rectangle'
 
-CognitiveCaption:
+cognitive_caption:
   type: object
   properties:
     text:
@@ -108,17 +108,17 @@ CognitiveCaption:
     confidence:
       type: number
 
-CognitiveDenseCaption:
+cognitive_dense_caption:
   type: object
   properties:
     text:
       type: string
     confidence:
       type: number
-    boundingBox:
-      $ref: '#/Rectangle'
+    bounding_box:
+      $ref: '#/rectangle'
 
-CognitiveBrand:
+cognitive_brand:
   type: object
   properties:
     name:
@@ -126,15 +126,15 @@ CognitiveBrand:
     confidence:
       type: number
 
-CognitivePerson:
+cognitive_person:
   type: object
   properties:
     confidence:
       type: number
     rectangle:
-      $ref: '#/Rectangle'
+      $ref: '#/rectangle'
 
-Rectangle:
+rectangle:
   type: object
   properties:
     x:
@@ -146,21 +146,21 @@ Rectangle:
     h:
       type: number
 
-MediaCreate:
+media_create:
   type: object
   properties:
-    brandId:
+    brand_id:
       type: string
-    fileName:
+    file_name:
       type: string
-    mediaType:
+    media_type:
       type: string
       enum: [image, video]
 
-MediaUpdate:
+media_update:
   type: object
   properties:
-    fileName:
+    file_name:
       type: string
     metadata:
-      $ref: '#/MediaMetadata'
+      $ref: '#/media_metadata'

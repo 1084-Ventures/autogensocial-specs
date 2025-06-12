@@ -1,7 +1,7 @@
 openapi: 3.0.0
 components:
   schemas:
-    BaseModel:
+    base_model:
       type: object
       required:
         - id
@@ -9,6 +9,6 @@ components:
       properties:
         id:
           type: string
-          description: Unique identifier for the record
+          description: unique identifier for the record
         metadata:
           $ref: './common/metadata.yaml'

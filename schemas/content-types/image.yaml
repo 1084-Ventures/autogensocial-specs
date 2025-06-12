@@ -3,24 +3,24 @@ description: Settings specific to single image content
 properties:
   container:
     type: object
-    description: Layout and sizing for the image container
+    description: layout and sizing for the image container
     properties:
       width:
         type: integer
-        description: Width of the image in pixels
+        description: width of the image in pixels
       height:
         type: integer
-        description: Height of the image in pixels
+        description: height of the image in pixels
       aspect_ratio:
         type: string
         enum: [square, portrait, landscape]
-        description: Aspect ratio for the image
+        description: aspect ratio for the image
       padding:
         type: integer
-        description: Padding around the content in pixels
+        description: padding around the content in pixels
   background:
     type: string
-    description: URL or local path to a background image
+    description: url or local path to a background image
   format:
     type: object
     properties:

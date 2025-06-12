@@ -1,19 +1,19 @@
 openapi: 3.0.0
 components:
   schemas:
-    ContentType:
+    content_type:
       type: string
-      enum: [text, video, multi-image, image]
-      description: Type of content to be generated - text (text-only post), video (video content), multi-image (multiple images), image (single image)
+      enum: [text, video, multi_image, image]
+      description: type of content to be generated - text (text-only post), video (video content), multi_image (multiple images), image (single image)
 
-    Platform:
+    platform:
       type: array
       items:
         type: string
         enum: [instagram, facebook, tiktok, twitter]
-        description: Social media platform(s) for the content
+        description: social media platform(s) for the content
 
-    PromptVariable:
+    prompt_variable:
       type: object
       required:
         - name
@@ -21,17 +21,17 @@ components:
       properties:
         name:
           type: string
-          description: Name of the variable
+          description: name of the variable
         values:
           type: array
           items:
             type: string
-          description: Possible values for the variable
+          description: possible values for the variable
         description:
           type: string
-          description: Optional description of the variable
+          description: optional description of the variable
 
-    TemplateSettings:
+    template_settings:
       type: object
       required:
         - prompt_template
@@ -47,10 +47,10 @@ components:
           properties:
             system_prompt:
               type: string
-              description: System-level instructions for the AI.
+              description: system-level instructions for the ai.
             user_prompt:
               type: string
-              description: The main prompt for content generation. Uses {{variable}} syntax.
+              description: the main prompt for content generation. uses {{variable}} syntax.
             temperature:
               type: number
               minimum: 0
@@ -63,7 +63,7 @@ components:
             variables:
               type: array
               items:
-                $ref: '#/components/schemas/PromptVariable'
+                $ref: '#/components/schemas/prompt_variable'
         visual_style:
           type: object
           properties:
@@ -75,7 +75,7 @@ components:
         image:
           $ref: '../../schemas/content-types/image.yaml'
 
-    TemplateInfo:
+    template_info:
       type: object
       required:
         - name
@@ -90,14 +90,14 @@ components:
         brandId:
           type: string
         contentType:
-          $ref: '#/components/schemas/ContentType'
+          $ref: '#/components/schemas/content_type'
         targetPlatforms:
           type: array
           items:
             type: string
             enum: [instagram, facebook, tiktok, twitter]
 
-    ContentGenerationTemplate:
+    content_generation_template:
       allOf:
         - $ref: './base.yaml#/components/schemas/BaseModel'
         - type: object
@@ -107,13 +107,13 @@ components:
             - settings
           properties:
             templateInfo:
-              $ref: '#/components/schemas/TemplateInfo'
+              $ref: '#/components/schemas/template_info'
             schedule:
               $ref: '../../schemas/common/schedule.yaml'
             settings:
-              $ref: '#/components/schemas/TemplateSettings'
+              $ref: '#/components/schemas/template_settings'
 
-    ContentTemplateCreate:
+    content_template_create:
       type: object
       required:
         - templateInfo
@@ -121,13 +121,13 @@ components:
         - settings
       properties:
         templateInfo:
-          $ref: '#/components/schemas/TemplateInfo'
+          $ref: '#/components/schemas/template_info'
         schedule:
           $ref: '../../schemas/common/schedule.yaml'
         settings:
-          $ref: '#/components/schemas/TemplateSettings'
+          $ref: '#/components/schemas/template_settings'
 
-    ContentTemplateUpdate:
+    content_template_update:
       type: object
       properties:
         templateInfo:
@@ -138,10 +138,10 @@ components:
             description:
               type: string
             contentType:
-              $ref: '#/components/schemas/ContentType'
+              $ref: '#/components/schemas/content_type'
             brandId:
               type: string
         schedule:
           $ref: '../../schemas/common/schedule.yaml'
         settings:
-          $ref: '#/components/schemas/TemplateSettings'
+          $ref: '#/components/schemas/template_settings'
