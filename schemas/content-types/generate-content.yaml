@@ -6,7 +6,7 @@ GenerateContentRequest:
     - template
   properties:
     template:
-      $ref: '#/components/schemas/Template'
+      $ref: "#/components/schemas/Template"
       description: Template object for content generation
     variableValues:
       type: object

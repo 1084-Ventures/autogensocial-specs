@@ -21,7 +21,7 @@ AzureOpenAIGenerateContentRequest:
     - template
   properties:
     template:
-      $ref: '#/AzureOpenAIGenerateContentTemplate'
+      $ref: "#/AzureOpenAIGenerateContentTemplate"
       description: Template object for content generation
     variableValues:
       type: object
