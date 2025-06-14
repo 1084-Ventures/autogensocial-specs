@@ -1,4 +1,19 @@
 ---
+AzureOpenAIGenerateContentTemplate:
+  type: object
+  description: Schema for the template object used in content generation
+  properties:
+    # Define template-specific properties here
+    name:
+      type: string
+      description: Name of the template
+    content:
+      type: string
+      description: Content or structure of the template
+  required:
+    - name
+    - content
+
 AzureOpenAIGenerateContentRequest:
   type: object
   description: Request to generate content using Azure OpenAI
@@ -6,7 +21,7 @@ AzureOpenAIGenerateContentRequest:
     - template
   properties:
     template:
-      type: object
+      $ref: '#/AzureOpenAIGenerateContentTemplate'
       description: Template object for content generation
     variableValues:
       type: object

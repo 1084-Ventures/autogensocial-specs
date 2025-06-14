@@ -6,7 +6,7 @@ GenerateContentRequest:
     - template
   properties:
     template:
-      type: object
+      $ref: '#/components/schemas/Template'
       description: Template object for content generation
     variableValues:
       type: object
@@ -17,6 +17,8 @@ GenerateContentRequest:
 GenerateContentResponse:
   type: object
   description: Response containing generated content
+  required:
+    - text
   properties:
     text:
       type: string
@@ -32,3 +34,4 @@ GenerateContentResponse:
       items:
         type: string
       description: List of hashtags for the post
+  additionalProperties: false

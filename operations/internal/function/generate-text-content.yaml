@@ -1,0 +1,10 @@
+# This file has been replaced by generate-content.yaml. See that file for the updated content generation operation.
+
+paths:
+  /generate-text-content:
+	post:
+	  summary: Deprecated operation. See generate-content.yaml for the replacement.
+	  deprecated: true
+	  responses:
+		'410':
+		  description: This operation is deprecated. Use /generate-content instead.
