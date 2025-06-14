@@ -19,9 +19,9 @@ paths:
   /generate-image:
     post:
       $ref: "./operations/internal/function/generate-image.yaml#/paths/~1generate-image/post"
-  /generate-text-content:
+  /generate-content:
     post:
-      $ref: "./operations/internal/function/generate-text-content.yaml#/paths/~1generate-text-content/post"
+      $ref: "./operations/internal/function/generate-content.yaml#/paths/~1generate-content/post"
   /post-content:
     post:
       $ref: "./operations/internal/function/post-content.yaml#/paths/~1post-content/post"

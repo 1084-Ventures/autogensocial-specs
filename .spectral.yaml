@@ -1,9 +1,0 @@
----
-extends:
-  - "spectral:oas"
-  - "spectral:recommended"
-
-rules:
-  # General YAML rules
-  no-empty-document: error
-  # Add more custom rules here if needed

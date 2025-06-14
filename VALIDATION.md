@@ -1,8 +1,10 @@
 # YAML & OpenAPI Spec Validation
 
-This project uses two tools for validation:
+This project uses the following tools for validation:
 
-- `yamllint` for general YAML syntax and style checking
+- `yamllint` for general YAML syntax and style checking (optional, for local use)
+- `prettier` for YAML formatting
+- `@redocly/cli` for OpenAPI linting
 - `swagger-cli` for OpenAPI spec validation (for files like `openapi.yaml`)
 
 ## Setup
@@ -10,22 +12,29 @@ This project uses two tools for validation:
 1. Install dependencies (requires Python and Node.js):
 
 ```sh
-pip install yamllint
-npm install -g swagger-cli
+npm install -g prettier @redocly/cli swagger-cli
 ```
 
 ## Usage
 
-To validate all YAML files:
+To check YAML formatting with Prettier:
 
 ```sh
-yamllint .
+prettier --check "**/*.yaml"
 ```
 
-To validate the OpenAPI spec:
+To lint the OpenAPI spec with Redocly CLI:
+
+```sh
+redocly lint openapi.yaml
+```
+
+To validate the OpenAPI spec with swagger-cli:
 
 ```sh
 swagger-cli validate openapi.yaml
 ```
 
 You can also add these as scripts in your package.json or a Makefile for convenience.
+
+Validation is also run automatically in CI via GitHub Actions.

@@ -1,0 +1,49 @@
+---
+AzureOpenAIGenerateContentTemplate:
+  type: object
+  description: Schema for the template object used in content generation
+  properties:
+    # Define template-specific properties here
+    name:
+      type: string
+      description: Name of the template
+    content:
+      type: string
+      description: Content or structure of the template
+  required:
+    - name
+    - content
+
+AzureOpenAIGenerateContentRequest:
+  type: object
+  description: Request to generate content using Azure OpenAI
+  required:
+    - template
+  properties:
+    template:
+      $ref: "#/AzureOpenAIGenerateContentTemplate"
+      description: Template object for content generation
+    variableValues:
+      type: object
+      description: Variable values for the template
+      additionalProperties:
+        type: string
+
+AzureOpenAIGenerateContentResponse:
+  type: object
+  description: Response containing generated content from Azure OpenAI
+  properties:
+    text:
+      type: string
+      description: The generated text content
+    imageDescription:
+      type: string
+      description: Description of the type of image to generate (if any)
+    commentary:
+      type: string
+      description: Additional commentary for the post
+    hashtags:
+      type: array
+      items:
+        type: string
+      description: List of hashtags for the post
