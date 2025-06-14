@@ -1,3 +1,4 @@
+---
 MediaSearchRequest:
   type: object
   properties:
