@@ -90,6 +90,12 @@ components:
       $ref: "./schemas/platforms/tiktok.yaml#/TikTok"
     Twitter:
       $ref: "./schemas/platforms/twitter.yaml#/Twitter"
+    AzureOpenAIGenerateContentTemplate:
+      $ref: "./schemas/ai/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentTemplate"
+    AzureOpenAIGenerateContentRequest:
+      $ref: "./schemas/ai/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentRequest"
+    AzureOpenAIGenerateContentResponse:
+      $ref: "./schemas/ai/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentResponse"
 
 security:
   - bearerAuth: []

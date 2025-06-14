@@ -1,0 +1,29 @@
+OrchestratorRequest:
+  type: object
+  properties:
+    operation:
+      type: string
+      description: The operation to perform
+    payload:
+      type: object
+      description: The payload for the operation
+      additionalProperties: true
+  required:
+    - operation
+    - payload
+
+OrchestratorResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      description: The status of the operation
+    result:
+      type: object
+      description: The result of the operation
+      additionalProperties: true
+    error:
+      type: string
+      description: Error message if the operation failed
+  required:
+    - status
