@@ -43,9 +43,9 @@ TextOverlay:
       type: string
       description: The text to overlay on the image
     font:
-      $ref: '../common/fonts.yaml#/Font'
+      $ref: "../common/fonts.yaml#/Font"
     color:
-      $ref: '../common/fonts.yaml#/Color'
+      $ref: "../common/fonts.yaml#/Color"
     position:
       type: object
       properties:
