@@ -1,115 +1,117 @@
-type: object
-description: TikTok-specific content settings
-properties:
-  video:
-    type: object
-    description: Settings for TikTok videos
-    allOf:
-      - $ref: '../content-types/reel.yaml'
-      - type: object
-        properties:
-          music:
-            type: object
-            properties:
-              source:
-                type: string
-                enum: [original, commercial_music, sounds]
-              startTime:
-                type: integer
-              endTime:
-                type: integer
-              volume:
-                type: number
-                minimum: 0
-                maximum: 1
-          effects:
-            type: array
-            items:
+---
+TikTok:
+  type: object
+  description: TikTok-specific content settings
+  properties:
+    video:
+      type: object
+      description: Settings for TikTok videos
+      allOf:
+        - $ref: "../content-types/reel.yaml#/Reel"
+        - type: object
+          properties:
+            music:
               type: object
               properties:
-                id:
+                source:
                   type: string
+                  enum: [original, commercial_music, sounds]
                 startTime:
                   type: integer
-                duration:
+                endTime:
                   type: integer
-          duet:
-            type: object
-            properties:
-              enabled:
-                type: boolean
-              layout:
-                type: string
-                enum: [left_right, top_bottom, react]
-          stitch:
-            type: boolean
-            description: Allow other users to stitch this video
-          visibility:
-            type: string
-            enum: [public, friends, private]
-            default: public
-          comments:
-            type: boolean
-            default: true
-          downloads:
-            type: boolean
-            default: true
-          stickers:
-            type: array
-            items:
+                volume:
+                  type: number
+                  minimum: 0
+                  maximum: 1
+            effects:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  startTime:
+                    type: integer
+                  duration:
+                    type: integer
+            duet:
               type: object
               properties:
-                type:
+                enabled:
+                  type: boolean
+                layout:
                   type: string
-                  enum: [mention, hashtag, location]
-                value:
-                  type: string
-                timestamp:
-                  type: integer
-                position:
-                  type: object
-                  properties:
-                    x:
-                      type: number
-                    y:
-                      type: number
-  story:
-    type: object
-    description: Settings for TikTok stories
-    allOf:
-      - $ref: '../content-types/story.yaml'
-      - type: object
-        properties:
-          visibility:
-            type: string
-            enum: [public, friends, private]
-          music:
-            type: object
-            properties:
-              enabled:
-                type: boolean
-              songId:
-                type: string
-          effects:
-            type: array
-            items:
+                  enum: [left_right, top_bottom, react]
+            stitch:
+              type: boolean
+              description: Allow other users to stitch this video
+            visibility:
               type: string
-          text:
-            type: array
-            items:
+              enum: [public, friends, private]
+              default: public
+            comments:
+              type: boolean
+              default: true
+            downloads:
+              type: boolean
+              default: true
+            stickers:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum: [mention, hashtag, location]
+                  value:
+                    type: string
+                  timestamp:
+                    type: integer
+                  position:
+                    type: object
+                    properties:
+                      x:
+                        type: number
+                      y:
+                        type: number
+    story:
+      type: object
+      description: Settings for TikTok stories
+      allOf:
+        - $ref: "../content-types/story.yaml#/Story"
+        - type: object
+          properties:
+            visibility:
+              type: string
+              enum: [public, friends, private]
+            music:
               type: object
               properties:
-                content:
+                enabled:
+                  type: boolean
+                songId:
                   type: string
-                style:
-                  type: string
-                  enum: [default, handwriting, typewriter, neon]
-                color:
-                  type: string
-                position:
-                  type: object
-                  properties:
-                    x:
-                      type: number
-                    y:
-                      type: number
+            effects:
+              type: array
+              items:
+                type: string
+            text:
+              type: array
+              items:
+                type: object
+                properties:
+                  content:
+                    type: string
+                  style:
+                    type: string
+                    enum: [default, handwriting, typewriter, neon]
+                  color:
+                    type: string
+                  position:
+                    type: object
+                    properties:
+                      x:
+                        type: number
+                      y:
+                        type: number

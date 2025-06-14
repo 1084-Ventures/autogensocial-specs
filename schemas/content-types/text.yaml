@@ -1,34 +1,36 @@
-type: object
-description: Settings specific to text-based content
-properties:
-  max_length:
-    type: integer
-    description: maximum length of the text content in characters
-  media_attachments:
-    type: object
-    properties:
-      allowed:
-        type: boolean
-        description: whether media attachments are allowed with this text content
-      max_count:
-        type: integer
-        description: maximum number of media attachments allowed
-      types:
-        type: array
-        items:
-          type: string
-          enum: [image, gif, video]
-        description: types of media attachments allowed
-  formatting:
-    type: object
-    properties:
-      allow_markdown:
-        type: boolean
-        description: whether markdown formatting is allowed
-      allow_html:
-        type: boolean
-        description: whether html formatting is allowed
-      allow_emoji:
-        type: boolean
-        default: true
-        description: whether emoji are allowed in the text
+---
+Text:
+  type: object
+  description: Settings specific to text-based content
+  properties:
+    max_length:
+      type: integer
+      description: maximum length of the text content in characters
+    media_attachments:
+      type: object
+      properties:
+        allowed:
+          type: boolean
+          description: whether media attachments are allowed with this text content
+        max_count:
+          type: integer
+          description: maximum number of media attachments allowed
+        types:
+          type: array
+          items:
+            type: string
+            enum: [image, gif, video]
+          description: types of media attachments allowed
+    formatting:
+      type: object
+      properties:
+        allow_markdown:
+          type: boolean
+          description: whether markdown formatting is allowed
+        allow_html:
+          type: boolean
+          description: whether html formatting is allowed
+        allow_emoji:
+          type: boolean
+          default: true
+          description: whether emoji are allowed in the text

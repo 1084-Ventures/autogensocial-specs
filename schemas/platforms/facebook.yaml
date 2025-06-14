@@ -1,116 +1,124 @@
-type: object
-description: Facebook-specific content settings
-properties:
-  post:
-    type: object
-    description: Settings for Facebook posts
-    allOf:
-      - $ref: '../content-types/post.yaml'
-      - type: object
-        properties:
-          privacy:
-            type: string
-            enum: [public, friends, custom]
-            default: public
-          feeling:
-            type: object
-            properties:
-              enabled:
-                type: boolean
-              type:
-                type: string
-                enum: [activity, feeling, celebrating, watching, eating]
-              value:
-                type: string
-          taggedUsers:
-            type: array
-            items:
+---
+Facebook:
+  type: object
+  description: Facebook-specific content settings
+  properties:
+    post:
+      type: object
+      description: Settings for Facebook posts
+      allOf:
+        - $ref: "../content-types/post.yaml#/Post"
+        - type: object
+          properties:
+            privacy:
               type: string
-          crosspost:
-            type: object
-            properties:
-              instagram:
-                type: boolean
-              groups:
-                type: array
-                items:
-                  type: string
-                description: Group IDs to cross-post to
-
-  reel:
-    type: object
-    description: Settings for Facebook reels
-    allOf:
-      - $ref: '../content-types/reel.yaml'
-      - type: object
-        properties:
-          soundtrack:
-            type: object
-            properties:
-              enabled:
-                type: boolean
-              source:
-                type: string
-                enum: [original, music_library]
-          crosspostToIG:
-            type: boolean
-            default: false
-          tags:
-            type: array
-            items:
+              enum: [public, friends, custom]
+              default: public
+            feeling:
               type: object
               properties:
-                userId:
+                enabled:
+                  type: boolean
+                type:
                   type: string
-                timestamp:
-                  type: integer
-                description: Time in seconds when tag appears
-
-  carousel:
-    type: object
-    description: Settings for Facebook carousel posts
-    allOf:
-      - $ref: '../content-types/carousel.yaml'
-      - type: object
-        properties:
-          albumName:
-            type: string
-          privacy:
-            type: string
-            enum: [public, friends, custom]
-          description:
-            type: string
-          taggedUsers:
-            type: object
-            properties:
-              perPhoto:
-                type: boolean
-                description: Whether to allow different tags per photo
-              users:
-                type: array
-                items:
+                  enum: [activity, feeling, celebrating, watching, eating]
+                value:
                   type: string
-
-  story:
-    type: object
-    description: Settings for Facebook stories
-    allOf:
-      - $ref: '../content-types/story.yaml'
-      - type: object
-        properties:
-          privacy:
-            type: string
-            enum: [public, friends, custom]
-          music:
-            type: object
-            properties:
-              enabled:
-                type: boolean
-              songId:
+            taggedUsers:
+              type: array
+              items:
                 type: string
-          shareToNews:
-            type: boolean
-            description: Whether to share to News Feed
-          allowReshares:
-            type: boolean
-            default: true
+            crosspost:
+              type: object
+              properties:
+                instagram:
+                  type: boolean
+                groups:
+                  type: array
+                  items:
+                    type: string
+
+    reel:
+      type: object
+      description: Settings for Facebook reels
+      allOf:
+        - $ref: "../content-types/reel.yaml#/Reel"
+        - type: object
+          properties:
+            soundtrack:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                source:
+                  type: string
+                  enum: [original, music_library]
+            crosspostToIG:
+              type: boolean
+              default: false
+            tags:
+              type: array
+              items:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                  timestamp:
+                    type: integer
+                  description:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                      language:
+                        type: string
+                    description: Description object for the tag
+
+    carousel:
+      type: object
+      description: Settings for Facebook carousel posts
+      allOf:
+        - $ref: "../content-types/carousel.yaml#/Carousel"
+        - type: object
+          properties:
+            albumName:
+              type: string
+            privacy:
+              type: string
+              enum: [public, friends, custom]
+            description:
+              type: string
+            taggedUsers:
+              type: object
+              properties:
+                perPhoto:
+                  type: boolean
+                  description: Whether to allow different tags per photo
+                users:
+                  type: array
+                  items:
+                    type: string
+
+    story:
+      type: object
+      description: Settings for Facebook stories
+      allOf:
+        - $ref: "../content-types/story.yaml#/Story"
+        - type: object
+          properties:
+            privacy:
+              type: string
+              enum: [public, friends, custom]
+            music:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                songId:
+                  type: string
+            shareToNews:
+              type: boolean
+              description: Whether to share to News Feed
+            allowReshares:
+              type: boolean
+              default: true

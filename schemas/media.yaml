@@ -1,7 +1,5 @@
-# Media Model Spec
-# Updated to match latest backend and frontend models
-
-media_document:
+---
+MediaDocument:
   type: object
   required:
     - id
@@ -25,7 +23,7 @@ media_document:
       type: string
       enum: [image, video]
     metadata:
-      $ref: '#/media_metadata'
+      $ref: "#/MediaMetadata"
     created_at:
       type: string
       format: date-time
@@ -33,7 +31,7 @@ media_document:
       type: string
       format: date-time
 
-media_metadata:
+MediaMetadata:
   type: object
   properties:
     file_name:
@@ -45,36 +43,36 @@ media_metadata:
     tags:
       type: array
       items:
-        $ref: '#/cognitive_tag'
+        $ref: "#/CognitiveTag"
     categories:
       type: array
       items:
-        $ref: '#/cognitive_category'
+        $ref: "#/CognitiveCategory"
     objects:
       type: array
       items:
-        $ref: '#/cognitive_object'
+        $ref: "#/CognitiveObject"
     caption:
-      $ref: '#/cognitive_caption'
+      $ref: "#/CognitiveCaption"
     dense_captions:
       type: array
       items:
-        $ref: '#/cognitive_dense_caption'
+        $ref: "#/CognitiveDenseCaption"
     brands:
       type: array
       items:
-        $ref: '#/cognitive_brand'
+        $ref: "#/CognitiveBrand"
     people:
       type: array
       items:
-        $ref: '#/cognitive_person'
+        $ref: "#/CognitivePerson"
     ocr_text:
       type: string
     cognitive_data:
       type: object
       additionalProperties: true
 
-cognitive_tag:
+CognitiveTag:
   type: object
   properties:
     name:
@@ -82,7 +80,7 @@ cognitive_tag:
     confidence:
       type: number
 
-cognitive_category:
+CognitiveCategory:
   type: object
   properties:
     name:
@@ -90,7 +88,7 @@ cognitive_category:
     confidence:
       type: number
 
-cognitive_object:
+CognitiveObject:
   type: object
   properties:
     object:
@@ -98,9 +96,9 @@ cognitive_object:
     confidence:
       type: number
     rectangle:
-      $ref: '#/rectangle'
+      $ref: "#/Rectangle"
 
-cognitive_caption:
+CognitiveCaption:
   type: object
   properties:
     text:
@@ -108,7 +106,7 @@ cognitive_caption:
     confidence:
       type: number
 
-cognitive_dense_caption:
+CognitiveDenseCaption:
   type: object
   properties:
     text:
@@ -116,9 +114,9 @@ cognitive_dense_caption:
     confidence:
       type: number
     bounding_box:
-      $ref: '#/rectangle'
+      $ref: "#/Rectangle"
 
-cognitive_brand:
+CognitiveBrand:
   type: object
   properties:
     name:
@@ -126,15 +124,15 @@ cognitive_brand:
     confidence:
       type: number
 
-cognitive_person:
+CognitivePerson:
   type: object
   properties:
     confidence:
       type: number
     rectangle:
-      $ref: '#/rectangle'
+      $ref: "#/Rectangle"
 
-rectangle:
+Rectangle:
   type: object
   properties:
     x:
@@ -146,7 +144,7 @@ rectangle:
     h:
       type: number
 
-media_create:
+MediaCreate:
   type: object
   properties:
     brand_id:
@@ -157,10 +155,10 @@ media_create:
       type: string
       enum: [image, video]
 
-media_update:
+MediaUpdate:
   type: object
   properties:
     file_name:
       type: string
     metadata:
-      $ref: '#/media_metadata'
+      $ref: "#/MediaMetadata"

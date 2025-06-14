@@ -1,0 +1,11 @@
+---
+extends:
+  - recommended-strict
+
+rules:
+  no-server-example.com: error
+  operation-operationId: error
+  operation-4xx-response: error
+  no-invalid-media-type-examples: error
+  no-unresolved-refs: error
+  # Add more custom rules as needed

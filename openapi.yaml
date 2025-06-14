@@ -1,150 +1,95 @@
+---
 openapi: 3.0.0
 info:
   title: autogen_social_api
-  version: '1.0.0'
+  version: "1.0.0"
   description: |
-    api for managing brands and content generation templates for social media automation.
-    
-    ## authentication
-    this api uses api key authentication. include your api key in the x-api-key header.
-    
-    ## rate_limiting
-    api calls are limited to 100 requests per minute per api key.
-    
-    ## error_handling
-    all errors follow a standard format:
-    ```json
-    {
-      "error": {
-        "code": "error_code",
-        "message": "human readable message",
-        "details": {} // optional additional information
-      }
-    }
-    ```
-  contact:
-    name: autogen_social_support
-    url: https://autogensocial.com/support
+    API for content orchestration, generation, and posting for social media automation.
   license:
-    name: mit
-    url: https://opensource.org/licenses/mit
-
+    name: MIT
+    url: https://opensource.org/licenses/MIT
 servers:
   - url: /api
     description: Azure Functions API endpoint
-  - url: http://localhost:7071/api
-    description: Local development server
 
-tags:
-  - name: Brands
-    description: Brand management operations
-  - name: Content Templates
-    description: Content generation template operations
+paths:
+  /orchestrate-content:
+    post:
+      $ref: "./operations/internal/function/generate-content-orchestrator.yaml#/paths/~1orchestrate-content/post"
+  /generate-image:
+    post:
+      $ref: "./operations/internal/function/generate-image.yaml#/paths/~1generate-image/post"
+  /generate-text-content:
+    post:
+      $ref: "./operations/internal/function/generate-text-content.yaml#/paths/~1generate-text-content/post"
+  /post-content:
+    post:
+      $ref: "./operations/internal/function/post-content.yaml#/paths/~1post-content/post"
+  /external/post-instagram-content:
+    post:
+      $ref: "./operations/external/post-instagram-content.yaml#/paths/~1external~1post-instagram-content/post"
 
 components:
   parameters:
-    $ref: './components/parameters.yaml'
+    brand_id:
+      $ref: "./components/parameters.yaml#/brand_id"
+    id:
+      $ref: "./components/parameters.yaml#/id"
+    pagination:
+      $ref: "./components/parameters.yaml#/pagination"
   responses:
-    $ref: './components/responses.yaml'
+    NotFound:
+      $ref: "./components/responses.yaml#/NotFound"
+    BadRequest:
+      $ref: "./components/responses.yaml#/BadRequest"
+    Unauthorized:
+      $ref: "./components/responses.yaml#/Unauthorized"
+    RateLimitExceeded:
+      $ref: "./components/responses.yaml#/RateLimitExceeded"
   securitySchemes:
-    $ref: './components/security-schemes.yaml'
+    bearerAuth:
+      $ref: "./components/security-schemes.yaml#/bearerAuth"
+    ApiKeyAuth:
+      $ref: "./components/security-schemes.yaml#/ApiKeyAuth"
   schemas:
-    GenerateContentRequest:
-      type: object
-      required:
-        - brandId
-        - templateId
-      properties:
-        brandId:
-          type: string
-          format: uuid
-        templateId:
-          type: string
-          format: uuid
-        variableValues:
-          type: object
-          additionalProperties:
-            type: string
-    GenerateContentResponse:
-      type: object
-      required:
-        - id
-        - content
-      properties:
-        id:
-          type: string
-        content:
-          $ref: './schemas/responses/openai-content-response.yaml#/components/schemas/OpenAIContentResponse'
-
-paths:
-  /brand_management:
-    post:
-      $ref: './paths/brand/create.yaml#/post'
-      tags: [Brands]
-    get:
-      $ref: './paths/brand/get-all.yaml#/get'
-      tags: [Brands]
-      parameters:
-        - $ref: '#/components/parameters/pagination'
-
-  /brand_management/{id}:
-    parameters:
-      - $ref: '#/components/parameters/id'
-    get:
-      $ref: './paths/brand/get-by-id.yaml#/get'
-      tags: [Brands]
-    put:
-      $ref: './paths/brand/update.yaml#/put'
-      tags: [Brands]
-
-  /content_generation_template_management:
-    post:
-      $ref: './paths/content-template/create.yaml#/post'
-      tags: [Content Templates]
-    get:
-      $ref: './paths/content-template/get-all.yaml#/get'
-      tags: [Content Templates]
-      parameters:
-        - $ref: '#/components/parameters/brandId'
-        - $ref: '#/components/parameters/pagination'
-
-  /content_generation_template_management/{id}:
-    parameters:
-      - $ref: '#/components/parameters/id'
-    get:
-      $ref: './paths/content-template/get-by-id.yaml#/get'
-      tags: [Content Templates]
-    put:
-      $ref: './paths/content-template/update.yaml#/put'
-      tags: [Content Templates]
-
-  /generate_content:
-    post:
-      summary: Generate content using a template
-      tags: [Content Templates]
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GenerateContentRequest'
-      responses:
-        '201':
-          description: Content generated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenerateContentResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '429':
-          $ref: '#/components/responses/RateLimitExceeded'
-        '500':
-          $ref: '#/components/responses/InternalError'
+    BaseModel:
+      $ref: "./schemas/base.yaml#/BaseModel"
+    Brand:
+      $ref: "./schemas/brand.yaml#/Brand"
+    ContentTemplate:
+      $ref: "./schemas/content-template.yaml#/ContentTemplate"
+    MediaDocument:
+      $ref: "./schemas/media.yaml#/MediaDocument"
+    MediaMetadata:
+      $ref: "./schemas/media.yaml#/MediaMetadata"
+    Fonts:
+      $ref: "./schemas/common/fonts.yaml#/Fonts"
+    Metadata:
+      $ref: "./schemas/common/metadata.yaml#/Metadata"
+    Schedule:
+      $ref: "./schemas/common/schedule.yaml#/Schedule"
+    SocialAccount:
+      $ref: "./schemas/common/social-account.yaml#/SocialAccount"
+    TimeSlot:
+      $ref: "./schemas/common/time-slot.yaml#/TimeSlot"
+    VisualStyle:
+      $ref: "./schemas/common/visual-style.yaml#/VisualStyle"
+    Image:
+      $ref: "./schemas/content-types/image.yaml#/Image"
+    MultiImage:
+      $ref: "./schemas/content-types/multi-image.yaml#/MultiImage"
+    Text:
+      $ref: "./schemas/content-types/text.yaml#/Text"
+    Video:
+      $ref: "./schemas/content-types/video.yaml#/Video"
+    Facebook:
+      $ref: "./schemas/platforms/facebook.yaml#/Facebook"
+    Instagram:
+      $ref: "./schemas/platforms/instagram.yaml#/Instagram"
+    TikTok:
+      $ref: "./schemas/platforms/tiktok.yaml#/TikTok"
+    Twitter:
+      $ref: "./schemas/platforms/twitter.yaml#/Twitter"
 
 security:
-  - ApiKeyAuth: []
+  - bearerAuth: []

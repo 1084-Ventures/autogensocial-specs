@@ -1,61 +1,22 @@
-# Font definitions for use by both backend and frontend
-fonts:
-  - family: arial
-    display_name: arial
-    styles:
-      regular: https://storautogensocial.blob.core.windows.net/fonts/arial.ttf
-      bold: https://storautogensocial.blob.core.windows.net/fonts/arial%20bold.ttf
-      italic: https://storautogensocial.blob.core.windows.net/fonts/arial%20italic.ttf
-      bold_italic: https://storautogensocial.blob.core.windows.net/fonts/arial%20bold%20italic.ttf
-  - family: arial_narrow
-    display_name: arial_narrow
-    styles:
-      regular: https://storautogensocial.blob.core.windows.net/fonts/arial%20narrow.ttf
-      bold: https://storautogensocial.blob.core.windows.net/fonts/arial%20narrow%20bold.ttf
-      italic: https://storautogensocial.blob.core.windows.net/fonts/arial%20narrow%20italic.ttf
-      bold_italic: https://storautogensocial.blob.core.windows.net/fonts/arial%20narrow%20bold%20italic.ttf
-  - family: comic_sans_ms
-    display_name: comic_sans_ms
-    styles:
-      regular: https://storautogensocial.blob.core.windows.net/fonts/comic%20sans%20ms.ttf
-      bold: https://storautogensocial.blob.core.windows.net/fonts/comic%20sans%20ms%20bold.ttf
-  - family: courier_new
-    display_name: courier_new
-    styles:
-      regular: https://storautogensocial.blob.core.windows.net/fonts/courier%20new.ttf
-      bold: https://storautogensocial.blob.core.windows.net/fonts/courier%20new%20bold.ttf
-      italic: https://storautogensocial.blob.core.windows.net/fonts/courier%20new%20italic.ttf
-      bold_italic: https://storautogensocial.blob.core.windows.net/fonts/courier%20new%20bold%20italic.ttf
-  - family: georgia
-    display_name: georgia
-    styles:
-      regular: https://storautogensocial.blob.core.windows.net/fonts/georgia.ttf
-      bold: https://storautogensocial.blob.core.windows.net/fonts/georgia%20bold.ttf
-      italic: https://storautogensocial.blob.core.windows.net/fonts/georgia%20italic.ttf
-      bold_italic: https://storautogensocial.blob.core.windows.net/fonts/georgia%20bold%20italic.ttf
-  - family: tahoma
-    display_name: tahoma
-    styles:
-      regular: https://storautogensocial.blob.core.windows.net/fonts/tahoma.ttf
-      bold: https://storautogensocial.blob.core.windows.net/fonts/tahoma%20bold.ttf
-  - family: times_new_roman
-    display_name: times_new_roman
-    styles:
-      regular: https://storautogensocial.blob.core.windows.net/fonts/times%20new%20roman.ttf
-      bold: https://storautogensocial.blob.core.windows.net/fonts/times%20new%20roman%20bold.ttf
-      italic: https://storautogensocial.blob.core.windows.net/fonts/times%20new%20roman%20italic.ttf
-      bold_italic: https://storautogensocial.blob.core.windows.net/fonts/times%20new%20roman%20bold%20italic.ttf
-  - family: trebuchet_ms
-    display_name: trebuchet_ms
-    styles:
-      regular: https://storautogensocial.blob.core.windows.net/fonts/trebuchet%20ms.ttf
-      bold: https://storautogensocial.blob.core.windows.net/fonts/trebuchet%20ms%20bold.ttf
-      italic: https://storautogensocial.blob.core.windows.net/fonts/trebuchet%20ms%20italic.ttf
-      bold_italic: https://storautogensocial.blob.core.windows.net/fonts/trebuchet%20ms%20bold%20italic.ttf
-  - family: verdana
-    display_name: verdana
-    styles:
-      regular: https://storautogensocial.blob.core.windows.net/fonts/verdana.ttf
-      bold: https://storautogensocial.blob.core.windows.net/fonts/verdana%20bold.ttf
-      italic: https://storautogensocial.blob.core.windows.net/fonts/verdana%20italic.ttf
-      bold_italic: https://storautogensocial.blob.core.windows.net/fonts/verdana%20bold%20italic.ttf
+---
+Fonts:
+  type: array
+  description: Font definitions for use by both backend and frontend
+  items:
+    type: object
+    properties:
+      family:
+        type: string
+      display_name:
+        type: string
+      styles:
+        type: object
+        properties:
+          regular:
+            type: string
+          bold:
+            type: string
+          italic:
+            type: string
+          bold_italic:
+            type: string

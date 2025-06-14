@@ -1,17 +1,10 @@
-openapi: 3.0.0
-info:
-  title: Content Orchestrator API
-  version: 1.0.0
+---
 paths:
   /orchestrate-content:
     post:
-      operationId: generateContentOrchestrator
+      operationId: orchestrateContent
       summary: Orchestrate content generation and posting
       description: Orchestrates the generation of content and optionally posts it to external platforms.
-      tags:
-        - Orchestration
-      security:
-        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -34,7 +27,7 @@ paths:
                   additionalProperties:
                     type: string
       responses:
-        '201':
+        "201":
           description: Content generated and orchestrated successfully
           content:
             application/json:
@@ -59,7 +52,13 @@ paths:
                   postStatus:
                     type: string
                     description: Status of the post (e.g., posted, failed)
-        '404':
+        "400":
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: "../../../schemas/common/error.yaml#/Error"
+        "404":
           description: Template or brand not found
           content:
             application/json:
@@ -68,7 +67,7 @@ paths:
                 properties:
                   error:
                     type: string
-        '500':
+        "500":
           description: Internal server error
           content:
             application/json:
@@ -77,9 +76,3 @@ paths:
                 properties:
                   error:
                     type: string
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT

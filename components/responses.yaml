@@ -1,133 +1,40 @@
+---
 NotFound:
   description: Resource not found
   content:
     application/json:
       schema:
-        $ref: '#/components/schemas/Error'
+        $ref: "../schemas/common/error.yaml#/Error"
       example:
-        error:
-          code: RESOURCE_NOT_FOUND
-          message: The requested resource was not found
+        code: RESOURCE_NOT_FOUND
+        message: The requested resource was not found
 
 BadRequest:
   description: Invalid request parameters
   content:
     application/json:
       schema:
-        $ref: '#/components/schemas/Error'
+        $ref: "../schemas/common/error.yaml#/Error"
       example:
-        error:
-          code: INVALID_INPUT
-          message: Invalid request parameters
+        code: INVALID_INPUT
+        message: Invalid request parameters
 
 Unauthorized:
   description: Authentication required
   content:
     application/json:
       schema:
-        $ref: '#/components/schemas/Error'
+        $ref: "../schemas/common/error.yaml#/Error"
       example:
-        error:
-          code: UNAUTHORIZED
-          message: Valid API key required
+        code: UNAUTHORIZED
+        message: Valid API key required
 
 RateLimitExceeded:
   description: Rate limit exceeded
   content:
     application/json:
       schema:
-        $ref: '#/components/schemas/Error'
+        $ref: "../schemas/common/error.yaml#/Error"
       example:
-        error:
-          code: RATE_LIMIT_EXCEEDED
-          message: Rate limit exceeded
-          details:
-            remaining_requests: 0
-
-InternalError:
-  description: Internal server error
-  content:
-    application/json:
-      schema:
-        $ref: '#/components/schemas/Error'
-      example:
-        error:
-          code: INTERNAL_ERROR
-          message: An unexpected error occurred
-
-ValidationError:
-  description: Request validation failed
-  content:
-    application/json:
-      schema:
-        $ref: '#/components/schemas/Error'
-      example:
-        error:
-          code: VALIDATION_ERROR
-          message: Request validation failed
-          details:
-            field: name
-            message: Field is required
-
-components:
-  schemas:
-    Error:
-      type: object
-      required:
-        - error
-      properties:
-        error:
-          type: object
-          required:
-            - code
-            - message
-          properties:
-            code:
-              type: string
-              enum:
-                - UNAUTHORIZED
-                - RATE_LIMIT_EXCEEDED
-                - INVALID_INPUT
-                - VALIDATION_ERROR
-                - RESOURCE_NOT_FOUND
-                - INTERNAL_ERROR
-            message:
-              type: string
-            details:
-              type: object
-              additionalProperties: true
-
-BrandResponse:
-  description: Successfully retrieved brand
-  content:
-    application/json:
-      schema:
-        $ref: '#/components/schemas/brand'
-      example:
-        id: "123e4567-e89b-12d3-a456-426614174000"
-        brand_info:
-          name: "Acme Corporation"
-          description: "Leading provider of innovative solutions"
-          user_id: "user-123"
-        social_accounts:
-          instagram:
-            enabled: true
-            username: "@acmecorp"
-            access_token: "instagram_token"
-            expires_at: "2025-04-10T12:00:00Z"
-        created_at: "2025-01-01T00:00:00Z"
-        updated_at: "2025-04-10T12:00:00Z"
-
-brand_list_response:
-  description: successfully retrieved list of brands
-  content:
-    application/json:
-      schema:
-        type: array
-        items:
-          $ref: '#/components/schemas/brand_name_response'
-      example:
-        - id: "123e4567-e89b-12d3-a456-426614174000"
-          name: "Acme Corporation"
-        - id: "987fde32-c76a-45b3-b456-789012345678"
-          name: "Tech Startup Inc"
+        code: RATE_LIMIT_EXCEEDED
+        message: Rate limit exceeded

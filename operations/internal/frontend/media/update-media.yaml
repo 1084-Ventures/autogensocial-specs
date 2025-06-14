@@ -1,32 +1,22 @@
-openapi: 3.0.3
-info:
-  title: Update Media
-  version: 1.0.0
-  description: Update media metadata or name.
-servers:
-  - url: /api
+---
 paths:
   /media/{id}:
     put:
       summary: Update media metadata or name
       parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
+        - $ref: "../../../components/parameters.yaml#/id"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '../../../../../schemas/media.yaml#/MediaUpdate'
+              $ref: "../../../schemas/media.yaml#/MediaUpdate"
       responses:
-        '200':
+        "200":
           description: Updated media document
           content:
             application/json:
               schema:
-                $ref: '../../../../../schemas/media.yaml#/MediaDocument'
-        '404':
-          description: Not found
+                $ref: "../../../schemas/media.yaml#/MediaDocument"
+        "404":
+          $ref: "../../../components/responses.yaml#/NotFound"

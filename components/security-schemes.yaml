@@ -1,5 +1,10 @@
-api_key_auth:
-  type: api_key
+---
+bearerAuth:
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+ApiKeyAuth:
+  type: apiKey
   description: api key authentication for all endpoints
   name: x-api-key
   in: header

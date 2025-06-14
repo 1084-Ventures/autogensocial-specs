@@ -1,81 +1,21 @@
-openapi: 3.0.0
-info:
-  title: Brand API
-  version: 1.0.0
+---
 paths:
   /brands:
     post:
-      operationId: createBrand
       summary: Create a new brand
       description: Creates a new brand with the specified name and optional description.
-      tags:
-        - Brand
-      security:
-        - bearerAuth: []
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - name
-              properties:
-                name:
-                  type: string
-                  description: The name of the brand.
-                description:
-                  type: string
-                  description: Optional description for the brand.
+              $ref: "../../../schemas/brand.yaml#/BrandCreate"
       responses:
-        '201':
+        "201":
           description: Brand created successfully
           content:
             application/json:
               schema:
-                $ref: '../../schemas/brand.yaml#/components/schemas/BrandNameResponse'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-components:
-  schemas:
-    BrandNameResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the brand.
-        name:
-          type: string
-          description: The name of the brand.
-        description:
-          type: string
-          description: The description of the brand.
-        createdAt:
-          type: string
-          format: date-time
-          description: The date and time when the brand was created.
-        updatedAt:
-          type: string
-          format: date-time
-          description: The date and time when the brand was last updated.
-securitySchemes:
-  bearerAuth:
-    type: http
-    scheme: bearer
-    bearerFormat: JWT
+                $ref: "../../../schemas/brand.yaml#/BrandNameResponse"
+        "400":
+          $ref: "../../../components/responses.yaml#/BadRequest"

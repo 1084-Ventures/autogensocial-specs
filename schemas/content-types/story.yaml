@@ -1,0 +1,9 @@
+---
+Story:
+  type: object
+  description: Story content structure
+  properties:
+    mediaUrl:
+      type: string
+    text:
+      type: string

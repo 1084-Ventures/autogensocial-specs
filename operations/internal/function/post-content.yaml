@@ -1,17 +1,10 @@
-openapi: 3.0.0
-info:
-  title: Content Posting API
-  version: 1.0.0
+---
 paths:
   /post-content:
     post:
       operationId: postContent
       summary: Post generated content
       description: Posts generated content (text and image) to an external platform.
-      tags:
-        - Posting
-      security:
-        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -39,47 +32,16 @@ paths:
                       type: array
                       items:
                         type: string
-                postId:
-                  type: string
-                  description: Optional post ID for tracking.
       responses:
-        '200':
+        "201":
           description: Content posted successfully
           content:
             application/json:
               schema:
                 type: object
-                properties:
-                  instagramResult:
-                    type: object
-                    description: Instagram API result (if posted)
-                  instagramPostId:
-                    type: string
-                    description: Instagram post ID (if posted)
-                  postStatus:
-                    type: string
-                    description: Status of the post (e.g., posted, failed)
-        '404':
-          description: Instagram account not found
+        "400":
+          description: Invalid request parameters
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
+                $ref: "../../../schemas/common/error.yaml#/Error"

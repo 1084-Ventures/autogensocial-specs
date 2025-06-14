@@ -1,24 +1,11 @@
-openapi: 3.0.0
-info:
-  title: Content Template API
-  version: 1.0.0
+---
 paths:
   /content-templates/{id}:
     put:
-      operationId: updateContentTemplate
       summary: Update an existing content template
       description: Updates the details of an existing content generation template.
-      tags:
-        - ContentTemplate
-      security:
-        - bearerAuth: []
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The template ID to update.
+        - $ref: "../../../components/parameters.yaml#/id"
       requestBody:
         required: true
         content:
@@ -27,51 +14,17 @@ paths:
               type: object
               properties:
                 templateInfo:
-                  $ref: '../../schemas/content-template.yaml#/components/schemas/TemplateInfo'
+                  $ref: "../../../schemas/content-template.yaml#/TemplateInfo"
                 schedule:
-                  $ref: '../../schemas/content-template.yaml#/components/schemas/Schedule'
+                  $ref: "../../../schemas/content-template.yaml#/Schedule"
                 settings:
-                  $ref: '../../schemas/content-template.yaml#/components/schemas/TemplateSettings'
+                  $ref: "../../../schemas/content-template.yaml#/TemplateSettings"
       responses:
-        '200':
+        "200":
           description: Template updated successfully
           content:
             application/json:
               schema:
-                $ref: '../../schemas/content-template.yaml#/components/schemas/ContentGenerationTemplate'
-        '404':
-          description: Template not found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-        '422':
-          description: Validation failed
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                  details:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        field:
-                          type: string
-                        message:
-                          type: string
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                $ref: "../../../schemas/content-template.yaml#/ContentTemplate"
+        "404":
+          $ref: "../../../components/responses.yaml#/NotFound"

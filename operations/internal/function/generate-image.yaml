@@ -1,43 +1,27 @@
-openapi: 3.0.0
-info:
-  title: Image Generation API
-  version: 1.0.0
+---
 paths:
   /generate-image:
     post:
       operationId: generateImage
       summary: Generate an image
       description: Generates an image based on provided text and style options, including advanced font management and background image centering.
-      tags:
-        - ContentGeneration
-      security:
-        - bearerAuth: []
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '../../../schemas/content-types/image.yaml'
+              $ref: "../../../schemas/content-types/image.yaml#/Image"
       responses:
-        '200':
+        "200":
           description: Image generated successfully
           content:
             image/png:
               schema:
                 type: string
                 format: binary
-        '500':
-          description: Internal server error
+        "400":
+          description: Invalid request parameters
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
+                $ref: "../../../schemas/common/error.yaml#/Error"

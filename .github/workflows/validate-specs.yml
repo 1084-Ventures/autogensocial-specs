@@ -1,0 +1,43 @@
+---
+name: Validate YAML Specs
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install yamllint
+        run: pip install yamllint
+
+      - name: Run yamllint
+        run: yamllint .
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Prettier, Redocly CLI, and swagger-cli
+        run: npm install -g prettier @redocly/cli swagger-cli
+
+      - name: Check YAML formatting with Prettier
+        run: prettier --check "**/*.yaml"
+
+      - name: Lint OpenAPI with Redocly CLI
+        run: redocly lint openapi.yaml
+
+      - name: Validate OpenAPI spec
+        run: swagger-cli validate openapi.yaml

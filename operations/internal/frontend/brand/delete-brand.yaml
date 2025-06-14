@@ -1,0 +1,20 @@
+---
+/brand_management/{id}:
+  delete:
+    summary: Delete a brand
+    parameters:
+      - $ref: "../../../components/parameters.yaml#/id"
+    responses:
+      "200":
+        description: Brand deleted successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+      "404":
+        $ref: "../../../components/responses.yaml#/NotFound"
+      "400":
+        $ref: "../../../components/responses.yaml#/BadRequest"

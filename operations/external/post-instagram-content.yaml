@@ -1,17 +1,10 @@
-openapi: 3.0.0
-info:
-  title: Instagram Content Posting API
-  version: 1.0.0
+---
 paths:
   /external/post-instagram-content:
     post:
       operationId: postInstagramContent
       summary: Post content to Instagram
       description: Posts content (text and image) to Instagram for a given brand.
-      tags:
-        - External
-      security:
-        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -39,47 +32,16 @@ paths:
                       type: array
                       items:
                         type: string
-                postId:
-                  type: string
-                  description: Optional post ID for tracking.
       responses:
-        '200':
+        "201":
           description: Content posted successfully
           content:
             application/json:
               schema:
                 type: object
-                properties:
-                  id:
-                    type: string
-                    description: Instagram post ID
-                  status:
-                    type: string
-                    description: Post status (e.g., posted, failed)
-                  result:
-                    type: object
-                    description: Raw Instagram API response
-        '404':
-          description: Instagram account not found
+        "400":
+          description: Invalid request parameters
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
+                $ref: "../../schemas/common/error.yaml#/Error"

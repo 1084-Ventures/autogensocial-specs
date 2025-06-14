@@ -1,147 +1,336 @@
-openapi: 3.0.0
-components:
-  schemas:
-    content_type:
-      type: string
-      enum: [text, video, multi_image, image]
-      description: type of content to be generated - text (text-only post), video (video content), multi_image (multiple images), image (single image)
+---
+ContentType:
+  type: string
+  enum: [text, video, multi_image, image]
+  description: type of content to be generated - text (text-only post), video (video content), multi_image (multiple images), image (single image)
 
-    platform:
+Platform:
+  type: array
+  items:
+    type: string
+    enum: [instagram, facebook, tiktok, twitter]
+    description: social media platform(s) for the content
+
+PromptVariable:
+  type: object
+  required:
+    - name
+    - values
+  properties:
+    name:
+      type: string
+      description: name of the variable
+    values:
+      type: array
+      items:
+        type: string
+      description: possible values for the variable
+    description:
+      type: string
+      description: optional description of the variable
+
+TemplateSettings:
+  type: object
+  required:
+    - prompt_template
+    - visual_style
+    - image
+  properties:
+    prompt_template:
+      type: object
+      required:
+        - system_prompt
+        - user_prompt
+        - model
+      properties:
+        system_prompt:
+          type: string
+          description: system-level instructions for the ai.
+        user_prompt:
+          type: string
+          description: the main prompt for content generation. uses {{variable}} syntax.
+        temperature:
+          type: number
+          minimum: 0
+          maximum: 2
+          default: 1
+        max_tokens:
+          type: integer
+        model:
+          type: string
+        variables:
+          type: array
+          items:
+            $ref: "./content-template.yaml#/PromptVariable"
+    visual_style:
+      type: object
+      properties:
+        themes:
+          type: array
+          minItems: 1
+          items:
+            $ref: "./common/visual-style.yaml#/VisualStyle"
+    image:
+      $ref: "./content-types/image.yaml#/Image"
+
+TemplateInfo:
+  type: object
+  required:
+    - name
+    - brandId
+    - contentType
+    - targetPlatforms
+  properties:
+    name:
+      type: string
+    description:
+      type: string
+    brandId:
+      type: string
+    contentType:
+      $ref: "./content-template.yaml#/ContentType"
+    targetPlatforms:
       type: array
       items:
         type: string
         enum: [instagram, facebook, tiktok, twitter]
-        description: social media platform(s) for the content
 
-    prompt_variable:
-      type: object
-      required:
-        - name
-        - values
-      properties:
-        name:
-          type: string
-          description: name of the variable
-        values:
-          type: array
-          items:
-            type: string
-          description: possible values for the variable
-        description:
-          type: string
-          description: optional description of the variable
-
-    template_settings:
-      type: object
-      required:
-        - prompt_template
-        - visual_style
-        - image
-      properties:
-        prompt_template:
-          type: object
-          required:
-            - system_prompt
-            - user_prompt
-            - model
-          properties:
-            system_prompt:
-              type: string
-              description: system-level instructions for the ai.
-            user_prompt:
-              type: string
-              description: the main prompt for content generation. uses {{variable}} syntax.
-            temperature:
-              type: number
-              minimum: 0
-              maximum: 2
-              default: 1
-            max_tokens:
-              type: integer
-            model:
-              type: string
-            variables:
-              type: array
-              items:
-                $ref: '#/components/schemas/prompt_variable'
-        visual_style:
-          type: object
-          properties:
-            themes:
-              type: array
-              minItems: 1
-              items:
-                $ref: '../../schemas/common/visual-style.yaml'
-        image:
-          $ref: '../../schemas/content-types/image.yaml'
-
-    template_info:
-      type: object
-      required:
-        - name
-        - brandId
-        - contentType
-        - targetPlatforms
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        brandId:
-          type: string
-        contentType:
-          $ref: '#/components/schemas/content_type'
-        targetPlatforms:
-          type: array
-          items:
-            type: string
-            enum: [instagram, facebook, tiktok, twitter]
-
-    content_generation_template:
-      allOf:
-        - $ref: './base.yaml#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - templateInfo
-            - schedule
-            - settings
-          properties:
-            templateInfo:
-              $ref: '#/components/schemas/template_info'
-            schedule:
-              $ref: '../../schemas/common/schedule.yaml'
-            settings:
-              $ref: '#/components/schemas/template_settings'
-
-    content_template_create:
-      type: object
+ContentGenerationTemplate:
+  allOf:
+    - $ref: "./base.yaml#/BaseModel"
+    - type: object
       required:
         - templateInfo
         - schedule
         - settings
       properties:
         templateInfo:
-          $ref: '#/components/schemas/template_info'
+          $ref: "./content-template.yaml#/TemplateInfo"
         schedule:
-          $ref: '../../schemas/common/schedule.yaml'
+          $ref: "./common/schedule.yaml#/Schedule"
         settings:
-          $ref: '#/components/schemas/template_settings'
+          $ref: "./content-template.yaml#/TemplateSettings"
 
-    content_template_update:
-      type: object
+ContentTemplate:
+  allOf:
+    - $ref: "./base.yaml#/BaseModel"
+    - type: object
+      required:
+        - templateInfo
+        - schedule
+        - settings
       properties:
         templateInfo:
-          type: object
-          properties:
-            name:
-              type: string
-            description:
-              type: string
-            contentType:
-              $ref: '#/components/schemas/content_type'
-            brandId:
-              type: string
+          $ref: "./content-template.yaml#/TemplateInfo"
         schedule:
-          $ref: '../../schemas/common/schedule.yaml'
+          $ref: "./common/schedule.yaml#/Schedule"
         settings:
-          $ref: '#/components/schemas/template_settings'
+          $ref: "./content-template.yaml#/TemplateSettings"
+
+ContentTemplateCreate:
+  type: object
+  required:
+    - templateInfo
+    - schedule
+    - settings
+  properties:
+    templateInfo:
+      $ref: "./content-template.yaml#/TemplateInfo"
+    schedule:
+      $ref: "./common/schedule.yaml#/Schedule"
+    settings:
+      $ref: "./content-template.yaml#/TemplateSettings"
+
+ContentTemplateUpdate:
+  type: object
+  properties:
+    templateInfo:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        contentType:
+          $ref: "./content-template.yaml#/ContentType"
+        brandId:
+          type: string
+    schedule:
+      $ref: "./common/schedule.yaml#/Schedule"
+    settings:
+      $ref: "./content-template.yaml#/TemplateSettings"
+
+GenerateTextContentRequest:
+  type: object
+  properties:
+    template:
+      type: object
+    variableValues:
+      type: object
+      additionalProperties:
+        type: string
+  required:
+    - template
+
+GenerateTextContentResponse:
+  type: object
+  properties:
+    text:
+      type: string
+    hashtags:
+      type: array
+      items:
+        type: string
+    comment:
+      type: string
+    error:
+      type: string
+
+OrchestratorRequest:
+  type: object
+  properties:
+    templateId:
+      type: string
+    variableValues:
+      type: object
+      additionalProperties:
+        type: string
+    brandId:
+      type: string
+
+OrchestratorResponse:
+  type: object
+  properties:
+    # Add fields as needed from orchestrator specs
+
+PostingRequest:
+  type: object
+  properties:
+    brandId:
+      type: string
+    imageUrl:
+      type: string
+    content:
+      type: object
+    postId:
+      type: string
+
+PostingResponse:
+  type: object
+  properties:
+    instagramResult:
+      type: object
+    instagramPostId:
+      type: string
+    postStatus:
+      type: string
+
+Font:
+  type: object
+  properties:
+    family:
+      type: string
+    size:
+      type: string
+    weight:
+      type: string
+    style:
+      type: string
+
+Color:
+  type: object
+  properties:
+    text:
+      type: string
+    background:
+      type: string
+    outline:
+      type: string
+
+Outline:
+  type: object
+  properties:
+    color:
+      type: string
+    width:
+      type: integer
+
+Alignment:
+  type: object
+  properties:
+    textAlign:
+      type: string
+
+Box:
+  type: object
+  properties:
+    color:
+      type: string
+    alpha:
+      type: integer
+
+VisualStyle:
+  type: object
+  properties:
+    font:
+      $ref: "#/components/schemas/Font"
+    color:
+      $ref: "#/components/schemas/Color"
+    outline:
+      $ref: "#/components/schemas/Outline"
+    alignment:
+      $ref: "#/components/schemas/Alignment"
+    box:
+      $ref: "#/components/schemas/Box"
+
+Container:
+  type: object
+  properties:
+    width:
+      type: integer
+    height:
+      type: integer
+    padding:
+      type: integer
+
+Background:
+  type: object
+  properties:
+    type:
+      type: string
+    value:
+      type: string
+    filters:
+      type: array
+      items:
+        type: string
+
+Format:
+  type: object
+  properties:
+    imageFormat:
+      type: string
+
+TextOverlay:
+  type: object
+  properties:
+    text:
+      type: string
+    visualStyle:
+      $ref: "#/components/schemas/VisualStyle"
+    horizontalAlign:
+      type: string
+    verticalAlign:
+      type: string
+
+ImageContent:
+  type: object
+  properties:
+    container:
+      $ref: "#/components/schemas/Container"
+    background:
+      $ref: "#/components/schemas/Background"
+    format:
+      $ref: "#/components/schemas/Format"
+    textOverlay:
+      $ref: "#/components/schemas/TextOverlay"

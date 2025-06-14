@@ -1,124 +1,122 @@
-openapi: 3.0.0
-components:
-  schemas:
-    social_account:
-      type: object
-      required:
-        - enabled
-        - username
-        - access_token
-      properties:
-        enabled:
-          type: boolean
-          description: whether this social account is enabled
-          example: true
-        username:
-          type: string
-          description: username for the social account
-          example: "@brandaccount"
-        access_token:
-          type: string
-          description: access token
-          format: string
-          example: "oauth2_access_token"
-        refresh_token:
-          type: string
-          description: refresh token
-          format: string
-          example: "oauth2_refresh_token"
-        expires_at:
-          type: string
-          format: date-time
-          description: token expiration timestamp
-          example: "2025-04-10t12:00:00z"
+---
+SocialAccount:
+  type: object
+  required:
+    - enabled
+    - username
+    - access_token
+  properties:
+    enabled:
+      type: boolean
+      description: whether this social account is enabled
+      example: true
+    username:
+      type: string
+      description: username for the social account
+      example: "@brandaccount"
+    access_token:
+      type: string
+      description: access token
+      format: string
+      example: "oauth2_access_token"
+    refresh_token:
+      type: string
+      description: refresh token
+      format: string
+      example: "oauth2_refresh_token"
+    expires_at:
+      type: string
+      format: date-time
+      description: token expiration timestamp
+      example: "2025-04-10t12:00:00z"
 
-    Brand:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
+Brand:
+  allOf:
+    - $ref: "./base.yaml#/BaseModel"
+    - type: object
+      required:
+        - brand_info
+      properties:
+        brand_info:
+          type: object
           required:
-            - brand_info
+            - name
+            - user_id
           properties:
-            brand_info:
-              type: object
-              required:
-                - name
-                - user_id
-              properties:
-                name:
-                  type: string
-                  description: Name of the brand
-                  minLength: 1
-                  maxLength: 100
-                  example: "Acme Corporation"
-                description:
-                  type: string
-                  description: Optional description of the brand
-                  maxLength: 500
-                  example: "Leading provider of innovative solutions"
-                user_id:
-                  type: string
-                  description: ID of the user who owns this brand
-                  format: uuid
-                  example: "123e4567-e89b-12d3-a456-426614174000"
-            socialAccounts:
-              type: object
-              properties:
-                instagram:
-                  $ref: '#/components/schemas/social_account'
-                facebook:
-                  $ref: '#/components/schemas/social_account'
-                tiktok:
-                  $ref: '#/components/schemas/social_account'
-
-    BrandCreate:
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          type: string
-          description: Name of the brand
-          minLength: 1
-          maxLength: 100
-          example: "New Brand Name"
-
-    BrandUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Updated name of the brand
-          minLength: 1
-          maxLength: 100
-          example: "Updated Brand Name"
-        description:
-          type: string
-          description: Updated description of the brand
-          maxLength: 500
-          example: "Updated brand description"
+            name:
+              type: string
+              description: Name of the brand
+              minLength: 1
+              maxLength: 100
+              example: "Acme Corporation"
+            description:
+              type: string
+              description: Optional description of the brand
+              maxLength: 500
+              example: "Leading provider of innovative solutions"
+            user_id:
+              type: string
+              description: ID of the user who owns this brand
+              format: uuid
+              example: "123e4567-e89b-12d3-a456-426614174000"
         socialAccounts:
           type: object
           properties:
             instagram:
-              $ref: '#/components/schemas/social_account'
+              $ref: "./brand.yaml#/SocialAccount"
             facebook:
-              $ref: '#/components/schemas/social_account'
+              $ref: "./brand.yaml#/SocialAccount"
             tiktok:
-              $ref: '#/components/schemas/social_account'
+              $ref: "./brand.yaml#/SocialAccount"
 
-    BrandNameResponse:
+BrandCreate:
+  type: object
+  required:
+    - name
+  properties:
+    name:
+      type: string
+      description: Name of the brand
+      minLength: 1
+      maxLength: 100
+      example: "New Brand Name"
+
+BrandUpdate:
+  type: object
+  properties:
+    name:
+      type: string
+      description: Updated name of the brand
+      minLength: 1
+      maxLength: 100
+      example: "Updated Brand Name"
+    description:
+      type: string
+      description: Updated description of the brand
+      maxLength: 500
+      example: "Updated brand description"
+    socialAccounts:
       type: object
-      required:
-        - id
-        - name
       properties:
-        id:
-          type: string
-          description: Unique identifier of the brand
-          format: uuid
-          example: "123e4567-e89b-12d3-a456-426614174000"
-        name:
-          type: string
-          description: Name of the brand
-          example: "Brand Name"
+        instagram:
+          $ref: "./brand.yaml#/SocialAccount"
+        facebook:
+          $ref: "./brand.yaml#/SocialAccount"
+        tiktok:
+          $ref: "./brand.yaml#/SocialAccount"
+
+BrandNameResponse:
+  type: object
+  required:
+    - id
+    - name
+  properties:
+    id:
+      type: string
+      description: Unique identifier of the brand
+      format: uuid
+      example: "123e4567-e89b-12d3-a456-426614174000"
+    name:
+      type: string
+      description: Name of the brand
+      example: "Brand Name"

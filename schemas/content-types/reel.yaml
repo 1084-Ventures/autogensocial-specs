@@ -1,0 +1,9 @@
+---
+Reel:
+  type: object
+  description: Reel content structure
+  properties:
+    videoUrl:
+      type: string
+    caption:
+      type: string

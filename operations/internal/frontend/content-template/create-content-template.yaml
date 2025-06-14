@@ -1,17 +1,9 @@
-openapi: 3.0.0
-info:
-  title: Content Template API
-  version: 1.0.0
+---
 paths:
   /content-templates:
     post:
-      operationId: createContentTemplate
       summary: Create a new content template
       description: Creates a new content generation template for a brand.
-      tags:
-        - ContentTemplate
-      security:
-        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -23,51 +15,17 @@ paths:
                 - settings
               properties:
                 templateInfo:
-                  $ref: '../../schemas/content-template.yaml#/components/schemas/TemplateInfo'
+                  $ref: "../../../schemas/content-template.yaml#/TemplateInfo"
                 schedule:
-                  $ref: '../../schemas/content-template.yaml#/components/schemas/Schedule'
+                  $ref: "../../../schemas/content-template.yaml#/Schedule"
                 settings:
-                  $ref: '../../schemas/content-template.yaml#/components/schemas/TemplateSettings'
+                  $ref: "../../../schemas/content-template.yaml#/TemplateSettings"
       responses:
-        '201':
+        "201":
           description: Template created successfully
           content:
             application/json:
               schema:
-                $ref: '../../schemas/content-template.yaml#/components/schemas/ContentGenerationTemplate'
-        '403':
-          description: Not authorized to create templates for this brand
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-        '422':
-          description: Validation failed
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                  details:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        field:
-                          type: string
-                        message:
-                          type: string
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                $ref: "../../../schemas/content-template.yaml#/ContentTemplate"
+        "403":
+          $ref: "../../../components/responses.yaml#/Unauthorized"

@@ -1,0 +1,11 @@
+---
+Post:
+  type: object
+  description: Generic post content structure
+  properties:
+    text:
+      type: string
+    media:
+      type: array
+      items:
+        type: string
