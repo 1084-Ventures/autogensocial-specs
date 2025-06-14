@@ -1,0 +1,32 @@
+---
+name: Code Scanning (YAML, Markdown, Secrets)
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  scan-secrets:
+    name: Scan for Secrets (truffleHog)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Run truffleHog on all files
+        uses: trufflesecurity/trufflehog@v3.77.0
+        with:
+          path: .
+
+  check-markdown-links:
+    name: Check Markdown Links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install markdown-link-check
+        run: npm install -g markdown-link-check
+      - name: Run markdown-link-check on all Markdown files
+        run: |
+          find . -name "*.md" -print0 | xargs -0 -n 1 markdown-link-check -q
