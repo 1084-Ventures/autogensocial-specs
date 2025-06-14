@@ -10,22 +10,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - templateId
-                - brandId
-              properties:
-                templateId:
-                  type: string
-                  description: The template ID to use for content generation
-                brandId:
-                  type: string
-                  description: The brand ID for which to generate content
-                variableValues:
-                  type: object
-                  description: Variable values for the template
-                  additionalProperties:
-                    type: string
+              $ref: "../../../schemas/function/orchestrator.yaml#/OrchestratorRequest"
       responses:
         "201":
           description: Content generated and orchestrated successfully

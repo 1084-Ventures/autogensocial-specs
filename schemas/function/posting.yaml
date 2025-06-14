@@ -1,0 +1,36 @@
+---
+PostingRequest:
+  type: object
+  properties:
+    brand_id:
+      type: string
+      description: The brand ID
+    image_url:
+      type: string
+      description: The image URL
+    content:
+      type: string
+      description: The post content
+    post_id:
+      type: string
+      description: The post ID
+  required:
+    - brand_id
+    - image_url
+    - content
+    - post_id
+
+PostingResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      description: The status of the post operation
+    post_url:
+      type: string
+      description: The URL of the posted content
+    error:
+      type: string
+      description: Error message if the operation failed
+  required:
+    - status

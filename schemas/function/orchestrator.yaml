@@ -1,16 +1,21 @@
+---
 OrchestratorRequest:
   type: object
   properties:
-    operation:
+    templateId:
       type: string
-      description: The operation to perform
-    payload:
-      type: object
-      description: The payload for the operation
-      additionalProperties: true
+      description: The template ID to use for content generation
+    brandId:
+      type: string
+      description: The brand ID for which to generate content
+    variableValues:
+      type: array
+      description: Variable values for the template
+      items:
+        type: object
   required:
-    - operation
-    - payload
+    - templateId
+    - brandId
 
 OrchestratorResponse:
   type: object
