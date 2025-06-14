@@ -1,0 +1,29 @@
+MediaSearchRequest:
+  type: object
+  properties:
+    text:
+      type: string
+      description: The text to search for related media
+    source:
+      type: string
+      description: The source to search (e.g., 'internal', 'online')
+      default: internal
+  required:
+    - text
+
+MediaSearchResponse:
+  type: object
+  properties:
+    media:
+      type: object
+      description: The best match media result
+      additionalProperties: true
+    source:
+      type: string
+      description: The source of the media
+    error:
+      type: string
+      description: Error message if the search failed
+  required:
+    - media
+    - source

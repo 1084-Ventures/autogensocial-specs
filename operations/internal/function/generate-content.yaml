@@ -10,14 +10,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../../../schemas/ai/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentRequest"
+              $ref: "../../../schemas/function/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentRequest"
       responses:
         "200":
           description: Content generated successfully
           content:
             application/json:
               schema:
-                $ref: "../../../schemas/ai/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentResponse"
+                $ref: "../../../schemas/function/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentResponse"
         "400":
           description: Invalid request parameters
           content:

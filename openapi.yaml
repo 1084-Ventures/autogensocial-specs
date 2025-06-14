@@ -91,15 +91,29 @@ components:
     Twitter:
       $ref: "./schemas/platforms/twitter.yaml#/Twitter"
     AzureOpenAIGenerateContentTemplate:
-      $ref: "./schemas/ai/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentTemplate"
+      $ref: "./schemas/function/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentTemplate"
     AzureOpenAIGenerateContentRequest:
-      $ref: "./schemas/ai/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentRequest"
+      $ref: "./schemas/function/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentRequest"
     AzureOpenAIGenerateContentResponse:
-      $ref: "./schemas/ai/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentResponse"
+      $ref: "./schemas/function/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentResponse"
     OrchestratorRequest:
       $ref: "./schemas/function/orchestrator.yaml#/OrchestratorRequest"
     OrchestratorResponse:
       $ref: "./schemas/function/orchestrator.yaml#/OrchestratorResponse"
+    PostingRequest:
+      $ref: "./schemas/function/posting.yaml#/PostingRequest"
+    PostingResponse:
+      $ref: "./schemas/function/posting.yaml#/PostingResponse"
+    ImageContent:
+      $ref: "./schemas/content-types/image-content.yaml#/ImageContent"
+    Background:
+      $ref: "./schemas/content-types/image-content.yaml#/Background"
+    TextOverlay:
+      $ref: "./schemas/content-types/image-content.yaml#/TextOverlay"
+    MediaSearchRequest:
+      $ref: "./schemas/function/media-search.yaml#/MediaSearchRequest"
+    MediaSearchResponse:
+      $ref: "./schemas/function/media-search.yaml#/MediaSearchResponse"
 
 security:
   - bearerAuth: []
