@@ -1,0 +1,10 @@
+# This file was migrated from components/responses.yaml (NotFound)
+NotFound:
+  description: Resource not found
+  content:
+    application/json:
+      schema:
+        $ref: "../../schemas/common/error.yaml#/Error"
+      example:
+        code: RESOURCE_NOT_FOUND
+        message: The requested resource was not found

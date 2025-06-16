@@ -1,0 +1,26 @@
+# This file was migrated from components/parameters.yaml (pagination)
+# Reusable query parameter for pagination
+pagination:
+  in: query
+  name: pagination
+  required: false
+  schema:
+    type: object
+    properties:
+      limit:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+      offset:
+        type: integer
+        minimum: 0
+        default: 0
+      sort_by:
+        type: string
+        enum: [created_at, updated_at, name]
+        default: created_at
+      sort_order:
+        type: string
+        enum: [asc, desc]
+        default: desc

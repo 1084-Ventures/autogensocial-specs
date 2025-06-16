@@ -1,0 +1,8 @@
+# components/schemas/common/SocialAccountEntry.yaml
+SocialAccountEntry:
+  type: object
+  properties:
+    platform:
+      $ref: '../common/Platform.yaml#/Platform'
+    account:
+      $ref: '../common/SocialAccount.yaml#/SocialAccount'

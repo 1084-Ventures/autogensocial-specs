@@ -1,0 +1,12 @@
+# components/schemas/common/PromptVariable.yaml
+PromptVariable:
+  type: object
+  properties:
+    name:
+      type: string
+    values:
+      type: array
+      items:
+        type: string
+    description:
+      type: string

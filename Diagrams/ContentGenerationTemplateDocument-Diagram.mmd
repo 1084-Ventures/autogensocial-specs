@@ -1,0 +1,150 @@
+classDiagram
+    class ContentGenerationTemplateDocument {
+        +string id
+        +Metadata metadata
+        +string brandId
+        +TemplateInfo templateInfo
+        +Schedule schedule
+        +TemplateSettings settings
+        +boolean deleted
+    }
+    class Metadata {
+        +string created_date
+        +string updated_date
+        +boolean is_active
+    }
+    class TemplateInfo {
+        +string name
+        +string description
+        +ContentType contentType
+        +Platform[] socialAccounts
+    }
+    class ContentType {
+        <<enum>> text, video, multi_image, image
+    }
+    class Platform {
+        <<enum>> instagram, facebook, twitter, tiktok
+    }
+    class MediaType {
+        <<enum>> Color, Set, Uploaded, Online
+    }
+    class Schedule {
+        +string[] days_of_week
+        +TimeSlot[] time_slots
+    }
+    class TimeSlot {
+        +integer hour
+        +integer minute
+        +string timezone
+    }
+    class TemplateSettings {
+        +PromptTemplate prompt_template
+        +VisualStyleObj visual_style
+        +ContentItem contentItem
+    }
+    class PromptTemplate {
+        +string system_prompt
+        +string user_prompt
+        +number temperature
+        +integer max_tokens
+        +string model
+        +PromptVariable[] variables
+    }
+    class PromptVariable {
+        +string name
+        +string[] values
+        +string description
+    }
+    class VisualStyleObj {
+        +VisualStyle[] themes
+    }
+    class ContentItem {
+        +Text text
+        +Image image
+        +Video video
+        +MultiImage multiImage
+    }
+    class Text {
+        +string value
+    }
+    class Image {
+        +MediaType media_type
+        +string set_url
+        +VisualStyle visualStyle
+    }
+    class Video {
+        +MediaType media_type
+        +string set_url
+        +VisualStyle visualStyle
+    }
+    class MultiImage {
+        +Image[] images
+        +integer min_images
+        +integer max_images
+    }
+    class VisualStyle {
+        +string background_color
+        +OverlayBox overlayBox
+        +TextStyle textStyle
+        +string[] filters
+        +string[] effects
+    }
+    class OverlayBox {
+        +string color
+        +number transparency
+        +string vertical_location
+        +string horizontal_location
+    }
+    class TextStyle {
+        +Font font
+        +string font_color
+        +Outline outline
+        +Alignment alignment
+    }
+    class Font {
+        +string family
+        +string size
+        +string weight
+        +string style
+    }
+    class Outline {
+        +string color
+        +integer width
+    }
+    class Alignment {
+        +string text_align
+    }
+
+    %% Relationships
+    ContentGenerationTemplateDocument --> Metadata : metadata
+    ContentGenerationTemplateDocument --> TemplateInfo : templateInfo
+    ContentGenerationTemplateDocument --> Schedule : schedule
+    ContentGenerationTemplateDocument --> TemplateSettings : settings
+    TemplateInfo --> ContentType : contentType
+    TemplateInfo --> Platform : socialAccounts
+    Schedule --> TimeSlot : time_slots
+    TemplateSettings --> PromptTemplate : prompt_template
+    TemplateSettings --> VisualStyleObj : visual_style
+    TemplateSettings --> ContentItem : contentItem
+    ContentItem --> Text : text
+    ContentItem --> Image : image
+    ContentItem --> Video : video
+    ContentItem --> MultiImage : multiImage
+    MultiImage --> Image : images
+    VisualStyleObj --> VisualStyle : themes
+    Image --> MediaType : media_type
+    Video --> MediaType : media_type
+    Image --> VisualStyle : visualStyle
+    Video --> VisualStyle : visualStyle
+    VisualStyle --> OverlayBox : overlayBox
+    VisualStyle --> TextStyle : textStyle
+    TextStyle --> Font : font
+    TextStyle --> Outline : outline
+    TextStyle --> Alignment : alignment
+    PromptTemplate --> PromptVariable : variables
+
+    TemplateInfo ..> ContentItem : drives type
+    note for ContentItem "Only one of text, image, video, or multiImage is used, based on ContentType in TemplateInfo"
+    note for TemplateInfo "ContentType determines which ContentItem property is populated"
+    note for Image "If media_type is 'Set', set_url must be provided"
+    note for Video "If media_type is 'Set', set_url must be provided"

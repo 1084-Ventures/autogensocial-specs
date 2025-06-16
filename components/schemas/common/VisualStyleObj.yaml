@@ -1,0 +1,8 @@
+# components/schemas/common/VisualStyleObj.yaml
+VisualStyleObj:
+  type: object
+  properties:
+    themes:
+      type: array
+      items:
+        $ref: '../common/VisualStyle.yaml#/VisualStyle'

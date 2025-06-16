@@ -1,0 +1,12 @@
+# components/schemas/common/TextStyle.yaml
+TextStyle:
+  type: object
+  properties:
+    font:
+      $ref: '../common/Font.yaml#/Font'
+    font_color:
+      type: string
+    outline:
+      $ref: '../common/Outline.yaml#/Outline'
+    alignment:
+      $ref: '../common/Alignment.yaml#/Alignment'

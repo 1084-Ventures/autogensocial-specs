@@ -1,0 +1,8 @@
+# components/schemas/common/ContentType.yaml
+ContentType:
+  type: string
+  enum:
+    - text
+    - video
+    - multi_image
+    - image

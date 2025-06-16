@@ -1,0 +1,7 @@
+# This file was migrated from components/security-schemes.yaml (ApiKeyAuth)
+ApiKeyAuth:
+  type: apiKey
+  description: api key authentication for all endpoints
+  name: x-api-key
+  in: header
+  x-example: "your-api-key-here"

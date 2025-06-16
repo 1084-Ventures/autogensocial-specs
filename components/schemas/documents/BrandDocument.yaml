@@ -1,0 +1,13 @@
+BrandDocument:
+  allOf:
+    - $ref: '../common/BaseModel.yaml#/BaseModel'
+    - type: object
+      properties:
+        user_id:
+          type: string
+        brand_info:
+          $ref: '../common/BrandInfo.yaml#/BrandInfo'
+        socialAccounts:
+          type: array
+          items:
+            $ref: '../common/SocialAccountEntry.yaml#/SocialAccountEntry'

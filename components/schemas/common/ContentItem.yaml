@@ -1,0 +1,12 @@
+# components/schemas/common/ContentItem.yaml
+ContentItem:
+  type: object
+  properties:
+    text:
+      $ref: '../common/Text.yaml#/Text'
+    image:
+      $ref: '../common/Image.yaml#/Image'
+    video:
+      $ref: '../common/Video.yaml#/Video'
+    multiImage:
+      $ref: '../common/MultiImage.yaml#/MultiImage'

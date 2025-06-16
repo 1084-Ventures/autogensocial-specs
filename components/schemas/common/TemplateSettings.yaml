@@ -1,0 +1,10 @@
+# components/schemas/common/TemplateSettings.yaml
+TemplateSettings:
+  type: object
+  properties:
+    prompt_template:
+      $ref: '../common/PromptTemplate.yaml#/PromptTemplate'
+    visual_style:
+      $ref: '../common/VisualStyleObj.yaml#/VisualStyleObj'
+    contentItem:
+      $ref: '../common/ContentItem.yaml#/ContentItem'

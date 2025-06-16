@@ -1,0 +1,5 @@
+# This file was migrated from components/security-schemes.yaml (bearerAuth)
+bearerAuth:
+  type: http
+  scheme: bearer
+  bearerFormat: JWT

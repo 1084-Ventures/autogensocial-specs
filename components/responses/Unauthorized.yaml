@@ -1,0 +1,10 @@
+# This file was migrated from components/responses.yaml (Unauthorized)
+Unauthorized:
+  description: Authentication required
+  content:
+    application/json:
+      schema:
+        $ref: "../../schemas/common/error.yaml#/Error"
+      example:
+        code: UNAUTHORIZED
+        message: Valid API key required

@@ -1,0 +1,12 @@
+# components/schemas/common/MultiImage.yaml
+MultiImage:
+  type: object
+  properties:
+    images:
+      type: array
+      items:
+        $ref: '../common/Image.yaml#/Image'
+    min_images:
+      type: integer
+    max_images:
+      type: integer

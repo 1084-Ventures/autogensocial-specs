@@ -1,0 +1,10 @@
+# This file was migrated from components/parameters.yaml (id)
+# Reusable path/query/header parameter for id
+id:
+  name: id
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+  description: resource identifier (uuid)
