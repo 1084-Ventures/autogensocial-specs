@@ -11,42 +11,59 @@ cp "$OPENAPI_FILE" "$OPENAPI_FILE.bak"
 
 echo "Updating $OPENAPI_FILE ..."
 
-# Extract header (everything before components.schemas)
-HEADER=$(awk '/components:/ {print NR-1; exit}' "$OPENAPI_FILE")
-head -n "$HEADER" "$OPENAPI_FILE" > "$OPENAPI_FILE.tmp"
+# Write OpenAPI header (always overwrite to ensure validity)
+cat > "$OPENAPI_FILE.tmp" <<EOF
+openapi: 3.0.0
+info:
+  title: autogen_social_api
+  version: "1.0.0"
+  description: |
+    API for content orchestration, generation, and posting for social media automation.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: /api
+    description: Azure Functions API endpoint
+EOF
 
+echo >> "$OPENAPI_FILE.tmp"
+echo "components:" >> "$OPENAPI_FILE.tmp"
 echo "  schemas:" >> "$OPENAPI_FILE.tmp"
 
 # Add all schemas from components (recursively)
-find "$COMPONENTS_DIR/schemas" -type f -name '*.yaml' | while read -r file; do
-  # Get schema name from filename (without extension)
+find "$COMPONENTS_DIR/schemas" -type f -name '*.yaml' | sort | while read -r file; do
   name=$(basename "$file" .yaml)
-  # Get relative path from specs dir
   relpath="./components/schemas${file#*$COMPONENTS_DIR/schemas}"
   echo "    $name:" >> "$OPENAPI_FILE.tmp"
-  echo "      $ref: \"$relpath#/$name\"" >> "$OPENAPI_FILE.tmp"
+  echo "      \$ref: '$relpath#/$name'" >> "$OPENAPI_FILE.tmp"
 done
 
 echo >> "$OPENAPI_FILE.tmp"
 echo "paths:" >> "$OPENAPI_FILE.tmp"
 
 # Add all operations from operations (recursively)
-find "$OPERATIONS_DIR" -type f -name '*.yaml' | while read -r file; do
-  # Get operation name from path (e.g. /internal/function/foo)
-  op_path="${file#$OPERATIONS_DIR}"
-  op_path="${op_path%.yaml}"
-  op_path="${op_path//_/\_}" # escape underscores
-  op_path="/$(echo "$op_path" | sed 's|/|~1|g')"
+find "$OPERATIONS_DIR" -type f -name '*.yaml' | sort | while read -r file; do
   relpath="./operations${file#*$OPERATIONS_DIR}"
-  echo "  $op_path:" >> "$OPENAPI_FILE.tmp"
-  echo "    $ref: \"$relpath#/paths/$op_path\"" >> "$OPENAPI_FILE.tmp"
+  # Build the API path from the file path
+  api_path="/${file#$OPERATIONS_DIR/}"
+  api_path="${api_path%.yaml}"
+  api_path="${api_path// /}" # remove spaces
+  # Only add if not already present
+  echo "  $api_path:" >> "$OPENAPI_FILE.tmp"
+  # Guess HTTP method (default to post)
+  method="post"
+  if grep -qE '^get:' "$file"; then method="get"; fi
+  if grep -qE '^put:' "$file"; then method="put"; fi
+  if grep -qE '^delete:' "$file"; then method="delete"; fi
+  echo "    $method:" >> "$OPENAPI_FILE.tmp"
+  echo "      \$ref: '$relpath#/paths/$api_path/$method'" >> "$OPENAPI_FILE.tmp"
 done
 
-# Append the rest of the file (security, etc.)
-awk '/^security:/ {print NR; exit}' "$OPENAPI_FILE" | while read -r line; do
-  tail -n +$line "$OPENAPI_FILE" >> "$OPENAPI_FILE.tmp"
-done
+echo >> "$OPENAPI_FILE.tmp"
+echo "security:" >> "$OPENAPI_FILE.tmp"
+echo "  - bearerAuth: []" >> "$OPENAPI_FILE.tmp"
 
+echo "openapi.yaml updated. Backup saved as openapi.yaml.bak."
 # Replace the original file
 mv "$OPENAPI_FILE.tmp" "$OPENAPI_FILE"
-echo "openapi.yaml updated. Backup saved as openapi.yaml.bak."

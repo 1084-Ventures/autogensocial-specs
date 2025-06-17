@@ -1,161 +1,129 @@
----
-openapi: 3.0.0
-info:
-  title: autogen_social_api
-  version: "1.0.0"
-  description: |
-    API for content orchestration, generation, and posting for social media automation.
-  license:
-    name: MIT
-    url: https://opensource.org/licenses/MIT
-servers:
-  - url: /api
-    description: Azure Functions API endpoint
+components:
+  schemas:
+    BrandCreate:
+      $ref: './components/schemas/api/internal/brand/BrandCreate.yaml#/BrandCreate'
+    BrandDelete:
+      $ref: './components/schemas/api/internal/brand/BrandDelete.yaml#/BrandDelete'
+    BrandGet:
+      $ref: './components/schemas/api/internal/brand/BrandGet.yaml#/BrandGet'
+    BrandResponse:
+      $ref: './components/schemas/api/internal/brand/BrandResponse.yaml#/BrandResponse'
+    BrandUpdate:
+      $ref: './components/schemas/api/internal/brand/BrandUpdate.yaml#/BrandUpdate'
+    ContentGenerationTemplateCreate:
+      $ref: './components/schemas/api/internal/content-generation-template/ContentGenerationTemplateCreate.yaml#/ContentGenerationTemplateCreate'
+    ContentGenerationTemplateDelete:
+      $ref: './components/schemas/api/internal/content-generation-template/ContentGenerationTemplateDelete.yaml#/ContentGenerationTemplateDelete'
+    ContentGenerationTemplateGet:
+      $ref: './components/schemas/api/internal/content-generation-template/ContentGenerationTemplateGet.yaml#/ContentGenerationTemplateGet'
+    ContentGenerationTemplateResponse:
+      $ref: './components/schemas/api/internal/content-generation-template/ContentGenerationTemplateResponse.yaml#/ContentGenerationTemplateResponse'
+    ContentGenerationTemplateUpdate:
+      $ref: './components/schemas/api/internal/content-generation-template/ContentGenerationTemplateUpdate.yaml#/ContentGenerationTemplateUpdate'
+    BaseModel:
+      $ref: './components/schemas/common/base/BaseModel.yaml#/BaseModel'
+    BrandInfo:
+      $ref: './components/schemas/common/base/BrandInfo.yaml#/BrandInfo'
+    ContentItem:
+      $ref: './components/schemas/common/base/ContentItem.yaml#/ContentItem'
+    ContentType:
+      $ref: './components/schemas/common/base/ContentType.yaml#/ContentType'
+    Metadata:
+      $ref: './components/schemas/common/base/Metadata.yaml#/Metadata'
+    Text:
+      $ref: './components/schemas/common/base/Text.yaml#/Text'
+    CognitiveBrand:
+      $ref: './components/schemas/common/cognitive/CognitiveBrand.yaml#/CognitiveBrand'
+    CognitiveCaption:
+      $ref: './components/schemas/common/cognitive/CognitiveCaption.yaml#/CognitiveCaption'
+    CognitiveCategory:
+      $ref: './components/schemas/common/cognitive/CognitiveCategory.yaml#/CognitiveCategory'
+    CognitiveData:
+      $ref: './components/schemas/common/cognitive/CognitiveData.yaml#/CognitiveData'
+    CognitiveDenseCaption:
+      $ref: './components/schemas/common/cognitive/CognitiveDenseCaption.yaml#/CognitiveDenseCaption'
+    CognitiveObject:
+      $ref: './components/schemas/common/cognitive/CognitiveObject.yaml#/CognitiveObject'
+    CognitivePerson:
+      $ref: './components/schemas/common/cognitive/CognitivePerson.yaml#/CognitivePerson'
+    CognitiveTag:
+      $ref: './components/schemas/common/cognitive/CognitiveTag.yaml#/CognitiveTag'
+    Rectangle:
+      $ref: './components/schemas/common/cognitive/Rectangle.yaml#/Rectangle'
+    Image:
+      $ref: './components/schemas/common/media/Image.yaml#/Image'
+    MediaMetadata:
+      $ref: './components/schemas/common/media/MediaMetadata.yaml#/MediaMetadata'
+    MediaType:
+      $ref: './components/schemas/common/media/MediaType.yaml#/MediaType'
+    MultiImage:
+      $ref: './components/schemas/common/media/MultiImage.yaml#/MultiImage'
+    Video:
+      $ref: './components/schemas/common/media/Video.yaml#/Video'
+    Schedule:
+      $ref: './components/schemas/common/schedule/Schedule.yaml#/Schedule'
+    TimeSlot:
+      $ref: './components/schemas/common/schedule/TimeSlot.yaml#/TimeSlot'
+    Platform:
+      $ref: './components/schemas/common/social/Platform.yaml#/Platform'
+    SocialAccount:
+      $ref: './components/schemas/common/social/SocialAccount.yaml#/SocialAccount'
+    SocialAccountEntry:
+      $ref: './components/schemas/common/social/SocialAccountEntry.yaml#/SocialAccountEntry'
+    Alignment:
+      $ref: './components/schemas/common/style/Alignment.yaml#/Alignment'
+    Font:
+      $ref: './components/schemas/common/style/Font.yaml#/Font'
+    Fonts:
+      $ref: './components/schemas/common/style/Fonts.yaml#/Fonts'
+    Outline:
+      $ref: './components/schemas/common/style/Outline.yaml#/Outline'
+    OverlayBox:
+      $ref: './components/schemas/common/style/OverlayBox.yaml#/OverlayBox'
+    TextStyle:
+      $ref: './components/schemas/common/style/TextStyle.yaml#/TextStyle'
+    VisualStyle:
+      $ref: './components/schemas/common/style/VisualStyle.yaml#/VisualStyle'
+    VisualStyleObj:
+      $ref: './components/schemas/common/style/VisualStyleObj.yaml#/VisualStyleObj'
+    PromptTemplate:
+      $ref: './components/schemas/common/template/PromptTemplate.yaml#/PromptTemplate'
+    PromptVariable:
+      $ref: './components/schemas/common/template/PromptVariable.yaml#/PromptVariable'
+    TemplateInfo:
+      $ref: './components/schemas/common/template/TemplateInfo.yaml#/TemplateInfo'
+    TemplateSettings:
+      $ref: './components/schemas/common/template/TemplateSettings.yaml#/TemplateSettings'
+    BrandDocument:
+      $ref: './components/schemas/documents/BrandDocument.yaml#/BrandDocument'
+    ContentGenerationTemplateDocument:
+      $ref: './components/schemas/documents/ContentGenerationTemplateDocument.yaml#/ContentGenerationTemplateDocument'
+    MediaDocument:
+      $ref: './components/schemas/documents/MediaDocument.yaml#/MediaDocument'
+    PostDocument:
+      $ref: './components/schemas/documents/PostDocument.yaml#/PostDocument'
 
 paths:
-  /orchestrate-content:
-    post:
-      $ref: "./operations/internal/function/generate-content-orchestrator.yaml#/paths/~1orchestrate-content/post"
-  /generate-image:
-    post:
-      $ref: "./operations/internal/function/generate-image.yaml#/paths/~1generate-image/post"
-  /generate-content:
-    post:
-      $ref: "./operations/internal/function/generate-content.yaml#/paths/~1generate-content/post"
-  /post-content:
-    post:
-      $ref: "./operations/internal/function/post-content.yaml#/paths/~1post-content/post"
-  /frontend/content-generation-template:
-    $ref: "./operations/internal/frontend/content-generation-template.yaml#/paths/~1frontend~1content-generation-template"
-  /frontend/brand:
-    $ref: "./operations/internal/frontend/brand.yaml#/paths/~1frontend~1brand"
   /external/post-instagram-content:
     post:
-      $ref: "./operations/external/post-instagram-content.yaml#/paths/~1external~1post-instagram-content/post"
-
-components:
-  parameters:
-    brand_id:
-      $ref: "./components/parameters/brandId.yaml#/brand_id"
-    id:
-      $ref: "./components/parameters/id.yaml#/id"
-    pagination:
-      $ref: "./components/parameters/pagination.yaml#/pagination"
-  responses:
-    NotFound:
-      $ref: "./components/responses/NotFound.yaml#/NotFound"
-    BadRequest:
-      $ref: "./components/responses/BadRequest.yaml#/BadRequest"
-    Unauthorized:
-      $ref: "./components/responses/Unauthorized.yaml#/Unauthorized"
-    RateLimitExceeded:
-      $ref: "./components/responses/RateLimitExceeded.yaml#/RateLimitExceeded"
-  securitySchemes:
-    bearerAuth:
-      $ref: "./components/securitySchemes/bearerAuth.yaml#/bearerAuth"
-    ApiKeyAuth:
-      $ref: "./components/securitySchemes/ApiKeyAuth.yaml#/ApiKeyAuth"
-  schemas:
-    BaseModel:
-      $ref: "./components/schemas/common/base/BaseModel.yaml#/BaseModel"
-    Brand:
-      $ref: "./components/schemas/documents/BrandDocument.yaml#/BrandDocument"
-    ContentTemplate:
-      $ref: "./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateGet.yaml"
-    MediaDocument:
-      $ref: "./components/schemas/documents/MediaDocument.yaml#/MediaDocument"
-    MediaMetadata:
-      $ref: "./components/schemas/common/media/MediaMetadata.yaml#/MediaMetadata"
-    Fonts:
-      $ref: "./components/schemas/common/style/Fonts.yaml#/Fonts"
-    Metadata:
-      $ref: "./components/schemas/common/base/Metadata.yaml#/Metadata"
-    Schedule:
-      $ref: "./components/schemas/common/schedule/Schedule.yaml#/Schedule"
-    SocialAccount:
-      $ref: "./components/schemas/common/social/SocialAccount.yaml#/SocialAccount"
-    TimeSlot:
-      $ref: "./components/schemas/common/schedule/TimeSlot.yaml#/TimeSlot"
-    VisualStyle:
-      $ref: "./components/schemas/common/style/VisualStyle.yaml#/VisualStyle"
-    Image:
-      $ref: "./components/schemas/common/media/Image.yaml#/Image"
-    MultiImage:
-      $ref: "./components/schemas/common/media/MultiImage.yaml#/MultiImage"
-    Text:
-      $ref: "./components/schemas/common/base/Text.yaml#/Text"
-    Video:
-      $ref: "./components/schemas/common/media/Video.yaml#/Video"
-    Platform:
-      $ref: "./components/schemas/common/social/Platform.yaml#/Platform"
-    BrandInfo:
-      $ref: "./components/schemas/common/base/BrandInfo.yaml#/BrandInfo"
-    ContentItem:
-      $ref: "./components/schemas/common/base/ContentItem.yaml#/ContentItem"
-    ContentType:
-      $ref: "./components/schemas/common/base/ContentType.yaml#/ContentType"
-    TemplateInfo:
-      $ref: "./components/schemas/common/template/TemplateInfo.yaml#/TemplateInfo"
-    TemplateSettings:
-      $ref: "./components/schemas/common/template/TemplateSettings.yaml#/TemplateSettings"
-    PromptTemplate:
-      $ref: "./components/schemas/common/template/PromptTemplate.yaml#/PromptTemplate"
-    PromptVariable:
-      $ref: "./components/schemas/common/template/PromptVariable.yaml#/PromptVariable"
-    VisualStyleObj:
-      $ref: "./components/schemas/common/style/VisualStyleObj.yaml#/VisualStyleObj"
-    AzureOpenAIGenerateContentTemplate:
-      $ref: "./schemas/function/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentTemplate"
-    AzureOpenAIGenerateContentRequest:
-      $ref: "./schemas/function/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentRequest"
-    AzureOpenAIGenerateContentResponse:
-      $ref: "./schemas/function/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentResponse"
-    OrchestratorRequest:
-      $ref: "./schemas/function/orchestrator.yaml#/OrchestratorRequest"
-    OrchestratorResponse:
-      $ref: "./schemas/function/orchestrator.yaml#/OrchestratorResponse"
-    PostingRequest:
-      $ref: "./schemas/function/posting.yaml#/PostingRequest"
-    PostingResponse:
-      $ref: "./schemas/function/posting.yaml#/PostingResponse"
-    ImageContent:
-      $ref: "./schemas/content-types/image-content.yaml#/ImageContent"
-    Background:
-      $ref: "./schemas/content-types/image-content.yaml#/Background"
-    TextOverlay:
-      $ref: "./schemas/content-types/image-content.yaml#/TextOverlay"
-    MediaSearchRequest:
-      $ref: "./schemas/function/media-search.yaml#/MediaSearchRequest"
-    MediaSearchResponse:
-      $ref: "./schemas/function/media-search.yaml#/MediaSearchResponse"
-    BrandGet:
-      $ref: "./components/schemas/api/internal/brand/BrandGet.yaml#/BrandGet"
-    BrandUpdate:
-      $ref: "./components/schemas/api/internal/brand/BrandUpdate.yaml#/BrandUpdate"
-    BrandCreate:
-      $ref: "./components/schemas/api/internal/brand/BrandCreate.yaml#/BrandCreate"
-    BrandResponse:
-      $ref: "./components/schemas/api/internal/brand/BrandResponse.yaml#/BrandResponse"
-    BrandDelete:
-      $ref: "./components/schemas/api/internal/brand/BrandDelete.yaml#/BrandDelete"
-    ContentGenerationTemplateUpdate:
-      $ref: "./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateUpdate.yaml#/ContentGenerationTemplateUpdate"
-    ContentGenerationTemplateCreate:
-      $ref: "./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateCreate.yaml#/ContentGenerationTemplateCreate"
-    ContentGenerationTemplateGet:
-      $ref: "./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateGet.yaml#/ContentGenerationTemplateGet"
-    ContentGenerationTemplateResponse:
-      $ref: "./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateResponse.yaml#/ContentGenerationTemplateResponse"
-    ContentGenerationTemplateDelete:
-      $ref: "./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateDelete.yaml#/ContentGenerationTemplateDelete"
-    ContentGenerationTemplateDocument:
-      $ref: "./components/schemas/documents/ContentGenerationTemplateDocument.yaml#/ContentGenerationTemplateDocument"
-    PostDocument:
-      $ref: "./components/schemas/documents/PostDocument.yaml#/PostDocument"
-    MediaDocument:
-      $ref: "./components/schemas/documents/MediaDocument.yaml#/MediaDocument"
-    BrandDocument:
-      $ref: "./components/schemas/documents/BrandDocument.yaml#/BrandDocument"
-
+      $ref: './operations/external/post-instagram-content.yaml#/paths//external/post-instagram-content/post'
+  /internal/frontend/brand:
+    post:
+      $ref: './operations/internal/frontend/brand.yaml#/paths//internal/frontend/brand/post'
+  /internal/frontend/content-generation-template:
+    post:
+      $ref: './operations/internal/frontend/content-generation-template.yaml#/paths//internal/frontend/content-generation-template/post'
+  /internal/function/generate-content-orchestrator:
+    post:
+      $ref: './operations/internal/function/generate-content-orchestrator.yaml#/paths//internal/function/generate-content-orchestrator/post'
+  /internal/function/generate-content:
+    post:
+      $ref: './operations/internal/function/generate-content.yaml#/paths//internal/function/generate-content/post'
+  /internal/function/generate-image:
+    post:
+      $ref: './operations/internal/function/generate-image.yaml#/paths//internal/function/generate-image/post'
+  /internal/function/post-content:
+    post:
+      $ref: './operations/internal/function/post-content.yaml#/paths//internal/function/post-content/post'
 security:
   - bearerAuth: []
