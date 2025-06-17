@@ -1,0 +1,14 @@
+---
+CognitiveObject:
+  type: object
+  required:
+    - object
+    - confidence
+    - rectangle
+  properties:
+    object:
+      type: string
+    confidence:
+      type: number
+    rectangle:
+      $ref: "./Rectangle.yaml#/Rectangle"

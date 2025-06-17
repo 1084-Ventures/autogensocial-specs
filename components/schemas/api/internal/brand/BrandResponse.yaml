@@ -1,0 +1,9 @@
+---
+type: object
+properties:
+  id:
+    type: string
+  name:
+    type: string
+description: >
+  Minimal response schema for Brand creation or deletion.

@@ -1,0 +1,15 @@
+---
+# components/schemas/common/TemplateInfo.yaml
+TemplateInfo:
+  type: object
+  properties:
+    name:
+      type: string
+    description:
+      type: string
+    contentType:
+      $ref: "../base/ContentType.yaml#/ContentType"
+    socialAccounts:
+      type: array
+      items:
+        $ref: "../social/Platform.yaml#/Platform"

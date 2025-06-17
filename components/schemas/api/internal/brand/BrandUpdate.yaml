@@ -1,0 +1,16 @@
+---
+type: object
+properties:
+  name:
+    type: string
+    minLength: 1
+    maxLength: 100
+  description:
+    type: string
+    maxLength: 500
+  socialAccounts:
+    type: array
+    items:
+      $ref: "../../../common/SocialAccountEntry.yaml#/SocialAccountEntry"
+description: >
+  Payload for updating a Brand. All fields are optional and may be provided for partial update.

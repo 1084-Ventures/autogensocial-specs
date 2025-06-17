@@ -1,0 +1,7 @@
+---
+ImageContent:
+  type: object
+Background:
+  type: object
+TextOverlay:
+  type: object

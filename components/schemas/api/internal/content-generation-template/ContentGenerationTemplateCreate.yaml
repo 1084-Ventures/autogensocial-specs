@@ -1,0 +1,16 @@
+---
+type: object
+required:
+  - brandId
+  - templateInfo
+properties:
+  brandId:
+    type: string
+  templateInfo:
+    $ref: "../../../common/TemplateInfo.yaml#/TemplateInfo"
+  schedule:
+    $ref: "../../../common/Schedule.yaml#/Schedule"
+  settings:
+    $ref: "../../../common/TemplateSettings.yaml#/TemplateSettings"
+description: >
+  Payload for creating a new ContentGenerationTemplateDocument. 'brandId' and 'templateInfo' are required.

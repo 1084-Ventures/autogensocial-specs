@@ -1,6 +1,0 @@
-# components/schemas/common/Alignment.yaml
-Alignment:
-  type: object
-  properties:
-    text_align:
-      type: string

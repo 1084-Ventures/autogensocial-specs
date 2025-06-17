@@ -1,0 +1,11 @@
+---
+CognitiveCategory:
+  type: object
+  required:
+    - name
+    - confidence
+  properties:
+    name:
+      type: string
+    confidence:
+      type: number

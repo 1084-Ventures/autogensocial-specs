@@ -1,0 +1,5 @@
+---
+MediaSearchRequest:
+  type: object
+MediaSearchResponse:
+  type: object

@@ -1,3 +1,4 @@
+---
 # This file was migrated from components/responses.yaml (RateLimitExceeded)
 RateLimitExceeded:
   description: Rate limit exceeded

@@ -1,0 +1,5 @@
+---
+allOf:
+  - $ref: "../../../../schemas/documents/ContentGenerationTemplateDocument.yaml#/ContentGenerationTemplateDocument"
+description: >
+  Response schema for retrieving a ContentGenerationTemplateDocument by id or brandId.

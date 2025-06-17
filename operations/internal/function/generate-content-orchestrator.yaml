@@ -1,0 +1,11 @@
+---
+paths:
+  /orchestrate-content:
+    post:
+      summary: Orchestrate content generation
+      operationId: orchestrateContent
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request

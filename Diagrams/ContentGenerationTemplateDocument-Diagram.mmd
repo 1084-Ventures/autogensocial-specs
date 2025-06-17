@@ -1,12 +1,12 @@
 classDiagram
     class ContentGenerationTemplateDocument {
+        <<BaseModel>>
         +string id
         +Metadata metadata
         +string brandId
         +TemplateInfo templateInfo
         +Schedule schedule
         +TemplateSettings settings
-        +boolean deleted
     }
     class Metadata {
         +string created_date

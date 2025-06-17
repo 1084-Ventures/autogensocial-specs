@@ -1,0 +1,9 @@
+---
+# components/schemas/common/Outline.yaml
+Outline:
+  type: object
+  properties:
+    color:
+      type: string
+    width:
+      type: integer

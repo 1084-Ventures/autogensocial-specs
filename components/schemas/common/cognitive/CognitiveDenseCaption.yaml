@@ -1,0 +1,14 @@
+---
+CognitiveDenseCaption:
+  type: object
+  required:
+    - text
+    - confidence
+    - boundingBox
+  properties:
+    text:
+      type: string
+    confidence:
+      type: number
+    boundingBox:
+      $ref: "./Rectangle.yaml#/Rectangle"

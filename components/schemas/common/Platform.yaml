@@ -1,8 +1,0 @@
-# components/schemas/common/Platform.yaml
-Platform:
-  type: string
-  enum:
-    - instagram
-    - facebook
-    - twitter
-    - tiktok

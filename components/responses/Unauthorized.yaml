@@ -1,3 +1,4 @@
+---
 # This file was migrated from components/responses.yaml (Unauthorized)
 Unauthorized:
   description: Authentication required

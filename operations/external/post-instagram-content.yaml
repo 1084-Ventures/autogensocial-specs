@@ -1,0 +1,11 @@
+---
+paths:
+  /external/post-instagram-content:
+    post:
+      summary: Post Instagram content
+      operationId: postInstagramContent
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request

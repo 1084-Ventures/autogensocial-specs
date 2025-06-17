@@ -1,6 +1,0 @@
-# components/schemas/common/Text.yaml
-Text:
-  type: object
-  properties:
-    value:
-      type: string

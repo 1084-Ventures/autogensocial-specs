@@ -1,0 +1,11 @@
+---
+paths:
+  /generate-content:
+    post:
+      summary: Generate content
+      operationId: generateContent
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request

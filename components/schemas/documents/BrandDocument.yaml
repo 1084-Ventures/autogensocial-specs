@@ -1,13 +1,14 @@
+---
 BrandDocument:
   allOf:
-    - $ref: '../common/BaseModel.yaml#/BaseModel'
+    - $ref: "../common/base/BaseModel.yaml#/BaseModel"
     - type: object
       properties:
         user_id:
           type: string
         brand_info:
-          $ref: '../common/BrandInfo.yaml#/BrandInfo'
+          $ref: "../common/base/BrandInfo.yaml#/BrandInfo"
         socialAccounts:
           type: array
           items:
-            $ref: '../common/SocialAccountEntry.yaml#/SocialAccountEntry'
+            $ref: "../common/social/SocialAccountEntry.yaml#/SocialAccountEntry"

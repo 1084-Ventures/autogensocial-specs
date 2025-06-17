@@ -1,0 +1,120 @@
+---
+openapi: 3.0.0
+info:
+  title: Brand API
+  version: 1.0.0
+paths:
+  /brands:
+    get:
+      summary: List brands by userId
+      parameters:
+        - name: user_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: "../../../components/parameters/pagination.yaml#/pagination"
+      responses:
+        "200":
+          description: List of brands for a user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "../../../components/schemas/api/internal/brand/BrandGet.yaml"
+        "400":
+          $ref: "../../../components/responses/BadRequest.yaml#/BadRequest"
+        "401":
+          $ref: "../../../components/responses/Unauthorized.yaml#/Unauthorized"
+        "429":
+          $ref: "../../../components/responses/RateLimitExceeded.yaml#/RateLimitExceeded"
+    post:
+      summary: Create a new brand
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "../../../components/schemas/api/internal/brand/BrandCreate.yaml"
+      responses:
+        "201":
+          description: Brand created
+          content:
+            application/json:
+              schema:
+                $ref: "../../../components/schemas/api/internal/brand/BrandResponse.yaml"
+        "400":
+          $ref: "../../../components/responses/BadRequest.yaml#/BadRequest"
+        "401":
+          $ref: "../../../components/responses/Unauthorized.yaml#/Unauthorized"
+        "429":
+          $ref: "../../../components/responses/RateLimitExceeded.yaml#/RateLimitExceeded"
+  /brands/{id}:
+    get:
+      summary: Get a brand by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Brand details
+          content:
+            application/json:
+              schema:
+                $ref: "../../../components/schemas/api/internal/brand/BrandGet.yaml"
+        "404":
+          $ref: "../../../components/responses/NotFound.yaml#/NotFound"
+        "401":
+          $ref: "../../../components/responses/Unauthorized.yaml#/Unauthorized"
+        "429":
+          $ref: "../../../components/responses/RateLimitExceeded.yaml#/RateLimitExceeded"
+    patch:
+      summary: Update a brand by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "../../../components/schemas/api/internal/brand/BrandUpdate.yaml"
+      responses:
+        "200":
+          description: Brand updated
+          content:
+            application/json:
+              schema:
+                $ref: "../../../components/schemas/api/internal/brand/BrandResponse.yaml"
+        "400":
+          $ref: "../../../components/responses/BadRequest.yaml#/BadRequest"
+        "404":
+          $ref: "../../../components/responses/NotFound.yaml#/NotFound"
+        "401":
+          $ref: "../../../components/responses/Unauthorized.yaml#/Unauthorized"
+        "429":
+          $ref: "../../../components/responses/RateLimitExceeded.yaml#/RateLimitExceeded"
+    delete:
+      summary: Delete a brand by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Brand deleted
+        "404":
+          $ref: "../../../components/responses/NotFound.yaml#/NotFound"
+        "401":
+          $ref: "../../../components/responses/Unauthorized.yaml#/Unauthorized"
+        "429":
+          $ref: "../../../components/responses/RateLimitExceeded.yaml#/RateLimitExceeded"

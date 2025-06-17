@@ -1,3 +1,4 @@
+---
 # This file was migrated from components/responses.yaml (NotFound)
 NotFound:
   description: Resource not found

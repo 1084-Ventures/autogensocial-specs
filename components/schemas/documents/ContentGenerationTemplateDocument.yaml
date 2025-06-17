@@ -1,16 +1,15 @@
+---
 # components/schemas/documents/ContentGenerationTemplateDocument.yaml
 ContentGenerationTemplateDocument:
   allOf:
-    - $ref: '../common/BaseModel.yaml#/BaseModel'
+    - $ref: "../common/base/BaseModel.yaml#/BaseModel"
     - type: object
       properties:
         brandId:
           type: string
         templateInfo:
-          $ref: '../common/TemplateInfo.yaml#/TemplateInfo'
+          $ref: "../common/template/TemplateInfo.yaml#/TemplateInfo"
         schedule:
-          $ref: '../common/Schedule.yaml#/Schedule'
+          $ref: "../common/schedule/Schedule.yaml#/Schedule"
         settings:
-          $ref: '../common/TemplateSettings.yaml#/TemplateSettings'
-        deleted:
-          type: boolean
+          $ref: "../common/template/TemplateSettings.yaml#/TemplateSettings"

@@ -1,8 +1,0 @@
-# components/schemas/common/BrandInfo.yaml
-BrandInfo:
-  type: object
-  properties:
-    name:
-      type: string
-    description:
-      type: string

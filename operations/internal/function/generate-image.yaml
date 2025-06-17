@@ -1,0 +1,11 @@
+---
+paths:
+  /generate-image:
+    post:
+      summary: Generate image
+      operationId: generateImage
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request

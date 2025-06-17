@@ -1,3 +1,4 @@
+---
 # This file was migrated from components/security-schemes.yaml (ApiKeyAuth)
 ApiKeyAuth:
   type: apiKey

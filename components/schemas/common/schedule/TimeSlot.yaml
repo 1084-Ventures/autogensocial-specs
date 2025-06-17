@@ -1,0 +1,21 @@
+---
+TimeSlot:
+  type: object
+  required:
+    - hour
+    - minute
+    - timezone
+  properties:
+    hour:
+      type: integer
+      minimum: 0
+      maximum: 23
+      description: Hour in 24-hour format
+    minute:
+      type: integer
+      minimum: 0
+      maximum: 59
+      description: Minute
+    timezone:
+      type: string
+      description: Timezone string (e.g., 'America/New_York')
