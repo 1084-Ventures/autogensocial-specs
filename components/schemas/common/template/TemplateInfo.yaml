@@ -1,5 +1,3 @@
----
-# components/schemas/common/TemplateInfo.yaml
 TemplateInfo:
   type: object
   properties:

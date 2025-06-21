@@ -1,7 +1,0 @@
----
-AzureOpenAIGenerateContentTemplate:
-  type: object
-AzureOpenAIGenerateContentRequest:
-  type: object
-AzureOpenAIGenerateContentResponse:
-  type: object

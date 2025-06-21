@@ -1,12 +1,8 @@
----
-openapi: 3.0.0
-info:
-  title: Brand API
-  version: 1.0.0
 paths:
   /brands:
     get:
       summary: List brands by userId
+      operationId: listBrandsByUserId
       parameters:
         - name: user_id
           in: query
@@ -31,6 +27,7 @@ paths:
           $ref: "../../../components/responses/RateLimitExceeded.yaml#/RateLimitExceeded"
     post:
       summary: Create a new brand
+      operationId: createBrand
       requestBody:
         required: true
         content:
@@ -53,6 +50,7 @@ paths:
   /brands/{id}:
     get:
       summary: Get a brand by ID
+      operationId: getBrandById
       parameters:
         - name: id
           in: path
@@ -74,6 +72,7 @@ paths:
           $ref: "../../../components/responses/RateLimitExceeded.yaml#/RateLimitExceeded"
     patch:
       summary: Update a brand by ID
+      operationId: updateBrandById
       parameters:
         - name: id
           in: path
@@ -103,6 +102,7 @@ paths:
           $ref: "../../../components/responses/RateLimitExceeded.yaml#/RateLimitExceeded"
     delete:
       summary: Delete a brand by ID
+      operationId: deleteBrandById
       parameters:
         - name: id
           in: path

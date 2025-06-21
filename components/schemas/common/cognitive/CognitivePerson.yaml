@@ -1,4 +1,3 @@
----
 CognitivePerson:
   type: object
   required:

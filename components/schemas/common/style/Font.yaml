@@ -1,5 +1,3 @@
----
-# components/schemas/common/Font.yaml
 Font:
   type: object
   properties:

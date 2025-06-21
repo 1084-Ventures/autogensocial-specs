@@ -1,6 +1,3 @@
----
-# This file was migrated from components/parameters.yaml (brand_id)
-# Reusable path/query/header parameter for brand_id
 brand_id:
   name: brand_id
   in: query

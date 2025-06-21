@@ -1,5 +1,3 @@
----
-# components/schemas/documents/ContentGenerationTemplateDocument.yaml
 ContentGenerationTemplateDocument:
   allOf:
     - $ref: "../common/base/BaseModel.yaml#/BaseModel"

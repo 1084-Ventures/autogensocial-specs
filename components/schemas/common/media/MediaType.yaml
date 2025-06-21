@@ -1,5 +1,3 @@
----
-# components/schemas/common/MediaType.yaml
 MediaType:
   type: string
   enum:

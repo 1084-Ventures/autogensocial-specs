@@ -1,5 +1,3 @@
----
-# components/schemas/common/Image.yaml
 Image:
   type: object
   properties:

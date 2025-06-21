@@ -1,4 +1,3 @@
----
 BaseModel:
   type: object
   required:

@@ -1,6 +1,3 @@
----
-# This file was migrated from components/parameters.yaml (id)
-# Reusable path/query/header parameter for id
 id:
   name: id
   in: path

@@ -1,5 +1,0 @@
----
-PostingRequest:
-  type: object
-PostingResponse:
-  type: object

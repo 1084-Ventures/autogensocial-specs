@@ -1,14 +1,9 @@
----
-type: object
-required:
-  - name
-properties:
-  name:
-    type: string
-    minLength: 1
-    maxLength: 100
-  description:
-    type: string
-    maxLength: 500
-description: >
-  Payload for creating a new Brand. Only 'name' is required. 'description' is optional.
+BrandCreate:
+  type: object
+  required:
+    - brandInfo
+  properties:
+    brandInfo:
+      $ref: "../../../common/base/BrandInfo.yaml#/BrandInfo"
+  description: >
+    Payload for creating a new Brand. Only 'brandInfo' is required.

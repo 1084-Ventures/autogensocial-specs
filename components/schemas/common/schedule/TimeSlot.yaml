@@ -1,4 +1,3 @@
----
 TimeSlot:
   type: object
   required:

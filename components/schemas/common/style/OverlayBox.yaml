@@ -1,5 +1,3 @@
----
-# components/schemas/common/OverlayBox.yaml
 OverlayBox:
   type: object
   properties:

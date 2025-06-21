@@ -1,5 +1,3 @@
----
-# components/schemas/common/TemplateSettings.yaml
 TemplateSettings:
   type: object
   properties:

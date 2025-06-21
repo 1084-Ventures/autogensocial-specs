@@ -1,11 +1,9 @@
----
-# This file was migrated from components/responses.yaml (BadRequest)
 BadRequest:
   description: Invalid request parameters
   content:
     application/json:
       schema:
-        $ref: "../../schemas/common/error.yaml#/Error"
+        $ref: "../../components/schemas/common/base/Error.yaml#/Error"
       example:
         code: INVALID_INPUT
         message: Invalid request parameters

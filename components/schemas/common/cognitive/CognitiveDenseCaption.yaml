@@ -1,4 +1,3 @@
----
 CognitiveDenseCaption:
   type: object
   required:

@@ -1,4 +1,3 @@
----
 BrandDocument:
   allOf:
     - $ref: "../common/base/BaseModel.yaml#/BaseModel"

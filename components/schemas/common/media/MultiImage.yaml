@@ -1,5 +1,3 @@
----
-# components/schemas/common/MultiImage.yaml
 MultiImage:
   type: object
   properties:

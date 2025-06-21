@@ -1,5 +1,3 @@
----
-# components/schemas/common/PromptVariable.yaml
 PromptVariable:
   type: object
   properties:

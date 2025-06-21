@@ -1,5 +1,3 @@
----
-# components/schemas/common/Platform.yaml
 Platform:
   type: string
   enum:

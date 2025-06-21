@@ -1,4 +1,3 @@
----
 PostDocument:
   type: object
   description: "Stub for PostDocument schema"

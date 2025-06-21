@@ -1,4 +1,3 @@
----
 MediaMetadata:
   type: object
   required:

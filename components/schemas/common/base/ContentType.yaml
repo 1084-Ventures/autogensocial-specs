@@ -1,5 +1,3 @@
----
-# components/schemas/common/ContentType.yaml
 ContentType:
   type: string
   enum:

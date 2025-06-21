@@ -1,11 +1,9 @@
----
-# This file was migrated from components/responses.yaml (RateLimitExceeded)
 RateLimitExceeded:
   description: Rate limit exceeded
   content:
     application/json:
       schema:
-        $ref: "../../schemas/common/error.yaml#/Error"
+        $ref: "../../components/schemas/common/base/Error.yaml#/Error"
       example:
         code: RATE_LIMIT_EXCEEDED
         message: Rate limit exceeded

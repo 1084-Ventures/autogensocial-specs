@@ -1,5 +1,3 @@
----
-# components/schemas/common/Alignment.yaml
 Alignment:
   type: object
   properties:

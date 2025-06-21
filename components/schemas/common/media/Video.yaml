@@ -1,5 +1,3 @@
----
-# components/schemas/common/Video.yaml
 Video:
   type: object
   properties:

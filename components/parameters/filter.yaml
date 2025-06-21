@@ -1,6 +1,3 @@
----
-# This file was migrated from components/parameters.yaml (filter)
-# Reusable query parameter for filter
 filter:
   name: filter
   in: query

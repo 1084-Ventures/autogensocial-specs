@@ -1,0 +1,14 @@
+{
+  "name": "specs",
+  "version": "1.0.0",
+  "description": "OpenAPI specs utilities and scripts",
+  "scripts": {
+    "validate:openapi": "node scripts/validate_openapi.js",
+    "generate:openapi": "node scripts/generate_openapi.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "glob": "^10.3.10"
+  }
+}

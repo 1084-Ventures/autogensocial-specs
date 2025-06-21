@@ -1,11 +1,7 @@
----
-openapi: 3.0.0
-info:
-  title: Content Generation Template API
-  version: 1.0.0
 paths:
   /content-generation-templates:
     get:
+      operationId: listContentGenerationTemplates
       summary: List content generation templates by brandId
       parameters:
         - name: brand_id
@@ -30,6 +26,7 @@ paths:
         "429":
           $ref: "../../../components/responses/RateLimitExceeded.yaml#/RateLimitExceeded"
     post:
+      operationId: createContentGenerationTemplate
       summary: Create a new content generation template
       requestBody:
         required: true
@@ -52,6 +49,7 @@ paths:
           $ref: "../../../components/responses/RateLimitExceeded.yaml#/RateLimitExceeded"
   /content-generation-templates/{id}:
     get:
+      operationId: getContentGenerationTemplateById
       summary: Get a content generation template by ID
       parameters:
         - name: id
@@ -73,6 +71,7 @@ paths:
         "429":
           $ref: "../../../components/responses/RateLimitExceeded.yaml#/RateLimitExceeded"
     patch:
+      operationId: updateContentGenerationTemplateById
       summary: Update a content generation template by ID
       parameters:
         - name: id
@@ -102,6 +101,7 @@ paths:
         "429":
           $ref: "../../../components/responses/RateLimitExceeded.yaml#/RateLimitExceeded"
     delete:
+      operationId: deleteContentGenerationTemplateById
       summary: Delete a content generation template by ID
       parameters:
         - name: id

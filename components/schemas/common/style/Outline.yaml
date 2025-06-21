@@ -1,5 +1,3 @@
----
-# components/schemas/common/Outline.yaml
 Outline:
   type: object
   properties:

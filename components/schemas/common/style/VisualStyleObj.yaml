@@ -1,5 +1,3 @@
----
-# components/schemas/common/VisualStyleObj.yaml
 VisualStyleObj:
   type: object
   properties:

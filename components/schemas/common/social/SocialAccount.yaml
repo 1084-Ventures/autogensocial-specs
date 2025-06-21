@@ -1,4 +1,3 @@
----
 SocialAccount:
   type: object
   required:
