@@ -37,7 +37,7 @@ jobs:
         run: prettier --check "**/*.yaml"
 
       - name: Lint OpenAPI with Redocly CLI
-        run: redocly lint openapi.yaml
+        run: redocly lint specs/generated_openapi.yaml
 
       - name: Validate OpenAPI spec
-        run: swagger-cli validate openapi.yaml
+        run: swagger-cli validate specs/generated_openapi.yaml
