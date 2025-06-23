@@ -1,5 +1,4 @@
-BrandGet:
-  allOf:
-    - $ref: "../../../documents/BrandDocument.yaml#/BrandDocument"
-  description: >
-    Response schema for retrieving a Brand by id or user_id.
+allOf:
+  - $ref: "../../../documents/BrandDocument.yaml"
+description: >
+  Response schema for retrieving a Brand by id or user_id.

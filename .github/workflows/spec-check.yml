@@ -1,0 +1,34 @@
+name: Spec CI
+on: [push, pull_request]
+
+jobs:
+  spec:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Lint spec (Spectral)
+        run: npx spectral lint openapi.yaml
+
+      - name: Lint & Validate spec (Redocly)
+        run: npm run spec:lint && npm run spec:validate
+
+      - name: Bundle spec
+        run: npm run spec:bundle
+
+      - name: Generate diagrams
+        run: npm run spec:diagrams
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: bundled-openapi
+          path: openapi.generated.yaml

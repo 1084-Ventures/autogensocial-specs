@@ -1,10 +1,6 @@
-CognitiveCaption:
-  type: object
-  required:
-    - text
-    - confidence
-  properties:
-    text:
-      type: string
-    confidence:
-      type: number
+type: object
+properties:
+  text:
+    type: string
+  confidence:
+    type: number

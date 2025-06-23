@@ -1,11 +1,10 @@
-MultiImage:
-  type: object
-  properties:
-    images:
-      type: array
-      items:
-        $ref: "./Image.yaml#/Image"
-    min_images:
-      type: integer
-    max_images:
-      type: integer
+type: object
+properties:
+  images:
+    type: array
+    items:
+      $ref: "./Image.yaml"
+  min_images:
+    type: integer
+  max_images:
+    type: integer

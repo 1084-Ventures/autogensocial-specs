@@ -1,16 +1,10 @@
-Rectangle:
-  type: object
-  required:
-    - x
-    - y
-    - w
-    - h
-  properties:
-    x:
-      type: number
-    y:
-      type: number
-    w:
-      type: number
-    h:
-      type: number
+type: object
+properties:
+  x:
+    type: number
+  y:
+    type: number
+  width:
+    type: number
+  height:
+    type: number

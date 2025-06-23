@@ -1,9 +1,8 @@
-ContentGenerationTemplateResponse:
-  type: object
-  properties:
-    id:
-      type: string
-    brandId:
-      type: string
-  description: >
-    Minimal response schema for ContentGenerationTemplateDocument creation or deletion.
+type: object
+properties:
+  id:
+    type: string
+  brandId:
+    type: string
+description: >
+  Minimal response schema for ContentGenerationTemplateDocument creation or deletion.

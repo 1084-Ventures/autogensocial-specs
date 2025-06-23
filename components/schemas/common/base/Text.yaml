@@ -1,5 +1,4 @@
-Text:
-  type: object
-  properties:
-    value:
-      type: string
+type: object
+properties:
+  value:
+    type: string

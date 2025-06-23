@@ -3,12 +3,27 @@
   "version": "1.0.0",
   "description": "OpenAPI specs utilities and scripts",
   "scripts": {
-    "validate:openapi": "node scripts/validate_openapi.js",
-    "generate:openapi": "node scripts/generate_openapi.js"
+    "api:lint": "redocly lint openapi.yaml",
+    "api:bundle": "redocly bundle openapi.yaml --output build/bundle.yaml",
+    "api:validate": "redocly lint --extends recommended-strict openapi.yaml",
+    "gen:diagrams": "node scripts/gen-diagrams.js",
+    "prepack": "npm run api:bundle && npm run gen:diagrams",
+    "generate:openapi": "node scripts/gen-openapi.js && npm run api:lint && npm run api:validate && redocly bundle openapi.yaml -o openapi-bundled.yaml"
   },
   "license": "MIT",
   "dependencies": {
     "js-yaml": "^4.1.0",
     "glob": "^10.3.10"
+  },
+  "devDependencies": {
+    "@stoplight/spectral-cli": "^6.x",
+    "@redocly/cli": "^2.x",
+    "openapi-mermaid": "^1.x",
+    "husky": "^8.x",
+    "lint-staged": "^14.x"
+  },
+  "lint-staged": {
+    "*.yaml": ["npm run api:lint", "prettier --write"],
+    "*.md": ["prettier --write"]
   }
 }

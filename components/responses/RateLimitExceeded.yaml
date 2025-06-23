@@ -1,9 +1,8 @@
-RateLimitExceeded:
-  description: Rate limit exceeded
-  content:
-    application/json:
-      schema:
-        $ref: "../../components/schemas/common/base/Error.yaml#/Error"
-      example:
-        code: RATE_LIMIT_EXCEEDED
-        message: Rate limit exceeded
+description: Rate limit exceeded
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/common/base/Error.yaml"
+    example:
+      code: RATE_LIMIT_EXCEEDED
+      message: Rate limit exceeded

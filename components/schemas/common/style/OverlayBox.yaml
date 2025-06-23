@@ -1,11 +1,10 @@
-OverlayBox:
-  type: object
-  properties:
-    color:
-      type: string
-    transparency:
-      type: number
-    vertical_location:
-      type: string
-    horizontal_location:
-      type: string
+type: object
+properties:
+  color:
+    type: string
+  transparency:
+    type: number
+  vertical_location:
+    type: string
+  horizontal_location:
+    type: string

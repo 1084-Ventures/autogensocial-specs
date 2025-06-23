@@ -1,11 +1,10 @@
-ContentItem:
-  type: object
-  properties:
-    text:
-      $ref: "./Text.yaml#/Text"
-    image:
-      $ref: "../media/Image.yaml#/Image"
-    video:
-      $ref: "../media/Video.yaml#/Video"
-    multiImage:
-      $ref: "../media/MultiImage.yaml#/MultiImage"
+type: object
+properties:
+  text:
+    $ref: "./Text.yaml"
+  image:
+    $ref: "../media/Image.yaml"
+  video:
+    $ref: "../media/Video.yaml"
+  multiImage:
+    $ref: "../media/MultiImage.yaml"

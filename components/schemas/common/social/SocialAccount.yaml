@@ -1,25 +1,24 @@
-SocialAccount:
-  type: object
-  required:
-    - id
-    - username
-    - accessToken
-    - profileUrl
-    - expiry_date
-  properties:
-    id:
-      type: string
-      description: Unique identifier for the social account
-    username:
-      type: string
-      description: Username for the social account
-    accessToken:
-      type: string
-      description: OAuth access token
-    profileUrl:
-      type: string
-      description: URL to the user's profile
-    expiry_date:
-      type: string
-      format: date-time
-      description: Token expiration timestamp
+type: object
+required:
+  - id
+  - username
+  - accessToken
+  - profileUrl
+  - expiry_date
+properties:
+  id:
+    type: string
+    description: Unique identifier for the social account
+  username:
+    type: string
+    description: Username for the social account
+  accessToken:
+    type: string
+    description: OAuth access token
+  profileUrl:
+    type: string
+    description: URL to the user's profile
+  expiry_date:
+    type: string
+    format: date-time
+    description: Token expiration timestamp

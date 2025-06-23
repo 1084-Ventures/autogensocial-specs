@@ -1,8 +1,7 @@
-brand_id:
-  name: brand_id
-  in: query
-  required: true
-  schema:
-    type: string
-    format: uuid
-  description: brand identifier (uuid)
+name: brand_id
+in: query
+required: true
+schema:
+  type: string
+  format: uuid
+description: brand identifier (uuid)

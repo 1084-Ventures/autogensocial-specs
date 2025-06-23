@@ -1,9 +1,8 @@
-ContentGenerationTemplateDelete:
-  type: object
-  required:
-    - id
-  properties:
-    id:
-      type: string
-  description: >
-    Payload for deleting a ContentGenerationTemplateDocument by id.
+type: object
+required:
+  - id
+properties:
+  id:
+    type: string
+description: >
+  Payload for deleting a ContentGenerationTemplateDocument by id.

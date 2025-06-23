@@ -1,7 +1,6 @@
-Platform:
-  type: string
-  enum:
-    - instagram
-    - facebook
-    - twitter
-    - tiktok
+type: string
+enum:
+  - instagram
+  - facebook
+  - twitter
+  - tiktok

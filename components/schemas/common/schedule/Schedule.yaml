@@ -1,15 +1,14 @@
-Schedule:
-  type: object
-  required:
-    - days_of_week
-    - time_slots
-  properties:
-    days_of_week:
-      type: array
-      items:
-        type: string
-        enum: [monday, tuesday, wednesday, thursday, friday, saturday, sunday]
-    time_slots:
-      type: array
-      items:
-        $ref: "./TimeSlot.yaml#/TimeSlot"
+type: object
+required:
+  - days_of_week
+  - time_slots
+properties:
+  days_of_week:
+    type: array
+    items:
+      type: string
+      enum: [monday, tuesday, wednesday, thursday, friday, saturday, sunday]
+  time_slots:
+    type: array
+    items:
+      $ref: "./TimeSlot.yaml"

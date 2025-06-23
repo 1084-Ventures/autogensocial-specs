@@ -1,7 +1,6 @@
-MediaType:
-  type: string
-  enum:
-    - Color
-    - Set
-    - Uploaded
-    - Online
+type: string
+enum:
+  - Color
+  - Set
+  - Uploaded
+  - Online

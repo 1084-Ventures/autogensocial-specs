@@ -1,10 +1,6 @@
-CognitiveTag:
-  type: object
-  required:
-    - name
-    - confidence
-  properties:
-    name:
-      type: string
-    confidence:
-      type: number
+type: object
+properties:
+  name:
+    type: string
+  confidence:
+    type: number

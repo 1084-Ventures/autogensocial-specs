@@ -1,7 +1,6 @@
-SocialAccountEntry:
-  type: object
-  properties:
-    platform:
-      $ref: "./Platform.yaml#/Platform"
-    account:
-      $ref: "./SocialAccount.yaml#/SocialAccount"
+type: object
+properties:
+  platform:
+    $ref: "./Platform.yaml"
+  account:
+    $ref: "./SocialAccount.yaml"

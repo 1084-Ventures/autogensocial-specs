@@ -2,39 +2,43 @@
 
 This project uses the following tools for validation:
 
-- `yamllint` for general YAML syntax and style checking (optional, for local use)
-- `prettier` for YAML formatting
-- `@redocly/cli` for OpenAPI linting
-- `swagger-cli` for OpenAPI spec validation (for files like `openapi.yaml`)
+- `@stoplight/spectral-cli` for OpenAPI linting and style checking
+- `@redocly/cli` for OpenAPI linting, bundling, and validation
+- `openapi-mermaid` for diagram generation
 
 ## Setup
 
-1. Install dependencies (requires Python and Node.js):
+1. Install dependencies (requires Node.js):
 
 ```sh
-npm install -g prettier @redocly/cli swagger-cli
+npm install
 ```
 
 ## Usage
 
-To check YAML formatting with Prettier:
+To lint the OpenAPI spec with Spectral:
 
 ```sh
-prettier --check "**/*.yaml"
+npx spectral lint openapi.yaml
 ```
 
-To lint the OpenAPI spec with Redocly CLI:
+To lint and validate the OpenAPI spec with Redocly CLI:
 
 ```sh
-redocly lint openapi.yaml
+npm run spec:lint
+npm run spec:validate
 ```
 
-To validate the OpenAPI spec with swagger-cli:
+To bundle the OpenAPI spec:
 
 ```sh
-swagger-cli validate openapi.yaml
+npm run spec:bundle
 ```
 
-You can also add these as scripts in your package.json or a Makefile for convenience.
+To generate diagrams:
+
+```sh
+npm run spec:diagrams
+```
 
 Validation is also run automatically in CI via GitHub Actions.

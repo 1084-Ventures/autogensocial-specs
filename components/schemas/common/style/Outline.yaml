@@ -1,7 +1,6 @@
-Outline:
-  type: object
-  properties:
-    color:
-      type: string
-    width:
-      type: integer
+type: object
+properties:
+  color:
+    type: string
+  width:
+    type: string

@@ -1,9 +1,8 @@
-BrandDelete:
-  type: object
-  required:
-    - id
-  properties:
-    id:
-      type: string
-  description: >
-    Payload for deleting a Brand by id.
+type: object
+required:
+  - id
+properties:
+  id:
+    type: string
+description: >
+  Payload for deleting a Brand by id.

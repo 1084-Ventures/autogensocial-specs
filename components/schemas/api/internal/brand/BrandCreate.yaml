@@ -1,9 +1,8 @@
-BrandCreate:
-  type: object
-  required:
-    - brandInfo
-  properties:
-    brandInfo:
-      $ref: "../../../common/base/BrandInfo.yaml#/BrandInfo"
-  description: >
-    Payload for creating a new Brand. Only 'brandInfo' is required.
+type: object
+required:
+  - brandInfo
+properties:
+  brandInfo:
+    $ref: "../../../common/base/BrandInfo.yaml"
+description: >
+  Payload for creating a new Brand. Only 'brandInfo' is required.

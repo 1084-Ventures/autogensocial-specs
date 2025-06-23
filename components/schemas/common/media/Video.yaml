@@ -1,9 +1,8 @@
-Video:
-  type: object
-  properties:
-    media_type:
-      $ref: "./MediaType.yaml#/MediaType"
-    set_url:
-      type: string
-    visualStyle:
-      $ref: "../style/VisualStyle.yaml#/VisualStyle"
+type: object
+properties:
+  media_type:
+    $ref: "./MediaType.yaml"
+  set_url:
+    type: string
+  visualStyle:
+    $ref: "../style/VisualStyle.yaml"

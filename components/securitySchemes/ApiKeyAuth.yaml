@@ -1,6 +1,5 @@
-ApiKeyAuth:
-  type: apiKey
-  description: api key authentication for all endpoints
-  name: x-api-key
-  in: header
-  x-example: "your-api-key-here"
+type: apiKey
+description: api key authentication for all endpoints
+name: x-api-key
+in: header
+x-example: "your-api-key-here"

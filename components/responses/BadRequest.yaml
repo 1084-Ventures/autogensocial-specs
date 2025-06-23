@@ -1,9 +1,8 @@
-BadRequest:
-  description: Invalid request parameters
-  content:
-    application/json:
-      schema:
-        $ref: "../../components/schemas/common/base/Error.yaml#/Error"
-      example:
-        code: INVALID_INPUT
-        message: Invalid request parameters
+description: Invalid request parameters
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/common/base/Error.yaml"
+    example:
+      code: INVALID_INPUT
+      message: Invalid request parameters

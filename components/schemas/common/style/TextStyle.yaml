@@ -1,11 +1,8 @@
-TextStyle:
-  type: object
-  properties:
-    font:
-      $ref: "./Font.yaml#/Font"
-    font_color:
-      type: string
-    outline:
-      $ref: "./Outline.yaml#/Outline"
-    alignment:
-      $ref: "./Alignment.yaml#/Alignment"
+type: object
+properties:
+  font:
+    $ref: "./Font.yaml"
+  outline:
+    $ref: "./Outline.yaml"
+  alignment:
+    $ref: "./Alignment.yaml"

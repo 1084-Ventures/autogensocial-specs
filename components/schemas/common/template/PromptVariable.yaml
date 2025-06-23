@@ -1,11 +1,10 @@
-PromptVariable:
-  type: object
-  properties:
-    name:
+type: object
+properties:
+  name:
+    type: string
+  values:
+    type: array
+    items:
       type: string
-    values:
-      type: array
-      items:
-        type: string
-    description:
-      type: string
+  description:
+    type: string

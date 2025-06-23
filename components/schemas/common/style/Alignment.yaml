@@ -1,5 +1,5 @@
-Alignment:
-  type: object
-  properties:
-    text_align:
-      type: string
+type: string
+enum:
+  - left
+  - center
+  - right

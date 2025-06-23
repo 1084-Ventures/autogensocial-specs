@@ -14,6 +14,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Change to specs directory
+        run: cd specs
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -37,7 +40,15 @@ jobs:
         run: prettier --check "**/*.yaml"
 
       - name: Lint OpenAPI with Redocly CLI
-        run: redocly lint specs/generated_openapi.yaml
+        run: redocly lint generated_openapi.yaml
 
       - name: Validate OpenAPI spec
-        run: swagger-cli validate specs/generated_openapi.yaml
+        run: swagger-cli validate generated_openapi.yaml
+
+      - name: Check for missing referenced files
+        run: |
+          grep -oE 'components/[^\"\']+' generated_openapi.yaml | while read -r ref; do
+            if [ ! -f "$ref" ]; then
+              echo "Missing referenced file: $ref" && exit 1
+            fi
+          done

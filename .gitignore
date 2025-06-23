@@ -16,3 +16,6 @@ build/
 *.local.js
 *.local.ts
 *.tmp
+openapi.generated.yaml
+/Diagrams/
+node_modules/

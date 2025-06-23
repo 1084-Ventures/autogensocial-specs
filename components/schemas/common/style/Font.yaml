@@ -1,11 +1,11 @@
-Font:
-  type: object
-  properties:
-    family:
-      type: string
-    size:
-      type: string
-    weight:
-      type: string
-    style:
-      type: string
+type: object
+properties:
+  family:
+    type: string
+  size:
+    type: string
+  weight:
+    type: string
+    enum: [normal, bold]
+  style:
+    type: string

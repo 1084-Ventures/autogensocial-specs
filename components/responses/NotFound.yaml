@@ -1,9 +1,8 @@
-NotFound:
-  description: Resource not found
-  content:
-    application/json:
-      schema:
-        $ref: "../../components/schemas/common/base/Error.yaml#/Error"
-      example:
-        code: RESOURCE_NOT_FOUND
-        message: The requested resource was not found
+description: Resource not found
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/common/base/Error.yaml"
+    example:
+      code: RESOURCE_NOT_FOUND
+      message: The requested resource was not found
