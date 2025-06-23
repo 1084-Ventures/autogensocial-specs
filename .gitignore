@@ -1,0 +1,21 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+.env
+.DS_Store
+coverage/
+dist/
+build/
+*.log
+*.tsbuildinfo
+.idea/
+.vscode/
+# Ignore local test and temp files
+*.local.js
+*.local.ts
+*.tmp
+openapi.generated.yaml
+/Diagrams/
+node_modules/

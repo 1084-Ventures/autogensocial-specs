@@ -1,0 +1,12 @@
+type: object
+properties:
+  color:
+    type: string
+  transparency:
+    type: number
+  vertical_location:
+    type: string
+    enum: [top, middle, bottom]
+  horizontal_location:
+    type: string
+    enum: [left, middle, right]

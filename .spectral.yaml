@@ -1,0 +1,15 @@
+extends: spectral:oas
+rules:
+  # require every operation to have an operationId
+  operation-operationId:
+    description: "Each operation should define a unique operationId"
+    severity: error
+  # enforce camelCase for schema property names
+  naming-convention:
+    description: "Schema property names should be camelCase"
+    given: "$.components.schemas.*.properties.*"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+        message: "must be camelCase"

@@ -1,119 +1,377 @@
----
-openapi: 3.0.0
+openapi: 3.0.3
 info:
-  title: autogen_social_api
-  version: "1.0.0"
-  description: |
-    API for content orchestration, generation, and posting for social media automation.
+  title: AutogenSocial API
+  version: 1.0.0
+  description: OpenAPI specification for the AutogenSocial API. This file references all modular components and operations.
   license:
     name: MIT
-    url: https://opensource.org/licenses/MIT
+    url: https://opensource.org/license/mit/
 servers:
-  - url: /api
-    description: Azure Functions API endpoint
-
-paths:
-  /orchestrate-content:
-    post:
-      $ref: "./operations/internal/function/generate-content-orchestrator.yaml#/paths/~1orchestrate-content/post"
-  /generate-image:
-    post:
-      $ref: "./operations/internal/function/generate-image.yaml#/paths/~1generate-image/post"
-  /generate-content:
-    post:
-      $ref: "./operations/internal/function/generate-content.yaml#/paths/~1generate-content/post"
-  /post-content:
-    post:
-      $ref: "./operations/internal/function/post-content.yaml#/paths/~1post-content/post"
-  /external/post-instagram-content:
-    post:
-      $ref: "./operations/external/post-instagram-content.yaml#/paths/~1external~1post-instagram-content/post"
-
-components:
-  parameters:
-    brand_id:
-      $ref: "./components/parameters.yaml#/brand_id"
-    id:
-      $ref: "./components/parameters.yaml#/id"
-    pagination:
-      $ref: "./components/parameters.yaml#/pagination"
-  responses:
-    NotFound:
-      $ref: "./components/responses.yaml#/NotFound"
-    BadRequest:
-      $ref: "./components/responses.yaml#/BadRequest"
-    Unauthorized:
-      $ref: "./components/responses.yaml#/Unauthorized"
-    RateLimitExceeded:
-      $ref: "./components/responses.yaml#/RateLimitExceeded"
-  securitySchemes:
-    bearerAuth:
-      $ref: "./components/security-schemes.yaml#/bearerAuth"
-    ApiKeyAuth:
-      $ref: "./components/security-schemes.yaml#/ApiKeyAuth"
-  schemas:
-    BaseModel:
-      $ref: "./schemas/base.yaml#/BaseModel"
-    Brand:
-      $ref: "./schemas/brand.yaml#/Brand"
-    ContentTemplate:
-      $ref: "./schemas/content-template.yaml#/ContentTemplate"
-    MediaDocument:
-      $ref: "./schemas/media.yaml#/MediaDocument"
-    MediaMetadata:
-      $ref: "./schemas/media.yaml#/MediaMetadata"
-    Fonts:
-      $ref: "./schemas/common/fonts.yaml#/Fonts"
-    Metadata:
-      $ref: "./schemas/common/metadata.yaml#/Metadata"
-    Schedule:
-      $ref: "./schemas/common/schedule.yaml#/Schedule"
-    SocialAccount:
-      $ref: "./schemas/common/social-account.yaml#/SocialAccount"
-    TimeSlot:
-      $ref: "./schemas/common/time-slot.yaml#/TimeSlot"
-    VisualStyle:
-      $ref: "./schemas/common/visual-style.yaml#/VisualStyle"
-    Image:
-      $ref: "./schemas/content-types/image.yaml#/Image"
-    MultiImage:
-      $ref: "./schemas/content-types/multi-image.yaml#/MultiImage"
-    Text:
-      $ref: "./schemas/content-types/text.yaml#/Text"
-    Video:
-      $ref: "./schemas/content-types/video.yaml#/Video"
-    Facebook:
-      $ref: "./schemas/platforms/facebook.yaml#/Facebook"
-    Instagram:
-      $ref: "./schemas/platforms/instagram.yaml#/Instagram"
-    TikTok:
-      $ref: "./schemas/platforms/tiktok.yaml#/TikTok"
-    Twitter:
-      $ref: "./schemas/platforms/twitter.yaml#/Twitter"
-    AzureOpenAIGenerateContentTemplate:
-      $ref: "./schemas/function/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentTemplate"
-    AzureOpenAIGenerateContentRequest:
-      $ref: "./schemas/function/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentRequest"
-    AzureOpenAIGenerateContentResponse:
-      $ref: "./schemas/function/azure-openai-generate-content.yaml#/AzureOpenAIGenerateContentResponse"
-    OrchestratorRequest:
-      $ref: "./schemas/function/orchestrator.yaml#/OrchestratorRequest"
-    OrchestratorResponse:
-      $ref: "./schemas/function/orchestrator.yaml#/OrchestratorResponse"
-    PostingRequest:
-      $ref: "./schemas/function/posting.yaml#/PostingRequest"
-    PostingResponse:
-      $ref: "./schemas/function/posting.yaml#/PostingResponse"
-    ImageContent:
-      $ref: "./schemas/content-types/image-content.yaml#/ImageContent"
-    Background:
-      $ref: "./schemas/content-types/image-content.yaml#/Background"
-    TextOverlay:
-      $ref: "./schemas/content-types/image-content.yaml#/TextOverlay"
-    MediaSearchRequest:
-      $ref: "./schemas/function/media-search.yaml#/MediaSearchRequest"
-    MediaSearchResponse:
-      $ref: "./schemas/function/media-search.yaml#/MediaSearchResponse"
-
+  - url: https://autogensocial-api.1084ventures.com
 security:
   - bearerAuth: []
+paths:
+  /content-generation-templates:
+    get:
+      operationId: listContentGenerationTemplates
+      summary: List content generation templates by brandId
+      parameters:
+        - name: brand_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: ./components/parameters/pagination.yaml
+      responses:
+        '200':
+          description: List of content generation templates for a brand
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateGet.yaml
+        '400':
+          $ref: ./components/responses/BadRequest.yaml
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
+    post:
+      operationId: createContentGenerationTemplate
+      summary: Create a new content generation template
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateCreate.yaml
+      responses:
+        '201':
+          description: Content generation template created
+          content:
+            application/json:
+              schema:
+                $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateResponse.yaml
+        '400':
+          $ref: ./components/responses/BadRequest.yaml
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
+  /content-generation-templates/{id}:
+    get:
+      operationId: getContentGenerationTemplateById
+      summary: Get a content generation template by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Content generation template details
+          content:
+            application/json:
+              schema:
+                $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateGet.yaml
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '404':
+          $ref: ./components/responses/NotFound.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
+    patch:
+      operationId: updateContentGenerationTemplateById
+      summary: Update a content generation template by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateUpdate.yaml
+      responses:
+        '200':
+          description: Content generation template updated
+          content:
+            application/json:
+              schema:
+                $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateResponse.yaml
+        '400':
+          $ref: ./components/responses/BadRequest.yaml
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '404':
+          $ref: ./components/responses/NotFound.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
+    delete:
+      operationId: deleteContentGenerationTemplateById
+      summary: Delete a content generation template by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Content generation template deleted
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '404':
+          $ref: ./components/responses/NotFound.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
+  /brands:
+    get:
+      summary: List brands by userId
+      operationId: listBrandsByUserId
+      parameters:
+        - name: user_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: ./components/parameters/pagination.yaml
+      responses:
+        '200':
+          description: List of brands for a user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./components/schemas/api/internal/brand/BrandGet.yaml
+        '400':
+          $ref: ./components/responses/BadRequest.yaml
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
+    post:
+      summary: Create a new brand
+      operationId: createBrand
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ./components/schemas/api/internal/brand/BrandCreate.yaml
+      responses:
+        '201':
+          description: Brand created
+          content:
+            application/json:
+              schema:
+                $ref: ./components/schemas/api/internal/brand/BrandResponse.yaml
+        '400':
+          $ref: ./components/responses/BadRequest.yaml
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
+  /brands/{id}:
+    get:
+      summary: Get a brand by ID
+      operationId: getBrandById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Brand details
+          content:
+            application/json:
+              schema:
+                $ref: ./components/schemas/api/internal/brand/BrandGet.yaml
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '404':
+          $ref: ./components/responses/NotFound.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
+    patch:
+      summary: Update a brand by ID
+      operationId: updateBrandById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ./components/schemas/api/internal/brand/BrandUpdate.yaml
+      responses:
+        '200':
+          description: Brand updated
+          content:
+            application/json:
+              schema:
+                $ref: ./components/schemas/api/internal/brand/BrandResponse.yaml
+        '400':
+          $ref: ./components/responses/BadRequest.yaml
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '404':
+          $ref: ./components/responses/NotFound.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
+    delete:
+      summary: Delete a brand by ID
+      operationId: deleteBrandById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Brand deleted
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '404':
+          $ref: ./components/responses/NotFound.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
+  /external/post-instagram-content:
+    post:
+      summary: Post Instagram content
+      operationId: postInstagramContent
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+components:
+  schemas:
+    MediaDocument:
+      $ref: ./components/schemas/documents/MediaDocument.yaml
+    ContentGenerationTemplateDocument:
+      $ref: ./components/schemas/documents/ContentGenerationTemplateDocument.yaml
+    BrandDocument:
+      $ref: ./components/schemas/documents/BrandDocument.yaml
+    TemplateSettings:
+      $ref: ./components/schemas/common/template/TemplateSettings.yaml
+    TemplateInfo:
+      $ref: ./components/schemas/common/template/TemplateInfo.yaml
+    PromptVariable:
+      $ref: ./components/schemas/common/template/PromptVariable.yaml
+    PromptTemplate:
+      $ref: ./components/schemas/common/template/PromptTemplate.yaml
+    VisualStyleObj:
+      $ref: ./components/schemas/common/style/VisualStyleObj.yaml
+    VisualStyle:
+      $ref: ./components/schemas/common/style/VisualStyle.yaml
+    TextStyle:
+      $ref: ./components/schemas/common/style/TextStyle.yaml
+    OverlayBox:
+      $ref: ./components/schemas/common/style/OverlayBox.yaml
+    Outline:
+      $ref: ./components/schemas/common/style/Outline.yaml
+    Fonts:
+      $ref: ./components/schemas/common/style/Fonts.yaml
+    Font:
+      $ref: ./components/schemas/common/style/Font.yaml
+    Alignment:
+      $ref: ./components/schemas/common/style/Alignment.yaml
+    SocialAccountEntry:
+      $ref: ./components/schemas/common/social/SocialAccountEntry.yaml
+    SocialAccount:
+      $ref: ./components/schemas/common/social/SocialAccount.yaml
+    Platform:
+      $ref: ./components/schemas/common/social/Platform.yaml
+    TimeSlot:
+      $ref: ./components/schemas/common/schedule/TimeSlot.yaml
+    Schedule:
+      $ref: ./components/schemas/common/schedule/Schedule.yaml
+    Video:
+      $ref: ./components/schemas/common/media/Video.yaml
+    MultiImage:
+      $ref: ./components/schemas/common/media/MultiImage.yaml
+    MediaType:
+      $ref: ./components/schemas/common/media/MediaType.yaml
+    MediaMetadata:
+      $ref: ./components/schemas/common/media/MediaMetadata.yaml
+    Image:
+      $ref: ./components/schemas/common/media/Image.yaml
+    Rectangle:
+      $ref: ./components/schemas/common/cognitive/Rectangle.yaml
+    CognitiveTag:
+      $ref: ./components/schemas/common/cognitive/CognitiveTag.yaml
+    CognitivePerson:
+      $ref: ./components/schemas/common/cognitive/CognitivePerson.yaml
+    CognitiveObject:
+      $ref: ./components/schemas/common/cognitive/CognitiveObject.yaml
+    CognitiveDenseCaption:
+      $ref: ./components/schemas/common/cognitive/CognitiveDenseCaption.yaml
+    CognitiveData:
+      $ref: ./components/schemas/common/cognitive/CognitiveData.yaml
+    CognitiveCategory:
+      $ref: ./components/schemas/common/cognitive/CognitiveCategory.yaml
+    CognitiveCaption:
+      $ref: ./components/schemas/common/cognitive/CognitiveCaption.yaml
+    CognitiveBrand:
+      $ref: ./components/schemas/common/cognitive/CognitiveBrand.yaml
+    Text:
+      $ref: ./components/schemas/common/base/Text.yaml
+    Metadata:
+      $ref: ./components/schemas/common/base/Metadata.yaml
+    Error:
+      $ref: ./components/schemas/common/base/Error.yaml
+    ContentType:
+      $ref: ./components/schemas/common/base/ContentType.yaml
+    ContentItem:
+      $ref: ./components/schemas/common/base/ContentItem.yaml
+    BrandInfo:
+      $ref: ./components/schemas/common/base/BrandInfo.yaml
+    BaseModel:
+      $ref: ./components/schemas/common/base/BaseModel.yaml
+    ContentGenerationTemplateUpdate:
+      $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateUpdate.yaml
+    ContentGenerationTemplateResponse:
+      $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateResponse.yaml
+    ContentGenerationTemplateGet:
+      $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateGet.yaml
+    ContentGenerationTemplateCreate:
+      $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateCreate.yaml
+    BrandUpdate:
+      $ref: ./components/schemas/api/internal/brand/BrandUpdate.yaml
+    BrandResponse:
+      $ref: ./components/schemas/api/internal/brand/BrandResponse.yaml
+    BrandGet:
+      $ref: ./components/schemas/api/internal/brand/BrandGet.yaml
+    BrandCreate:
+      $ref: ./components/schemas/api/internal/brand/BrandCreate.yaml
+  parameters:
+    pagination:
+      $ref: ./components/parameters/pagination.yaml
+  responses:
+    Unauthorized:
+      $ref: ./components/responses/Unauthorized.yaml
+    RateLimitExceeded:
+      $ref: ./components/responses/RateLimitExceeded.yaml
+    NotFound:
+      $ref: ./components/responses/NotFound.yaml
+    BadRequest:
+      $ref: ./components/responses/BadRequest.yaml
+  securitySchemes:
+    bearerAuth:
+      $ref: ./components/securitySchemes/bearerAuth.yaml
+    ApiKeyAuth:
+      $ref: ./components/securitySchemes/ApiKeyAuth.yaml

@@ -1,0 +1,20 @@
+type: array
+description: Font definitions for use by both backend and frontend
+items:
+  type: object
+  properties:
+    family:
+      type: string
+    display_name:
+      type: string
+    styles:
+      type: object
+      properties:
+        regular:
+          type: string
+        bold:
+          type: string
+        italic:
+          type: string
+        bold_italic:
+          type: string

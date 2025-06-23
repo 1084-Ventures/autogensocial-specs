@@ -1,0 +1,6 @@
+type: object
+properties:
+  platform:
+    $ref: "./Platform.yaml"
+  account:
+    $ref: "./SocialAccount.yaml"

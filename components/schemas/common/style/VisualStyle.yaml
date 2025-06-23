@@ -1,0 +1,9 @@
+type: object
+properties:
+  text_style:
+    $ref: "./TextStyle.yaml"
+  overlay_box:
+    $ref: "./OverlayBox.yaml"
+  background_color:
+    type: string
+    description: Background color

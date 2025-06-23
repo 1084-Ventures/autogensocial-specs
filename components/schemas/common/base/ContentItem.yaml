@@ -1,0 +1,10 @@
+type: object
+properties:
+  text:
+    $ref: "./Text.yaml"
+  image:
+    $ref: "../media/Image.yaml"
+  video:
+    $ref: "../media/Video.yaml"
+  multiImage:
+    $ref: "../media/MultiImage.yaml"

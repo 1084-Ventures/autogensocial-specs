@@ -1,0 +1,12 @@
+allOf:
+  - $ref: "../common/base/BaseModel.yaml"
+  - type: object
+    properties:
+      userId:
+        type: string
+      brand_info:
+        $ref: "../common/base/BrandInfo.yaml"
+      socialAccounts:
+        type: array
+        items:
+          $ref: "../common/social/SocialAccountEntry.yaml"

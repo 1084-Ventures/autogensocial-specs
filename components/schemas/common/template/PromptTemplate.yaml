@@ -1,0 +1,16 @@
+type: object
+properties:
+  system_prompt:
+    type: string
+  user_prompt:
+    type: string
+  temperature:
+    type: number
+  max_tokens:
+    type: integer
+  model:
+    type: string
+  variables:
+    type: array
+    items:
+      $ref: "./PromptVariable.yaml"

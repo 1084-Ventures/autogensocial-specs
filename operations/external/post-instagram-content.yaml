@@ -1,47 +1,9 @@
----
-paths:
-  /external/post-instagram-content:
-    post:
-      operationId: postInstagramContent
-      summary: Post content to Instagram
-      description: Posts content (text and image) to Instagram for a given brand.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - brandId
-                - imageUrl
-                - content
-              properties:
-                brandId:
-                  type: string
-                  description: The brand ID for which to post content.
-                imageUrl:
-                  type: string
-                  description: The URL of the image to post.
-                content:
-                  type: object
-                  description: Content object containing comment and hashtags.
-                  properties:
-                    comment:
-                      type: string
-                    hashtags:
-                      type: array
-                      items:
-                        type: string
-      responses:
-        "201":
-          description: Content posted successfully
-          content:
-            application/json:
-              schema:
-                type: object
-        "400":
-          description: Invalid request parameters
-          content:
-            application/json:
-              schema:
-                $ref: "../../schemas/common/error.yaml#/Error"
+/external/post-instagram-content:
+  post:
+    summary: Post Instagram content
+    operationId: postInstagramContent
+    responses:
+      "200":
+        description: Success
+      "400":
+        description: Bad request

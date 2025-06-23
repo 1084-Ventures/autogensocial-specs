@@ -1,0 +1,15 @@
+allOf:
+  - $ref: "../common/base/BaseModel.yaml"
+  - type: object
+    properties:
+      brandId:
+        type: string
+      blobUrl:
+        type: string
+      mediaType:
+        type: string
+        enum:
+          - image
+          - video
+      mediaMetadata:
+        $ref: "../common/media/MediaMetadata.yaml"

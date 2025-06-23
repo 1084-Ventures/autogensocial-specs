@@ -1,0 +1,8 @@
+type: object
+properties:
+  font:
+    $ref: "./Font.yaml"
+  outline:
+    $ref: "./Outline.yaml"
+  alignment:
+    $ref: "./Alignment.yaml"
