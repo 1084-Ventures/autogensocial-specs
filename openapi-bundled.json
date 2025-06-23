@@ -483,7 +483,7 @@
           {
             "type": "object",
             "properties": {
-              "user_id": {
+              "userId": {
                 "type": "string"
               },
               "brand_info": {
@@ -626,10 +626,20 @@
             "type": "number"
           },
           "vertical_location": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "top",
+              "middle",
+              "bottom"
+            ]
           },
           "horizontal_location": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "left",
+              "middle",
+              "right"
+            ]
           }
         }
       },
@@ -693,7 +703,11 @@
             ]
           },
           "style": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "normal",
+              "italic"
+            ]
           }
         }
       },
@@ -723,7 +737,7 @@
           "username",
           "accessToken",
           "profileUrl",
-          "expiry_date"
+          "expiryDate"
         ],
         "properties": {
           "id": {
@@ -742,7 +756,7 @@
             "type": "string",
             "description": "URL to the user's profile"
           },
-          "expiry_date": {
+          "expiryDate": {
             "type": "string",
             "format": "date-time",
             "description": "Token expiration timestamp"
@@ -755,6 +769,7 @@
           "instagram",
           "facebook",
           "twitter",
+          "youtube",
           "tiktok"
         ]
       },
@@ -848,10 +863,10 @@
       "MediaType": {
         "type": "string",
         "enum": [
-          "Color",
-          "Set",
-          "Uploaded",
-          "Online"
+          "color",
+          "set",
+          "uploaded",
+          "online"
         ]
       },
       "MediaMetadata": {

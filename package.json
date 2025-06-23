@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@stoplight/spectral-cli": "^6.x",
-    "@redocly/cli": "^2.x",
+    "@redocly/cli": "^1.x",
     "openapi-mermaid": "^1.x",
     "husky": "^8.x",
     "lint-staged": "^14.x"
