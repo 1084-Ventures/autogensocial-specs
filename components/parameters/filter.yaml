@@ -1,7 +1,0 @@
-name: filter
-in: query
-required: false
-schema:
-  type: string
-description: filter criteria in the format field:operator:value (e.g., name:contains:test)
-example: "name:contains:acme"

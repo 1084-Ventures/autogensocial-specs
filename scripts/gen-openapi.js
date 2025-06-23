@@ -79,7 +79,7 @@ function generateOpenApiSpec(componentsDir, operationsDir, outFile) {
       { url: 'https://autogensocial-api.1084ventures.com' }
     ],
     security: [
-      { BearerAuth: [] }
+      { bearerAuth: [] }
     ],
     paths,
     components: {

@@ -9,7 +9,7 @@ info:
 servers:
   - url: https://autogensocial-api.1084ventures.com
 security:
-  - BearerAuth: []
+  - bearerAuth: []
 paths:
   /content-generation-templates:
     get:
@@ -260,8 +260,6 @@ paths:
           description: Bad request
 components:
   schemas:
-    PostDocument:
-      $ref: ./components/schemas/documents/PostDocument.yaml
     MediaDocument:
       $ref: ./components/schemas/documents/MediaDocument.yaml
     ContentGenerationTemplateDocument:
@@ -363,12 +361,6 @@ components:
   parameters:
     pagination:
       $ref: ./components/parameters/pagination.yaml
-    id:
-      $ref: ./components/parameters/id.yaml
-    filter:
-      $ref: ./components/parameters/filter.yaml
-    brandId:
-      $ref: ./components/parameters/brandId.yaml
   responses:
     Unauthorized:
       $ref: ./components/responses/Unauthorized.yaml
@@ -379,7 +371,7 @@ components:
     BadRequest:
       $ref: ./components/responses/BadRequest.yaml
   securitySchemes:
-    BearerAuth:
-      $ref: ./components/securitySchemes/BearerAuth.yaml
+    bearerAuth:
+      $ref: ./components/securitySchemes/bearerAuth.yaml
     ApiKeyAuth:
       $ref: ./components/securitySchemes/ApiKeyAuth.yaml

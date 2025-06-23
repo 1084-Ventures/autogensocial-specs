@@ -16,7 +16,7 @@
   ],
   "security": [
     {
-      "BearerAuth": []
+      "bearerAuth": []
     }
   ],
   "paths": {
@@ -419,10 +419,6 @@
   },
   "components": {
     "schemas": {
-      "PostDocument": {
-        "type": "object",
-        "description": "Stub for PostDocument schema"
-      },
       "MediaDocument": {
         "allOf": [
           {
@@ -1313,36 +1309,6 @@
             }
           }
         }
-      },
-      "id": {
-        "name": "id",
-        "in": "path",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "description": "resource identifier (uuid)"
-      },
-      "filter": {
-        "name": "filter",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "type": "string"
-        },
-        "description": "filter criteria in the format field:operator:value (e.g., name:contains:test)",
-        "example": "name:contains:acme"
-      },
-      "brandId": {
-        "name": "brand_id",
-        "in": "query",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "description": "brand identifier (uuid)"
       }
     },
     "responses": {
@@ -1404,7 +1370,7 @@
       }
     },
     "securitySchemes": {
-      "BearerAuth": {
+      "bearerAuth": {
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "JWT"
