@@ -2,7 +2,7 @@ allOf:
   - $ref: "../common/base/BaseModel.yaml"
   - type: object
     properties:
-      user_id:
+      userId:
         type: string
       brand_info:
         $ref: "../common/base/BrandInfo.yaml"

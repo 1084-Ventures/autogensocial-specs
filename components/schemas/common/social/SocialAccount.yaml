@@ -4,7 +4,7 @@ required:
   - username
   - accessToken
   - profileUrl
-  - expiry_date
+  - expiryDate
 properties:
   id:
     type: string
@@ -18,7 +18,7 @@ properties:
   profileUrl:
     type: string
     description: URL to the user's profile
-  expiry_date:
+  expiryDate:
     type: string
     format: date-time
     description: Token expiration timestamp
