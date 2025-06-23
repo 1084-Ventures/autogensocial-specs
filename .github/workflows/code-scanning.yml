@@ -2,10 +2,8 @@
 name: Code Scanning (YAML, Markdown, Secrets)
 
 on:
-  push:
-    branches: ["main", "master"]
   pull_request:
-    branches: ["main", "master"]
+    branches: [main]
 
 jobs:
   scan-secrets:
