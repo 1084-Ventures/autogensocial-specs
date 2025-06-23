@@ -9,3 +9,4 @@ properties:
     enum: [normal, bold]
   style:
     type: string
+    enum: [normal, italic]

@@ -1,6 +1,2 @@
 type: string
-enum:
-  - instagram
-  - facebook
-  - twitter
-  - tiktok
+enum: [instagram, facebook, twitter, youtube, tiktok]

@@ -1,5 +1,2 @@
 type: string
-enum:
-  - left
-  - center
-  - right
+enum: [left, center, right]

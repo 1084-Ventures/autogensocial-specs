@@ -1,6 +1,2 @@
 type: string
-enum:
-  - text
-  - video
-  - multi_image
-  - image
+enum: [text, video, multi_image, image]

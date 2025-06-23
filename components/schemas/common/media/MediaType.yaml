@@ -1,6 +1,2 @@
 type: string
-enum:
-  - Color
-  - Set
-  - Uploaded
-  - Online
+enum: [color, set, uploaded, online]

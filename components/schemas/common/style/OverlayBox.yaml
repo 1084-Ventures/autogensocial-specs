@@ -6,5 +6,7 @@ properties:
     type: number
   vertical_location:
     type: string
+    enum: [top, middle, bottom]
   horizontal_location:
     type: string
+    enum: [left, middle, right]
