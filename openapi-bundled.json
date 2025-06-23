@@ -1,0 +1,1466 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "AutogenSocial API",
+    "version": "1.0.0",
+    "description": "OpenAPI specification for the AutogenSocial API. This file references all modular components and operations.",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/license/mit/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://autogensocial-api.1084ventures.com"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/content-generation-templates": {
+      "get": {
+        "operationId": "listContentGenerationTemplates",
+        "summary": "List content generation templates by brandId",
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of content generation templates for a brand",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentGenerationTemplateGet"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      },
+      "post": {
+        "operationId": "createContentGenerationTemplate",
+        "summary": "Create a new content generation template",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContentGenerationTemplateCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Content generation template created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentGenerationTemplateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      }
+    },
+    "/content-generation-templates/{id}": {
+      "get": {
+        "operationId": "getContentGenerationTemplateById",
+        "summary": "Get a content generation template by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content generation template details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentGenerationTemplateGet"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateContentGenerationTemplateById",
+        "summary": "Update a content generation template by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContentGenerationTemplateUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Content generation template updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentGenerationTemplateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteContentGenerationTemplateById",
+        "summary": "Delete a content generation template by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Content generation template deleted"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      }
+    },
+    "/brands": {
+      "get": {
+        "summary": "List brands by userId",
+        "operationId": "listBrandsByUserId",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of brands for a user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BrandGet"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new brand",
+        "operationId": "createBrand",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BrandCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Brand created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrandResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      }
+    },
+    "/brands/{id}": {
+      "get": {
+        "summary": "Get a brand by ID",
+        "operationId": "getBrandById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Brand details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrandGet"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a brand by ID",
+        "operationId": "updateBrandById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BrandUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Brand updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrandResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a brand by ID",
+        "operationId": "deleteBrandById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Brand deleted"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      }
+    },
+    "/external/post-instagram-content": {
+      "post": {
+        "summary": "Post Instagram content",
+        "operationId": "postInstagramContent",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PostDocument": {
+        "type": "object",
+        "description": "Stub for PostDocument schema"
+      },
+      "MediaDocument": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "brandId": {
+                "type": "string"
+              },
+              "blobUrl": {
+                "type": "string"
+              },
+              "mediaType": {
+                "type": "string",
+                "enum": [
+                  "image",
+                  "video"
+                ]
+              },
+              "mediaMetadata": {
+                "$ref": "#/components/schemas/MediaMetadata"
+              }
+            }
+          }
+        ]
+      },
+      "ContentGenerationTemplateDocument": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "brandId": {
+                "type": "string"
+              },
+              "templateInfo": {
+                "$ref": "#/components/schemas/TemplateInfo"
+              },
+              "schedule": {
+                "$ref": "#/components/schemas/Schedule"
+              },
+              "settings": {
+                "$ref": "#/components/schemas/TemplateSettings"
+              }
+            }
+          }
+        ]
+      },
+      "BrandDocument": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "user_id": {
+                "type": "string"
+              },
+              "brand_info": {
+                "$ref": "#/components/schemas/BrandInfo"
+              },
+              "socialAccounts": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SocialAccountEntry"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "TemplateSettings": {
+        "type": "object",
+        "properties": {
+          "prompt_template": {
+            "$ref": "#/components/schemas/PromptTemplate"
+          },
+          "visual_style": {
+            "$ref": "#/components/schemas/VisualStyleObj"
+          },
+          "contentItem": {
+            "$ref": "#/components/schemas/ContentItem"
+          }
+        }
+      },
+      "TemplateInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "contentType": {
+            "$ref": "#/components/schemas/ContentType"
+          },
+          "socialAccounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Platform"
+            }
+          }
+        }
+      },
+      "PromptVariable": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "PromptTemplate": {
+        "type": "object",
+        "properties": {
+          "system_prompt": {
+            "type": "string"
+          },
+          "user_prompt": {
+            "type": "string"
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "max_tokens": {
+            "type": "integer"
+          },
+          "model": {
+            "type": "string"
+          },
+          "variables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PromptVariable"
+            }
+          }
+        }
+      },
+      "VisualStyleObj": {
+        "type": "object",
+        "properties": {
+          "themes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VisualStyle"
+            }
+          }
+        }
+      },
+      "VisualStyle": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "type": "object",
+            "required": [
+              "family",
+              "size"
+            ],
+            "properties": {
+              "family": {
+                "type": "string",
+                "description": "Font family for the overlay text (e.g., Arial)."
+              },
+              "size": {
+                "type": "string",
+                "description": "Font size (e.g., \"32px\")."
+              },
+              "weight": {
+                "type": "string",
+                "enum": [
+                  "normal",
+                  "bold"
+                ],
+                "description": "Font weight for the overlay text."
+              },
+              "style": {
+                "type": "string",
+                "enum": [
+                  "normal",
+                  "italic"
+                ],
+                "description": "Font style for the overlay text."
+              }
+            }
+          },
+          "color": {
+            "type": "object",
+            "required": [
+              "text",
+              "background"
+            ],
+            "properties": {
+              "text": {
+                "type": "string",
+                "description": "Color for the overlay text (e.g., \"#000000\")."
+              },
+              "background": {
+                "type": "string",
+                "description": "Background color for the overlay area (e.g., \"#FFFFFF\")."
+              },
+              "box": {
+                "type": "string",
+                "description": "Color of the text box background (e.g., \"#000000\")."
+              },
+              "outline": {
+                "type": "string",
+                "description": "Color for text outline (if supported)."
+              }
+            }
+          },
+          "outline": {
+            "type": "object",
+            "properties": {
+              "color": {
+                "type": "string",
+                "description": "Color for text outline (if supported)."
+              },
+              "width": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "TextStyle": {
+        "type": "object",
+        "properties": {
+          "font": {
+            "$ref": "#/components/schemas/Font"
+          },
+          "outline": {
+            "$ref": "#/components/schemas/Outline"
+          },
+          "alignment": {
+            "$ref": "#/components/schemas/Alignment"
+          }
+        }
+      },
+      "OverlayBox": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "type": "string"
+          },
+          "transparency": {
+            "type": "number"
+          },
+          "vertical_location": {
+            "type": "string"
+          },
+          "horizontal_location": {
+            "type": "string"
+          }
+        }
+      },
+      "Outline": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "type": "string"
+          },
+          "width": {
+            "type": "string"
+          }
+        }
+      },
+      "Fonts": {
+        "type": "array",
+        "description": "Font definitions for use by both backend and frontend",
+        "items": {
+          "type": "object",
+          "properties": {
+            "family": {
+              "type": "string"
+            },
+            "display_name": {
+              "type": "string"
+            },
+            "styles": {
+              "type": "object",
+              "properties": {
+                "regular": {
+                  "type": "string"
+                },
+                "bold": {
+                  "type": "string"
+                },
+                "italic": {
+                  "type": "string"
+                },
+                "bold_italic": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Font": {
+        "type": "object",
+        "properties": {
+          "family": {
+            "type": "string"
+          },
+          "size": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "bold"
+            ]
+          },
+          "style": {
+            "type": "string"
+          }
+        }
+      },
+      "Alignment": {
+        "type": "string",
+        "enum": [
+          "left",
+          "center",
+          "right"
+        ]
+      },
+      "SocialAccountEntry": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "$ref": "#/components/schemas/Platform"
+          },
+          "account": {
+            "$ref": "#/components/schemas/SocialAccount"
+          }
+        }
+      },
+      "SocialAccount": {
+        "type": "object",
+        "required": [
+          "id",
+          "username",
+          "accessToken",
+          "profileUrl",
+          "expiry_date"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the social account"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username for the social account"
+          },
+          "accessToken": {
+            "type": "string",
+            "description": "OAuth access token"
+          },
+          "profileUrl": {
+            "type": "string",
+            "description": "URL to the user's profile"
+          },
+          "expiry_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Token expiration timestamp"
+          }
+        }
+      },
+      "Platform": {
+        "type": "string",
+        "enum": [
+          "instagram",
+          "facebook",
+          "twitter",
+          "tiktok"
+        ]
+      },
+      "TimeSlot": {
+        "type": "object",
+        "required": [
+          "hour",
+          "minute",
+          "timezone"
+        ],
+        "properties": {
+          "hour": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 23,
+            "description": "Hour in 24-hour format"
+          },
+          "minute": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 59,
+            "description": "Minute"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "Timezone string (e.g., 'America/New_York')"
+          }
+        }
+      },
+      "Schedule": {
+        "type": "object",
+        "required": [
+          "days_of_week",
+          "time_slots"
+        ],
+        "properties": {
+          "days_of_week": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday",
+                "saturday",
+                "sunday"
+              ]
+            }
+          },
+          "time_slots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TimeSlot"
+            }
+          }
+        }
+      },
+      "Video": {
+        "type": "object",
+        "properties": {
+          "media_type": {
+            "$ref": "#/components/schemas/MediaType"
+          },
+          "set_url": {
+            "type": "string"
+          },
+          "visualStyle": {
+            "$ref": "#/components/schemas/VisualStyle"
+          }
+        }
+      },
+      "MultiImage": {
+        "type": "object",
+        "properties": {
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Image"
+            }
+          },
+          "min_images": {
+            "type": "integer"
+          },
+          "max_images": {
+            "type": "integer"
+          }
+        }
+      },
+      "MediaType": {
+        "type": "string",
+        "enum": [
+          "Color",
+          "Set",
+          "Uploaded",
+          "Online"
+        ]
+      },
+      "MediaMetadata": {
+        "type": "object",
+        "required": [
+          "fileName",
+          "tags",
+          "cognitiveData"
+        ],
+        "properties": {
+          "fileName": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "suggestedName": {
+            "type": "string"
+          },
+          "cognitiveData": {
+            "$ref": "#/components/schemas/CognitiveData"
+          }
+        }
+      },
+      "Image": {
+        "type": "object",
+        "properties": {
+          "media_type": {
+            "$ref": "#/components/schemas/MediaType"
+          },
+          "set_url": {
+            "type": "string"
+          },
+          "visualStyle": {
+            "$ref": "#/components/schemas/VisualStyle"
+          }
+        }
+      },
+      "Rectangle": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number"
+          },
+          "y": {
+            "type": "number"
+          },
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          }
+        }
+      },
+      "CognitiveTag": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        }
+      },
+      "CognitivePerson": {
+        "type": "object",
+        "properties": {
+          "rectangle": {
+            "$ref": "#/components/schemas/Rectangle"
+          }
+        }
+      },
+      "CognitiveObject": {
+        "type": "object",
+        "properties": {
+          "rectangle": {
+            "$ref": "#/components/schemas/Rectangle"
+          }
+        }
+      },
+      "CognitiveDenseCaption": {
+        "type": "object",
+        "properties": {
+          "rectangle": {
+            "$ref": "#/components/schemas/Rectangle"
+          }
+        }
+      },
+      "CognitiveData": {
+        "type": "object",
+        "properties": {
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CognitiveTag"
+            }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CognitiveCategory"
+            }
+          },
+          "objects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CognitiveObject"
+            }
+          },
+          "caption": {
+            "$ref": "#/components/schemas/CognitiveCaption"
+          },
+          "denseCaptions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CognitiveDenseCaption"
+            }
+          },
+          "brands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CognitiveBrand"
+            }
+          },
+          "people": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CognitivePerson"
+            }
+          },
+          "rectangles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Rectangle"
+            }
+          }
+        }
+      },
+      "CognitiveCategory": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        }
+      },
+      "CognitiveCaption": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        }
+      },
+      "CognitiveBrand": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        }
+      },
+      "Text": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "Metadata": {
+        "type": "object",
+        "required": [
+          "created_date",
+          "updated_date",
+          "is_active"
+        ],
+        "properties": {
+          "created_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Creation timestamp"
+          },
+          "updated_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Last update timestamp"
+          },
+          "is_active": {
+            "type": "boolean",
+            "description": "Whether the record is active or soft-deleted"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code identifier"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "details": {
+            "type": "string",
+            "description": "Optional additional error details",
+            "nullable": true
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "description": "Standard error response object"
+      },
+      "ContentType": {
+        "type": "string",
+        "enum": [
+          "text",
+          "video",
+          "multi_image",
+          "image"
+        ]
+      },
+      "ContentItem": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "$ref": "#/components/schemas/Text"
+          },
+          "image": {
+            "$ref": "#/components/schemas/Image"
+          },
+          "video": {
+            "$ref": "#/components/schemas/Video"
+          },
+          "multiImage": {
+            "$ref": "#/components/schemas/MultiImage"
+          }
+        }
+      },
+      "BrandInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "BaseModel": {
+        "type": "object",
+        "required": [
+          "id",
+          "metadata"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier for the record"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          }
+        }
+      },
+      "ContentGenerationTemplateUpdate": {
+        "type": "object",
+        "properties": {
+          "brandId": {
+            "type": "string"
+          },
+          "templateInfo": {
+            "$ref": "#/components/schemas/TemplateInfo"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/TemplateSettings"
+          },
+          "deleted": {
+            "type": "boolean"
+          }
+        },
+        "description": "Payload for updating a ContentGenerationTemplateDocument. All fields are optional and may be provided for partial update.\n"
+      },
+      "ContentGenerationTemplateResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "brandId": {
+            "type": "string"
+          }
+        },
+        "description": "Minimal response schema for ContentGenerationTemplateDocument creation or deletion.\n"
+      },
+      "ContentGenerationTemplateGet": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContentGenerationTemplateDocument"
+          }
+        ],
+        "description": "Response schema for retrieving a ContentGenerationTemplateDocument by id or brandId.\n"
+      },
+      "ContentGenerationTemplateCreate": {
+        "type": "object",
+        "required": [
+          "brandId",
+          "templateInfo"
+        ],
+        "properties": {
+          "brandId": {
+            "type": "string"
+          },
+          "templateInfo": {
+            "$ref": "#/components/schemas/TemplateInfo"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/TemplateSettings"
+          }
+        },
+        "description": "Payload for creating a new ContentGenerationTemplateDocument. 'brandId' and 'templateInfo' are required.\n"
+      },
+      "BrandUpdate": {
+        "type": "object",
+        "properties": {
+          "brandInfo": {
+            "$ref": "#/components/schemas/BrandInfo"
+          },
+          "socialAccounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SocialAccountEntry"
+            }
+          }
+        },
+        "description": "Payload for updating a Brand. All fields are optional and may be provided for partial update.\n"
+      },
+      "BrandResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "description": "Minimal response schema for Brand creation or deletion.\n"
+      },
+      "BrandGet": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BrandDocument"
+          }
+        ],
+        "description": "Response schema for retrieving a Brand by id or user_id.\n"
+      },
+      "BrandCreate": {
+        "type": "object",
+        "required": [
+          "brandInfo"
+        ],
+        "properties": {
+          "brandInfo": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BrandInfo"
+              },
+              {
+                "required": [
+                  "name"
+                ]
+              }
+            ]
+          }
+        },
+        "description": "Payload for creating a new Brand. Only 'brandInfo.name' is required.\n"
+      }
+    },
+    "parameters": {
+      "pagination": {
+        "name": "pagination",
+        "in": "query",
+        "description": "Pagination and sorting options",
+        "required": false,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "offset": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            },
+            "sort_by": {
+              "type": "string",
+              "enum": [
+                "created_at",
+                "updated_at",
+                "name"
+              ],
+              "default": "created_at"
+            },
+            "sort_order": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "default": "desc"
+            }
+          }
+        }
+      },
+      "id": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": "resource identifier (uuid)"
+      },
+      "filter": {
+        "name": "filter",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "filter criteria in the format field:operator:value (e.g., name:contains:test)",
+        "example": "name:contains:acme"
+      },
+      "brandId": {
+        "name": "brand_id",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": "brand identifier (uuid)"
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Authentication required",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "code": "UNAUTHORIZED",
+              "message": "Valid API key required"
+            }
+          }
+        }
+      },
+      "RateLimitExceeded": {
+        "description": "Rate limit exceeded",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "code": "RATE_LIMIT_EXCEEDED",
+              "message": "Rate limit exceeded"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "code": "RESOURCE_NOT_FOUND",
+              "message": "The requested resource was not found"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Invalid request parameters",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "code": "INVALID_INPUT",
+              "message": "Invalid request parameters"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "description": "api key authentication for all endpoints",
+        "name": "x-api-key",
+        "in": "header",
+        "x-example": "your-api-key-here"
+      }
+    }
+  }
+}

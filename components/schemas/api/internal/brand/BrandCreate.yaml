@@ -3,6 +3,8 @@ required:
   - brandInfo
 properties:
   brandInfo:
-    $ref: "../../../common/base/BrandInfo.yaml"
+    allOf:
+      - $ref: "../../../common/base/BrandInfo.yaml"
+      - required: [name]
 description: >
-  Payload for creating a new Brand. Only 'brandInfo' is required.
+  Payload for creating a new Brand. Only 'brandInfo.name' is required.

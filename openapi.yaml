@@ -350,8 +350,6 @@ components:
       $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateResponse.yaml
     ContentGenerationTemplateGet:
       $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateGet.yaml
-    ContentGenerationTemplateDelete:
-      $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateDelete.yaml
     ContentGenerationTemplateCreate:
       $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateCreate.yaml
     BrandUpdate:
@@ -360,8 +358,6 @@ components:
       $ref: ./components/schemas/api/internal/brand/BrandResponse.yaml
     BrandGet:
       $ref: ./components/schemas/api/internal/brand/BrandGet.yaml
-    BrandDelete:
-      $ref: ./components/schemas/api/internal/brand/BrandDelete.yaml
     BrandCreate:
       $ref: ./components/schemas/api/internal/brand/BrandCreate.yaml
   parameters:
