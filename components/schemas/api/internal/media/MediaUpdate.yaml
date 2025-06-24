@@ -1,0 +1,14 @@
+allOf:
+  - $ref: "../../../documents/MediaDocument.yaml"
+  - type: object
+    properties:
+      brandId:
+        type: string
+      blobUrl:
+        type: string
+      mediaType:
+        type: string
+        enum: [image, video]
+      mediaMetadata:
+        $ref: "../../../common/media/MediaMetadata.yaml"
+    # All fields optional for PATCH/PUT
