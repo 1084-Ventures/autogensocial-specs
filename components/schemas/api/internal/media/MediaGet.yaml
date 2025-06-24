@@ -1,0 +1,4 @@
+allOf:
+  - $ref: "../../../documents/MediaDocument.yaml"
+description: >
+  Response schema for retrieving a MediaDocument by id or brandId.

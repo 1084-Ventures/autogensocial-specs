@@ -20,6 +20,255 @@
     }
   ],
   "paths": {
+    "/media": {
+      "get": {
+        "operationId": "listMedia",
+        "summary": "List media by brandId",
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of media for a brand",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MediaGet"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      },
+      "post": {
+        "operationId": "createMedia",
+        "summary": "Create a new media item",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MediaCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Media created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaGet"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      }
+    },
+    "/media/{id}": {
+      "get": {
+        "operationId": "getMediaById",
+        "summary": "Get a media item by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Media item details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaGet"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateMediaById",
+        "summary": "Update a media item by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MediaUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Media item updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaGet"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteMediaById",
+        "summary": "Delete a media item by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Media item deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      }
+    },
+    "/media/analyze": {
+      "post": {
+        "operationId": "analyzeMedia",
+        "summary": "Analyze a media file (image or video)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "imageBase64": {
+                    "type": "string",
+                    "description": "Base64-encoded image data"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Analysis results for the media file",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaAnalyze"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      }
+    },
     "/content-generation-templates": {
       "get": {
         "operationId": "listContentGenerationTemplates",
@@ -1147,6 +1396,132 @@
           },
           "metadata": {
             "$ref": "#/components/schemas/Metadata"
+          }
+        }
+      },
+      "MediaUpdate": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MediaDocument"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "brandId": {
+                "type": "string"
+              },
+              "blobUrl": {
+                "type": "string"
+              },
+              "mediaType": {
+                "type": "string",
+                "enum": [
+                  "image",
+                  "video"
+                ]
+              },
+              "mediaMetadata": {
+                "$ref": "#/components/schemas/MediaMetadata"
+              }
+            }
+          }
+        ]
+      },
+      "MediaGet": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MediaDocument"
+          }
+        ],
+        "description": "Response schema for retrieving a MediaDocument by id or brandId.\n"
+      },
+      "MediaCreate": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MediaDocument"
+          },
+          {
+            "type": "object",
+            "required": [
+              "brandId",
+              "blobUrl",
+              "mediaType",
+              "mediaMetadata"
+            ],
+            "properties": {
+              "brandId": {
+                "type": "string"
+              },
+              "blobUrl": {
+                "type": "string"
+              },
+              "mediaType": {
+                "type": "string",
+                "enum": [
+                  "image",
+                  "video"
+                ]
+              },
+              "mediaMetadata": {
+                "$ref": "#/components/schemas/MediaMetadata"
+              }
+            }
+          }
+        ]
+      },
+      "MediaAnalyze": {
+        "type": "object",
+        "properties": {
+          "suggestedName": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CognitiveTag"
+            }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CognitiveCategory"
+            }
+          },
+          "objects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CognitiveObject"
+            }
+          },
+          "caption": {
+            "$ref": "#/components/schemas/CognitiveCaption"
+          },
+          "denseCaptions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CognitiveDenseCaption"
+            }
+          },
+          "brands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CognitiveBrand"
+            }
+          },
+          "people": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CognitivePerson"
+            }
+          },
+          "ocrText": {
+            "type": "string"
+          },
+          "cognitiveData": {
+            "$ref": "#/components/schemas/CognitiveData"
           }
         }
       },

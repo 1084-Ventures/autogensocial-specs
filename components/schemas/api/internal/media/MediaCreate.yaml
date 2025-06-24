@@ -1,0 +1,19 @@
+allOf:
+  - $ref: "../../../documents/MediaDocument.yaml"
+  - type: object
+    required:
+      - brandId
+      - blobUrl
+      - mediaType
+      - mediaMetadata
+    properties:
+      brandId:
+        type: string
+      blobUrl:
+        type: string
+      mediaType:
+        type: string
+        enum: [image, video]
+      mediaMetadata:
+        $ref: "../../../common/media/MediaMetadata.yaml"
+    # id, createdAt, updatedAt are set by backend

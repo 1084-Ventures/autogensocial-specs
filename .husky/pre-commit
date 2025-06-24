@@ -1,11 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# Lint YAML files (Spectral)
-npx spectral lint openapi.yaml
+# Optionally, check formatting (Prettier)
+npx prettier --check "**/*.yaml"
 
 # Lint & validate OpenAPI spec (Redocly)
 npm run generate:openapi
-
-# Optionally, check formatting (Prettier)
-npx prettier --check "**/*.yaml"

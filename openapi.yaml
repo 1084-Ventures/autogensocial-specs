@@ -11,6 +11,161 @@ servers:
 security:
   - bearerAuth: []
 paths:
+  /media:
+    get:
+      operationId: listMedia
+      summary: List media by brandId
+      parameters:
+        - name: brand_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: ./components/parameters/pagination.yaml
+      responses:
+        '200':
+          description: List of media for a brand
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./components/schemas/api/internal/media/MediaGet.yaml
+        '400':
+          $ref: ./components/responses/BadRequest.yaml
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
+    post:
+      operationId: createMedia
+      summary: Create a new media item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ./components/schemas/api/internal/media/MediaCreate.yaml
+      responses:
+        '201':
+          description: Media created
+          content:
+            application/json:
+              schema:
+                $ref: ./components/schemas/api/internal/media/MediaGet.yaml
+        '400':
+          $ref: ./components/responses/BadRequest.yaml
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
+  /media/{id}:
+    get:
+      operationId: getMediaById
+      summary: Get a media item by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Media item details
+          content:
+            application/json:
+              schema:
+                $ref: ./components/schemas/api/internal/media/MediaGet.yaml
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '404':
+          $ref: ./components/responses/NotFound.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
+    put:
+      operationId: updateMediaById
+      summary: Update a media item by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ./components/schemas/api/internal/media/MediaUpdate.yaml
+      responses:
+        '200':
+          description: Media item updated
+          content:
+            application/json:
+              schema:
+                $ref: ./components/schemas/api/internal/media/MediaGet.yaml
+        '400':
+          $ref: ./components/responses/BadRequest.yaml
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '404':
+          $ref: ./components/responses/NotFound.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
+    delete:
+      operationId: deleteMediaById
+      summary: Delete a media item by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Media item deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  id:
+                    type: string
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '404':
+          $ref: ./components/responses/NotFound.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
+  /media/analyze:
+    post:
+      operationId: analyzeMedia
+      summary: Analyze a media file (image or video)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageBase64:
+                  type: string
+                  description: Base64-encoded image data
+      responses:
+        '200':
+          description: Analysis results for the media file
+          content:
+            application/json:
+              schema:
+                $ref: ./components/schemas/api/internal/media/MediaAnalyze.yaml
+        '400':
+          $ref: ./components/responses/BadRequest.yaml
+        '401':
+          $ref: ./components/responses/Unauthorized.yaml
+        '429':
+          $ref: ./components/responses/RateLimitExceeded.yaml
   /content-generation-templates:
     get:
       operationId: listContentGenerationTemplates
@@ -342,6 +497,14 @@ components:
       $ref: ./components/schemas/common/base/BrandInfo.yaml
     BaseModel:
       $ref: ./components/schemas/common/base/BaseModel.yaml
+    MediaUpdate:
+      $ref: ./components/schemas/api/internal/media/MediaUpdate.yaml
+    MediaGet:
+      $ref: ./components/schemas/api/internal/media/MediaGet.yaml
+    MediaCreate:
+      $ref: ./components/schemas/api/internal/media/MediaCreate.yaml
+    MediaAnalyze:
+      $ref: ./components/schemas/api/internal/media/MediaAnalyze.yaml
     ContentGenerationTemplateUpdate:
       $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateUpdate.yaml
     ContentGenerationTemplateResponse:
