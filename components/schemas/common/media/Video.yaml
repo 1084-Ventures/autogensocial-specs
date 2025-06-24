@@ -6,3 +6,42 @@ properties:
     type: string
   visualStyle:
     $ref: "../style/VisualStyle.yaml"
+  dimensions:
+    type: object
+    properties:
+      width:
+        type: integer
+        description: Video width in pixels
+      height:
+        type: integer
+        description: Video height in pixels
+      aspect_ratio:
+        type: string
+        description: Aspect ratio (e.g., "16:9", "1:1")
+  video_info:
+    type: object
+    properties:
+      duration:
+        type: number
+        description: Duration in seconds
+      frame_rate:
+        type: number
+        description: Frames per second
+      codec:
+        type: string
+        description: Video codec (e.g., "h264", "vp9")
+  audio_info:
+    type: object
+    properties:
+      audio_codec:
+        type: string
+        description: Audio codec (e.g., "aac", "opus")
+      channels:
+        type: integer
+        description: Number of audio channels (e.g., 2 for stereo)
+  resolution:
+    type: string
+    description: Video resolution (e.g., "1080p", "4K")
+  format:
+    type: string
+    description: Video file format (e.g., "mp4", "webm")
