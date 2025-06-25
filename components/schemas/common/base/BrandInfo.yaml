@@ -6,3 +6,6 @@ properties:
     type: string
   description:
     type: string
+  userId:
+    type: string
+    description: Unique identifier for the user who created the brand
