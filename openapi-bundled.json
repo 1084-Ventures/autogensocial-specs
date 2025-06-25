@@ -728,10 +728,7 @@
           {
             "type": "object",
             "properties": {
-              "userId": {
-                "type": "string"
-              },
-              "brand_info": {
+              "brandInfo": {
                 "$ref": "#/components/schemas/BrandInfo"
               },
               "socialAccounts": {
@@ -1460,6 +1457,10 @@
           },
           "description": {
             "type": "string"
+          },
+          "userId": {
+            "type": "string",
+            "description": "Unique identifier for the user who created the brand"
           }
         }
       },
@@ -1717,6 +1718,11 @@
               {
                 "required": [
                   "name"
+                ]
+              },
+              {
+                "required": [
+                  "userId"
                 ]
               }
             ]

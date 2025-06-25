@@ -1,4 +1,4 @@
-name: pagination
+name: Pagination
 in: query
 description: Pagination and sorting options
 required: false
@@ -14,11 +14,11 @@ schema:
       type: integer
       minimum: 0
       default: 0
-    sort_by:
+    sortBy:
       type: string
       enum: [created_at, updated_at, name]
       default: created_at
-    sort_order:
+    sortOrder:
       type: string
       enum: [asc, desc]
       default: desc

@@ -1,8 +1,8 @@
 type: object
 properties:
-  prompt_template:
+  promptTemplate:
     $ref: "./PromptTemplate.yaml"
-  visual_style:
+  visualStyle:
     $ref: "../style/VisualStyleObj.yaml"
   contentItem:
     $ref: "../base/ContentItem.yaml"

@@ -1,12 +1,12 @@
 type: object
 properties:
-  system_prompt:
+  systemPrompt:
     type: string
-  user_prompt:
+  userPrompt:
     type: string
   temperature:
     type: number
-  max_tokens:
+  maxTokens:
     type: integer
   model:
     type: string
