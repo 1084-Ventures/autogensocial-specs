@@ -466,7 +466,7 @@
         "operationId": "listBrandsByUserId",
         "parameters": [
           {
-            "name": "user_id",
+            "name": "userId",
             "in": "query",
             "required": true,
             "schema": {
@@ -728,6 +728,9 @@
           {
             "type": "object",
             "properties": {
+              "userId": {
+                "type": "string"
+              },
               "brandInfo": {
                 "$ref": "#/components/schemas/BrandInfo"
               },
@@ -744,10 +747,10 @@
       "TemplateSettings": {
         "type": "object",
         "properties": {
-          "prompt_template": {
+          "promptTemplate": {
             "$ref": "#/components/schemas/PromptTemplate"
           },
-          "visual_style": {
+          "visualStyle": {
             "$ref": "#/components/schemas/VisualStyleObj"
           },
           "contentItem": {
@@ -795,16 +798,16 @@
       "PromptTemplate": {
         "type": "object",
         "properties": {
-          "system_prompt": {
+          "systemPrompt": {
             "type": "string"
           },
-          "user_prompt": {
+          "userPrompt": {
             "type": "string"
           },
           "temperature": {
             "type": "number"
           },
-          "max_tokens": {
+          "maxTokens": {
             "type": "integer"
           },
           "model": {
@@ -832,13 +835,13 @@
       "VisualStyle": {
         "type": "object",
         "properties": {
-          "text_style": {
+          "textStyle": {
             "$ref": "#/components/schemas/TextStyle"
           },
-          "overlay_box": {
+          "overlayBox": {
             "$ref": "#/components/schemas/OverlayBox"
           },
-          "background_color": {
+          "backgroundColor": {
             "type": "string",
             "description": "Background color"
           }
@@ -867,7 +870,7 @@
           "transparency": {
             "type": "number"
           },
-          "vertical_location": {
+          "verticalLocation": {
             "type": "string",
             "enum": [
               "top",
@@ -875,7 +878,7 @@
               "bottom"
             ]
           },
-          "horizontal_location": {
+          "horizontalLocation": {
             "type": "string",
             "enum": [
               "left",
@@ -905,7 +908,7 @@
             "family": {
               "type": "string"
             },
-            "display_name": {
+            "displayName": {
               "type": "string"
             },
             "styles": {
@@ -920,7 +923,7 @@
                 "italic": {
                   "type": "string"
                 },
-                "bold_italic": {
+                "boldItalic": {
                   "type": "string"
                 }
               }
@@ -1037,18 +1040,18 @@
           },
           "timezone": {
             "type": "string",
-            "description": "Timezone string (e.g., 'America/New_York')"
+            "description": "Timezone string (e.g., 'America/NewYork')"
           }
         }
       },
       "Schedule": {
         "type": "object",
         "required": [
-          "days_of_week",
-          "time_slots"
+          "daysOfWeek",
+          "timeSlots"
         ],
         "properties": {
-          "days_of_week": {
+          "daysOfWeek": {
             "type": "array",
             "items": {
               "type": "string",
@@ -1063,7 +1066,7 @@
               ]
             }
           },
-          "time_slots": {
+          "timeSlots": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TimeSlot"
@@ -1074,10 +1077,10 @@
       "Video": {
         "type": "object",
         "properties": {
-          "media_type": {
+          "mediaType": {
             "$ref": "#/components/schemas/MediaType"
           },
-          "set_url": {
+          "setUrl": {
             "type": "string"
           },
           "visualStyle": {
@@ -1094,20 +1097,20 @@
                 "type": "integer",
                 "description": "Video height in pixels"
               },
-              "aspect_ratio": {
+              "aspectRatio": {
                 "type": "string",
                 "description": "Aspect ratio (e.g., \"16:9\", \"1:1\")"
               }
             }
           },
-          "video_info": {
+          "videoInfo": {
             "type": "object",
             "properties": {
               "duration": {
                 "type": "number",
                 "description": "Duration in seconds"
               },
-              "frame_rate": {
+              "frameRate": {
                 "type": "number",
                 "description": "Frames per second"
               },
@@ -1117,10 +1120,10 @@
               }
             }
           },
-          "audio_info": {
+          "audioInfo": {
             "type": "object",
             "properties": {
-              "audio_codec": {
+              "audioCodec": {
                 "type": "string",
                 "description": "Audio codec (e.g., \"aac\", \"opus\")"
               },
@@ -1149,10 +1152,10 @@
               "$ref": "#/components/schemas/Image"
             }
           },
-          "min_images": {
+          "minImages": {
             "type": "integer"
           },
-          "max_images": {
+          "maxImages": {
             "type": "integer"
           }
         }
@@ -1197,10 +1200,10 @@
       "Image": {
         "type": "object",
         "properties": {
-          "media_type": {
+          "mediaType": {
             "$ref": "#/components/schemas/MediaType"
           },
-          "set_url": {
+          "setUrl": {
             "type": "string"
           },
           "visualStyle": {
@@ -1217,7 +1220,7 @@
                 "type": "integer",
                 "description": "Image height in pixels"
               },
-              "aspect_ratio": {
+              "aspectRatio": {
                 "type": "string",
                 "description": "Aspect ratio (e.g., \"16:9\", \"1:1\")"
               }
@@ -1379,22 +1382,22 @@
       "Metadata": {
         "type": "object",
         "required": [
-          "created_date",
-          "updated_date",
-          "is_active"
+          "createdDate",
+          "updatedDate",
+          "isActive"
         ],
         "properties": {
-          "created_date": {
+          "createdDate": {
             "type": "string",
             "format": "date-time",
             "description": "Creation timestamp"
           },
-          "updated_date": {
+          "updatedDate": {
             "type": "string",
             "format": "date-time",
             "description": "Last update timestamp"
           },
-          "is_active": {
+          "isActive": {
             "type": "boolean",
             "description": "Whether the record is active or soft-deleted"
           }
@@ -1428,7 +1431,7 @@
         "enum": [
           "text",
           "video",
-          "multi_image",
+          "multi-image",
           "image"
         ]
       },
@@ -1452,15 +1455,14 @@
       "BrandInfo": {
         "type": "object",
         "properties": {
+          "userId": {
+            "type": "string"
+          },
           "name": {
             "type": "string"
           },
           "description": {
             "type": "string"
-          },
-          "userId": {
-            "type": "string",
-            "description": "Unique identifier for the user who created the brand"
           }
         }
       },
@@ -1702,7 +1704,7 @@
             "$ref": "#/components/schemas/BrandDocument"
           }
         ],
-        "description": "Response schema for retrieving a Brand by id or user_id.\n"
+        "description": "Response schema for retrieving a Brand by id or userId.\n"
       },
       "BrandCreate": {
         "type": "object",
@@ -1728,12 +1730,12 @@
             ]
           }
         },
-        "description": "Payload for creating a new Brand. Only 'brandInfo.name' is required.\n"
+        "description": "Payload for creating a new Brand. 'brandInfo.name' and 'brandInfo.userId' is required.\n"
       }
     },
     "parameters": {
-      "pagination": {
-        "name": "pagination",
+      "Pagination": {
+        "name": "Pagination",
         "in": "query",
         "description": "Pagination and sorting options",
         "required": false,
@@ -1751,16 +1753,55 @@
               "minimum": 0,
               "default": 0
             },
-            "sort_by": {
+            "sortBy": {
               "type": "string",
               "enum": [
-                "created_at",
-                "updated_at",
+                "createdAt",
+                "updatedAt",
                 "name"
               ],
-              "default": "created_at"
+              "default": "createdAt"
             },
-            "sort_order": {
+            "sortOrder": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "default": "desc"
+            }
+          }
+        }
+      },
+      "pagination": {
+        "name": "Pagination",
+        "in": "query",
+        "description": "Pagination and sorting options",
+        "required": false,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "offset": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            },
+            "sortBy": {
+              "type": "string",
+              "enum": [
+                "createdAt",
+                "updatedAt",
+                "name"
+              ],
+              "default": "createdAt"
+            },
+            "sortOrder": {
               "type": "string",
               "enum": [
                 "asc",
@@ -1836,7 +1877,7 @@
         "scheme": "bearer",
         "bearerFormat": "JWT"
       },
-      "ApiKeyAuth": {
+      "apiKeyAuth": {
         "type": "apiKey",
         "description": "api key authentication for all endpoints",
         "name": "x-api-key",
