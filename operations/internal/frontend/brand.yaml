@@ -3,7 +3,7 @@
     summary: List brands by userId
     operationId: listBrandsByUserId
     parameters:
-      - name: user_id
+      - name: userId
         in: query
         required: true
         schema:

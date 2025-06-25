@@ -4,7 +4,7 @@ properties:
     type: array
     items:
       $ref: "./Image.yaml"
-  min_images:
+  minImages:
     type: integer
-  max_images:
+  maxImages:
     type: integer

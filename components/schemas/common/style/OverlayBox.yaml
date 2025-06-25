@@ -4,9 +4,9 @@ properties:
     type: string
   transparency:
     type: number
-  vertical_location:
+  verticalLocation:
     type: string
     enum: [top, middle, bottom]
-  horizontal_location:
+  horizontalLocation:
     type: string
     enum: [left, middle, right]

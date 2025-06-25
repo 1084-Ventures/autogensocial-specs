@@ -1,8 +1,8 @@
 type: object
 properties:
-  media_type:
+  mediaType:
     $ref: "./MediaType.yaml"
-  set_url:
+  setUrl:
     type: string
   visualStyle:
     $ref: "../style/VisualStyle.yaml"
@@ -15,7 +15,7 @@ properties:
       height:
         type: integer
         description: Image height in pixels
-      aspect_ratio:
+      aspectRatio:
         type: string
         description: Aspect ratio (e.g., "16:9", "1:1")
   resolution:

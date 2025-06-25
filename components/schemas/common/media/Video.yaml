@@ -1,8 +1,8 @@
 type: object
 properties:
-  media_type:
+  mediaType:
     $ref: "./MediaType.yaml"
-  set_url:
+  setUrl:
     type: string
   visualStyle:
     $ref: "../style/VisualStyle.yaml"
@@ -15,25 +15,25 @@ properties:
       height:
         type: integer
         description: Video height in pixels
-      aspect_ratio:
+      aspectRatio:
         type: string
         description: Aspect ratio (e.g., "16:9", "1:1")
-  video_info:
+  videoInfo:
     type: object
     properties:
       duration:
         type: number
         description: Duration in seconds
-      frame_rate:
+      frameRate:
         type: number
         description: Frames per second
       codec:
         type: string
         description: Video codec (e.g., "h264", "vp9")
-  audio_info:
+  audioInfo:
     type: object
     properties:
-      audio_codec:
+      audioCodec:
         type: string
         description: Audio codec (e.g., "aac", "opus")
       channels:
