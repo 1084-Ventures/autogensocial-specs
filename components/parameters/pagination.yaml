@@ -16,8 +16,8 @@ schema:
       default: 0
     sortBy:
       type: string
-      enum: [created_at, updated_at, name]
-      default: created_at
+      enum: [createdAt, updatedAt, name]
+      default: createdAt
     sortOrder:
       type: string
       enum: [asc, desc]

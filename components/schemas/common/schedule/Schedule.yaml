@@ -1,7 +1,7 @@
 type: object
 required:
-  - days_of_week
-  - time_slots
+  - daysOfWeek
+  - timeSlots
 properties:
   daysOfWeek:
     type: array
