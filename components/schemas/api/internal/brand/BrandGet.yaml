@@ -1,4 +1,4 @@
 allOf:
   - $ref: "../../../documents/BrandDocument.yaml"
 description: >
-  Response schema for retrieving a Brand by id or user_id.
+  Response schema for retrieving a Brand by id or userId.

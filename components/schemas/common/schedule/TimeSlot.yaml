@@ -16,4 +16,4 @@ properties:
     description: Minute
   timezone:
     type: string
-    description: Timezone string (e.g., 'America/New_York')
+    description: Timezone string (e.g., 'America/NewYork')

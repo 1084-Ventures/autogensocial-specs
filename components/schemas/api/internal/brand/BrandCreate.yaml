@@ -6,5 +6,6 @@ properties:
     allOf:
       - $ref: "../../../common/base/BrandInfo.yaml"
       - required: [name]
+      - required: [userId]
 description: >
-  Payload for creating a new Brand. Only 'brandInfo.name' is required.
+  Payload for creating a new Brand. 'brandInfo.name' and 'brandInfo.userId' is required.

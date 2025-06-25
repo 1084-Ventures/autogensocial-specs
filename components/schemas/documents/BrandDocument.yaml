@@ -4,7 +4,7 @@ allOf:
     properties:
       userId:
         type: string
-      brand_info:
+      brandInfo:
         $ref: "../common/base/BrandInfo.yaml"
       socialAccounts:
         type: array
