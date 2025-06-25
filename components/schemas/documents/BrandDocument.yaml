@@ -2,6 +2,8 @@ allOf:
   - $ref: "../common/base/BaseModel.yaml"
   - type: object
     properties:
+      userId:
+        type: string
       brandInfo:
         $ref: "../common/base/BrandInfo.yaml"
       socialAccounts:

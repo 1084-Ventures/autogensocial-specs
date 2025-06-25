@@ -290,7 +290,7 @@ paths:
       summary: List brands by userId
       operationId: listBrandsByUserId
       parameters:
-        - name: user_id
+        - name: userId
           in: query
           required: true
           schema:
@@ -522,8 +522,8 @@ components:
     BrandCreate:
       $ref: ./components/schemas/api/internal/brand/BrandCreate.yaml
   parameters:
-    pagination:
-      $ref: ./components/parameters/pagination.yaml
+    Pagination:
+      $ref: ./components/parameters/Pagination.yaml
   responses:
     Unauthorized:
       $ref: ./components/responses/Unauthorized.yaml
@@ -536,5 +536,5 @@ components:
   securitySchemes:
     bearerAuth:
       $ref: ./components/securitySchemes/bearerAuth.yaml
-    ApiKeyAuth:
-      $ref: ./components/securitySchemes/ApiKeyAuth.yaml
+    apiKeyAuth:
+      $ref: ./components/securitySchemes/apiKeyAuth.yaml

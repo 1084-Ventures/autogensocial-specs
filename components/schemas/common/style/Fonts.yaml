@@ -5,7 +5,7 @@ items:
   properties:
     family:
       type: string
-    display_name:
+    displayName:
       type: string
     styles:
       type: object
@@ -16,5 +16,5 @@ items:
           type: string
         italic:
           type: string
-        bold_italic:
+        boldItalic:
           type: string
