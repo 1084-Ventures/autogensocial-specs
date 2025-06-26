@@ -522,8 +522,8 @@ components:
     BrandCreate:
       $ref: ./components/schemas/api/internal/brand/BrandCreate.yaml
   parameters:
-    Pagination:
-      $ref: ./components/parameters/Pagination.yaml
+    pagination:
+      $ref: ./components/parameters/pagination.yaml
   responses:
     Unauthorized:
       $ref: ./components/responses/Unauthorized.yaml
