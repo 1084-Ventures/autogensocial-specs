@@ -1455,9 +1455,6 @@
       "BrandInfo": {
         "type": "object",
         "properties": {
-          "userId": {
-            "type": "string"
-          },
           "name": {
             "type": "string"
           },
@@ -1721,11 +1718,6 @@
                 "required": [
                   "name"
                 ]
-              },
-              {
-                "required": [
-                  "userId"
-                ]
               }
             ]
           }
@@ -1734,45 +1726,6 @@
       }
     },
     "parameters": {
-      "Pagination": {
-        "name": "Pagination",
-        "in": "query",
-        "description": "Pagination and sorting options",
-        "required": false,
-        "schema": {
-          "type": "object",
-          "properties": {
-            "limit": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 100,
-              "default": 20
-            },
-            "offset": {
-              "type": "integer",
-              "minimum": 0,
-              "default": 0
-            },
-            "sortBy": {
-              "type": "string",
-              "enum": [
-                "createdAt",
-                "updatedAt",
-                "name"
-              ],
-              "default": "createdAt"
-            },
-            "sortOrder": {
-              "type": "string",
-              "enum": [
-                "asc",
-                "desc"
-              ],
-              "default": "desc"
-            }
-          }
-        }
-      },
       "pagination": {
         "name": "Pagination",
         "in": "query",
