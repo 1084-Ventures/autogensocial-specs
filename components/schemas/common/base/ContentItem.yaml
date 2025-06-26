@@ -1,10 +1,14 @@
 type: object
 properties:
-  text:
-    $ref: "./Text.yaml"
-  image:
-    $ref: "../media/Image.yaml"
-  video:
-    $ref: "../media/Video.yaml"
-  multiImage:
-    $ref: "../media/MultiImage.yaml"
+  oneOf:
+  - $ref: "./Text.yaml"
+  - $ref: "../media/Image.yaml"
+  - $ref: "../media/Video.yaml"
+  - $ref: "../media/MultiImage.yaml"
+discriminator:
+  propertyName: type
+  mapping:
+    text: "./Text.yaml"
+    image: "../media/Image.yaml"
+    video: "../media/Video.yaml"
+    multiImage: "../media/MultiImage.yaml"
