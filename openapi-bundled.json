@@ -1438,6 +1438,15 @@
       "ContentItem": {
         "type": "object",
         "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "image",
+              "video",
+              "multiImage"
+            ]
+          },
           "text": {
             "$ref": "#/components/schemas/Text"
           },
@@ -1449,6 +1458,29 @@
           },
           "multiImage": {
             "$ref": "#/components/schemas/MultiImage"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Text"
+          },
+          {
+            "$ref": "#/components/schemas/Image"
+          },
+          {
+            "$ref": "#/components/schemas/Video"
+          },
+          {
+            "$ref": "#/components/schemas/MultiImage"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "text": "#/components/schemas/Text",
+            "image": "#/components/schemas/Image",
+            "video": "#/components/schemas/Video",
+            "multiImage": "#/components/schemas/MultiImage"
           }
         }
       },
