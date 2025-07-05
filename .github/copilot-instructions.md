@@ -49,7 +49,8 @@ This project is **spec-driven**: all API contracts, models, and types are genera
   - Validate payloads against generated types.
 - **Material Design (Frontend):**  
   - Use Angular Material components for all UI.  
-  - Minimize custom CSS; use Material theming and layout utilities.
+  - Always import and reference your `MaterialModule` (typically `material.module.ts`) for all Material components.  
+  - Use Angular's pre-built Material themes and global styles as much as possible; avoid custom theming unless necessary.  
 
 ---
 
