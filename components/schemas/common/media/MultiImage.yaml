@@ -1,9 +1,7 @@
 type: object
 properties:
-  images:
-    type: array
-    items:
-      $ref: "./Image.yaml"
+  image:
+    $ref: "./Image.yaml"
   minImages:
     type: integer
   maxImages:
