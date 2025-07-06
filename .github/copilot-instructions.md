@@ -63,13 +63,15 @@ This project is **spec-driven**: all API contracts, models, and types are genera
 ---
 
 
-## Angular 16+ Architecture & Build Guidelines
+
+## Angular 19+ Architecture & Build Guidelines
 
 - **Project Structure:**
-  - Use the Angular CLI (`ng`) to generate and manage all Angular projects, modules, components, and services.
-  - Organize code by feature modules (feature-first), not by type (e.g., avoid `components/`, `services/` folders at the root).
+  - Use the Angular CLI (`ng`) for all project, module, component, and service generation and management.
+  - Organize code by feature modules (feature-first), not by type (avoid root-level `components/`, `services/` folders).
   - Place shared modules, components, and utilities in a `shared/` folder.
   - Use a `core/` module for singleton services, interceptors, and app-wide configuration.
+  - Prefer standalone components for all new code; use NgModules only when required for legacy compatibility.
 
 - **Material Design:**
   - Use Angular Material for all UI components.
@@ -77,7 +79,7 @@ This project is **spec-driven**: all API contracts, models, and types are genera
   - Use pre-built Angular Material themes and global styles; avoid custom theming unless necessary.
 
 - **State Management:**
-  - Use Angular signals, RxJS, or a state management library (e.g., NgRx, NGXS) for complex state.
+  - Use Angular signals (default for new state), RxJS, or a state management library (e.g., NgRx, NGXS) for complex/global state.
   - Prefer signals and RxJS for local/component state; use NgRx/NGXS for global or cross-feature state.
 
 - **API Integration:**
@@ -86,13 +88,18 @@ This project is **spec-driven**: all API contracts, models, and types are genera
   - Use Angular services for all API calls; keep components free of direct HTTP logic.
 
 - **Routing:**
-  - Use Angular Router with lazy-loaded feature modules.
-  - Define routes in a centralized `app-routing.module.ts`.
+  - Use Angular Router with lazy-loaded feature modules and standalone route definitions.
+  - Define routes in a centralized `app-routing.module.ts` or as standalone route trees.
 
 - **Strict Typing & Modern Syntax:**
   - Enable strict mode in `tsconfig.json`.
-  - Use standalone components and signals where possible (Angular 16+ best practices).
+  - Use standalone components and signals as the default for new code (Angular 17+ best practice, required in Angular 19+).
   - Prefer `async/await` and modern ES syntax.
+  - Use the new control flow syntax (`@if`, `@for`, etc.) instead of `*ngIf`/`*ngFor` for new code.
+
+- **SSR & Hydration:**
+  - Use Angular's built-in SSR and hydration APIs for server-side rendering if required.
+  - Prefer the latest SSR setup and hydration features available in Angular 19.
 
 - **Testing:**
   - Write unit tests for all components, services, and pipes using Jasmine and TestBed.
