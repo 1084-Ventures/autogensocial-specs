@@ -789,9 +789,6 @@
             "items": {
               "type": "string"
             }
-          },
-          "description": {
-            "type": "string"
           }
         }
       },
@@ -1146,11 +1143,8 @@
       "MultiImage": {
         "type": "object",
         "properties": {
-          "images": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Image"
-            }
+          "image": {
+            "$ref": "#/components/schemas/Image"
           },
           "minImages": {
             "type": "integer"
