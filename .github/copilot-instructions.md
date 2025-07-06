@@ -62,6 +62,53 @@ This project is **spec-driven**: all API contracts, models, and types are genera
 
 ---
 
+
+## Angular 16+ Architecture & Build Guidelines
+
+- **Project Structure:**
+  - Use the Angular CLI (`ng`) to generate and manage all Angular projects, modules, components, and services.
+  - Organize code by feature modules (feature-first), not by type (e.g., avoid `components/`, `services/` folders at the root).
+  - Place shared modules, components, and utilities in a `shared/` folder.
+  - Use a `core/` module for singleton services, interceptors, and app-wide configuration.
+
+- **Material Design:**
+  - Use Angular Material for all UI components.
+  - Import and reference a single `MaterialModule` that re-exports all used Material components.
+  - Use pre-built Angular Material themes and global styles; avoid custom theming unless necessary.
+
+- **State Management:**
+  - Use Angular signals, RxJS, or a state management library (e.g., NgRx, NGXS) for complex state.
+  - Prefer signals and RxJS for local/component state; use NgRx/NGXS for global or cross-feature state.
+
+- **API Integration:**
+  - Use Angular's `HttpClient` for all HTTP requests.
+  - Define all API models and types from the generated OpenAPI models (`src/app/generated/models.ts`).
+  - Use Angular services for all API calls; keep components free of direct HTTP logic.
+
+- **Routing:**
+  - Use Angular Router with lazy-loaded feature modules.
+  - Define routes in a centralized `app-routing.module.ts`.
+
+- **Strict Typing & Modern Syntax:**
+  - Enable strict mode in `tsconfig.json`.
+  - Use standalone components and signals where possible (Angular 16+ best practices).
+  - Prefer `async/await` and modern ES syntax.
+
+- **Testing:**
+  - Write unit tests for all components, services, and pipes using Jasmine and TestBed.
+  - Use generated types in mocks and assertions.
+  - Test locally before pushing.
+
+- **Build & Lint:**
+  - Use Angular CLI commands for build (`ng build`), serve (`ng serve`), and test (`ng test`).
+  - Lint with `ng lint` and fix issues before commit.
+
+- **CI/CD:**
+  - Use GitHub Actions for CI/CD.
+  - Validate, lint, and test in CI before merging.
+
+---
+
 ## TypeScript & OpenAPI Naming Conventions
 
 - Use `PascalCase` for types, interfaces, and classes.  
