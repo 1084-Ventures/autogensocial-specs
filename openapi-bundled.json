@@ -848,7 +848,12 @@
             "$ref": "#/components/schemas/Outline"
           },
           "alignment": {
-            "$ref": "#/components/schemas/Alignment"
+            "type": "string",
+            "enum": [
+              "left",
+              "center",
+              "right"
+            ]
           }
         }
       },
@@ -886,7 +891,7 @@
             "type": "string"
           },
           "width": {
-            "type": "string"
+            "type": "integer"
           }
         }
       },
@@ -1065,7 +1070,7 @@
           }
         }
       },
-      "Video": {
+      "VideoTemplate": {
         "type": "object",
         "properties": {
           "mediaType": {
@@ -1082,40 +1087,6 @@
           },
           "aspectRatio": {
             "$ref": "#/components/schemas/AspectRatio"
-          },
-          "videoInfo": {
-            "type": "object",
-            "properties": {
-              "duration": {
-                "type": "number",
-                "description": "Duration in seconds"
-              },
-              "frameRate": {
-                "type": "number",
-                "description": "Frames per second"
-              },
-              "codec": {
-                "type": "string",
-                "description": "Video codec (e.g., \"h264\", \"vp9\")"
-              }
-            }
-          },
-          "audioInfo": {
-            "type": "object",
-            "properties": {
-              "audioCodec": {
-                "type": "string",
-                "description": "Audio codec (e.g., \"aac\", \"opus\")"
-              },
-              "channels": {
-                "type": "integer",
-                "description": "Number of audio channels (e.g., 2 for stereo)"
-              }
-            }
-          },
-          "resolution": {
-            "type": "string",
-            "description": "Video resolution (e.g., \"1080p\", \"4K\")"
           },
           "format": {
             "type": "string",
@@ -1137,30 +1108,16 @@
                 "setUrl"
               ]
             }
-          },
-          {
-            "if": {
-              "properties": {
-                "mediaType": {
-                  "const": "color"
-                }
-              }
-            },
-            "then": {
-              "required": [
-                "visualStyleObj"
-              ]
-            }
           }
         ]
       },
-      "MultiImage": {
+      "MultiImageTemplate": {
         "type": "object",
         "properties": {
-          "images": {
+          "imageTemplates": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Image"
+              "$ref": "#/components/schemas/ImageTemplate"
             },
             "description": "Array of image objects"
           },
@@ -1207,7 +1164,7 @@
           }
         }
       },
-      "Image": {
+      "ImageTemplate": {
         "type": "object",
         "properties": {
           "mediaType": {
@@ -1222,31 +1179,11 @@
           "aspectRatio": {
             "$ref": "#/components/schemas/AspectRatio"
           },
-          "resolution": {
-            "type": "string",
-            "description": "Image resolution (e.g., \"300dpi\")"
-          },
           "format": {
             "type": "string",
             "description": "Image file format (e.g., \"jpeg\", \"png\")"
           }
-        },
-        "allOf": [
-          {
-            "if": {
-              "properties": {
-                "mediaType": {
-                  "const": "color"
-                }
-              }
-            },
-            "then": {
-              "required": [
-                "visualStyleObj"
-              ]
-            }
-          }
-        ]
+        }
       },
       "AspectRatio": {
         "type": "string",
@@ -1465,14 +1402,14 @@
           "text": {
             "$ref": "#/components/schemas/Text"
           },
-          "image": {
-            "$ref": "#/components/schemas/Image"
+          "imageTemplate": {
+            "$ref": "#/components/schemas/ImageTemplate"
           },
-          "video": {
-            "$ref": "#/components/schemas/Video"
+          "videoTemplate": {
+            "$ref": "#/components/schemas/VideoTemplate"
           },
-          "multiImage": {
-            "$ref": "#/components/schemas/MultiImage"
+          "multiImageTemplate": {
+            "$ref": "#/components/schemas/MultiImageTemplate"
           }
         },
         "oneOf": [
@@ -1480,22 +1417,22 @@
             "$ref": "#/components/schemas/Text"
           },
           {
-            "$ref": "#/components/schemas/Image"
+            "$ref": "#/components/schemas/ImageTemplate"
           },
           {
-            "$ref": "#/components/schemas/Video"
+            "$ref": "#/components/schemas/VideoTemplate"
           },
           {
-            "$ref": "#/components/schemas/MultiImage"
+            "$ref": "#/components/schemas/MultiImageTemplate"
           }
         ],
         "discriminator": {
           "propertyName": "contentType",
           "mapping": {
             "text": "#/components/schemas/Text",
-            "image": "#/components/schemas/Image",
-            "video": "#/components/schemas/Video",
-            "multi-image": "#/components/schemas/MultiImage"
+            "image": "#/components/schemas/ImageTemplate",
+            "video": "#/components/schemas/VideoTemplate",
+            "multi-image": "#/components/schemas/MultiImageTemplate"
           }
         }
       },
@@ -1666,9 +1603,6 @@
           },
           "settings": {
             "$ref": "#/components/schemas/TemplateSettings"
-          },
-          "deleted": {
-            "type": "boolean"
           }
         },
         "description": "Payload for updating a ContentGenerationTemplateDocument. All fields are optional and may be provided for partial update.\n"

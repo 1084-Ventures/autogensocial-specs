@@ -3,4 +3,4 @@ properties:
   color:
     type: string
   width:
-    type: string
+    type: integer

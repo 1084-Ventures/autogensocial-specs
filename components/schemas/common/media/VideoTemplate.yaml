@@ -1,0 +1,24 @@
+type: object
+properties:
+  mediaType:
+    $ref: "./MediaType.yaml"
+  setUrl:
+    type:
+      - string
+      - 'null'
+  visualStyleObj:
+    $ref: "../style/VisualStyleObj.yaml"
+  aspectRatio:
+    $ref: "./AspectRatio.yaml"
+  format:
+    type: string
+    description: Video file format (e.g., "mp4", "webm")
+required: []
+allOf:
+  - if:
+      properties:
+        mediaType:
+          const: set
+    then:
+      required:
+        - setUrl
