@@ -7,9 +7,10 @@ properties:
     type: string
     description: Human-readable error message
   details:
-    type: string
+    type:
+      - string
+      - 'null'
     description: Optional additional error details
-    nullable: true
 required:
   - code
   - message

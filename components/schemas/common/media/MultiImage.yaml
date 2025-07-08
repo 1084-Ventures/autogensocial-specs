@@ -1,8 +1,10 @@
 type: object
 properties:
-  image:
-    $ref: "./Image.yaml"
-  minImages:
+  images:
+    type: array
+    items:
+      $ref: "./Image.yaml"
+    description: Array of image objects
+  numImages:
     type: integer
-  maxImages:
-    type: integer
+    description: The exact number of images required

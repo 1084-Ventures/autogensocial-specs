@@ -4,8 +4,6 @@ properties:
     type: string
   description:
     type: string
-  contentType:
-    $ref: "../base/ContentType.yaml"
   socialAccounts:
     type: array
     items:

@@ -1,6 +1,7 @@
 # Copilot Agent Coding & Contribution Guidelines
 
 This project is **spec-driven**: all API contracts, models, and types are generated from the canonical OpenAPI spec (`specs/openapi-bundled.json`).  
+**OpenAPI 3.1.0 is the required spec version.**
 **Do not hand-write models or types that duplicate or diverge from the generated ones.**
 
 ---
@@ -54,10 +55,12 @@ This project is **spec-driven**: all API contracts, models, and types are genera
 
 ---
 
-## OpenAPI Spec Update Policy
+
+## OpenAPI 3.1.0 Spec Update Policy
 
 - **Do NOT edit `openapi.yaml` or `openapi-bundled.json` directly.**  
 - Make all API changes in `specs/components/` or `specs/operations/` and then regenerate.  
+- The canonical spec version is `openapi: 3.1.0` (JSON Schema compatibility, if/then/else supported).
 - This ensures maintainability and clean version control for API changes.
 
 ---
@@ -172,18 +175,21 @@ This project is **spec-driven**: all API contracts, models, and types are genera
 
 ---
 
-## How to Update the Spec
+
+## How to Update the Spec (OpenAPI 3.1.0)
 
 1. Edit/add files in `specs/components/` or `specs/operations/`.  
 2. Run:
    ```bash
    npm run generate:openapi
    ```
+   - This will generate `openapi.yaml` with `openapi: 3.1.0` as the version.
 3. Regenerate models:
    ```bash
    npm run generate:models:all
    ```
 4. Refactor code to use new/updated types.
+5. Ensure all tooling (Redocly CLI, code generators, validators, etc.) is updated to support OpenAPI 3.1.0.
 
 ---
 

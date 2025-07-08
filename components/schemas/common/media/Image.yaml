@@ -4,23 +4,21 @@ properties:
     $ref: "./MediaType.yaml"
   setUrl:
     type: string
-  visualStyle:
-    $ref: "../style/VisualStyle.yaml"
-  dimensions:
-    type: object
-    properties:
-      width:
-        type: integer
-        description: Image width in pixels
-      height:
-        type: integer
-        description: Image height in pixels
-      aspectRatio:
-        type: string
-        description: Aspect ratio (e.g., "16:9", "1:1")
+  visualStyleObj:
+    $ref: "../style/VisualStyleObj.yaml"
+  aspectRatio:
+    $ref: "./AspectRatio.yaml"
   resolution:
     type: string
     description: Image resolution (e.g., "300dpi")
   format:
     type: string
     description: Image file format (e.g., "jpeg", "png")
+allOf:
+  - if:
+      properties:
+        mediaType:
+          const: color
+    then:
+      required:
+        - visualStyleObj

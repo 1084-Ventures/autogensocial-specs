@@ -1,0 +1,7 @@
+type: string
+enum:
+  - square
+  - portrait
+  - landscape
+  - story
+description: Aspect ratio (e.g., "square", "portrait", "landscape", "story")

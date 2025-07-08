@@ -8,22 +8,29 @@
     "api:validate": "redocly lint --extends recommended-strict openapi.yaml",
     "gen:diagrams": "node scripts/gen-diagrams.js",
     "prepack": "npm run api:bundle && npm run gen:diagrams",
-    "generate:openapi": "node scripts/gen-openapi.js && npm run api:lint && npm run api:validate && redocly bundle openapi.yaml -o openapi-bundled.json"
+    "generate:openapi": "node scripts/gen-openapi.js && npm run api:lint && npm run api:validate && redocly bundle openapi.yaml -o openapi-bundled.json && swagger-cli validate openapi-bundled.json"
   },
   "license": "MIT",
   "dependencies": {
-    "js-yaml": "^4.1.0",
-    "glob": "^10.3.10"
+    "js-yaml": "^4.1.0"
   },
   "devDependencies": {
+    "@redocly/cli": "^1.34.4",
     "@stoplight/spectral-cli": "^6.x",
-    "@redocly/cli": "^1.x",
-    "openapi-mermaid": "^1.x",
-    "husky": "^8.x",
-    "lint-staged": "^14.x"
+    "glob": "^11.0.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
+    "openapi-mermaid": "^3.226.1",
+    "prettier": "^3.0.0",
+    "swagger-cli": "^4.0.4"
   },
   "lint-staged": {
-    "*.yaml": ["npm run api:lint", "prettier --write"],
-    "*.md": ["prettier --write"]
+    "*.yaml": [
+      "prettier --write",
+      "npm run generate:openapi"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
   }
 }

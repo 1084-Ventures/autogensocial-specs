@@ -1,12 +1,8 @@
 type: object
 properties:
-  type:
+  contentType:
     type: string
-    enum:
-      - text
-      - image
-      - video
-      - multiImage
+    enum: [text, image, multi-image, video]
   text:
     $ref: "./Text.yaml"
   image:
@@ -21,9 +17,9 @@ oneOf:
   - $ref: "../media/Video.yaml"
   - $ref: "../media/MultiImage.yaml"
 discriminator:
-  propertyName: type
+  propertyName: contentType
   mapping:
     text: "./Text.yaml"
     image: "../media/Image.yaml"
     video: "../media/Video.yaml"
-    multiImage: "../media/MultiImage.yaml"
+    multi-image: "../media/MultiImage.yaml"

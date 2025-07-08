@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.3",
+  "openapi": "3.1.0",
   "info": {
     "title": "AutogenSocial API",
     "version": "1.0.0",
@@ -750,9 +750,6 @@
           "promptTemplate": {
             "$ref": "#/components/schemas/PromptTemplate"
           },
-          "visualStyle": {
-            "$ref": "#/components/schemas/VisualStyleObj"
-          },
           "contentItem": {
             "$ref": "#/components/schemas/ContentItem"
           }
@@ -766,9 +763,6 @@
           },
           "description": {
             "type": "string"
-          },
-          "contentType": {
-            "$ref": "#/components/schemas/ContentType"
           },
           "socialAccounts": {
             "type": "array",
@@ -840,7 +834,7 @@
           },
           "backgroundColor": {
             "type": "string",
-            "description": "Background color"
+            "description": "Background color. Only relevant when the parent object's mediaType is \"color\".\nThis property is required if mediaType is \"color\" in the parent Image or Video object, otherwise it can be omitted.\n"
           }
         }
       },
@@ -1010,7 +1004,7 @@
         "enum": [
           "instagram",
           "facebook",
-          "twitter",
+          "x",
           "youtube",
           "tiktok"
         ]
@@ -1078,27 +1072,16 @@
             "$ref": "#/components/schemas/MediaType"
           },
           "setUrl": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
-          "visualStyle": {
-            "$ref": "#/components/schemas/VisualStyle"
+          "visualStyleObj": {
+            "$ref": "#/components/schemas/VisualStyleObj"
           },
-          "dimensions": {
-            "type": "object",
-            "properties": {
-              "width": {
-                "type": "integer",
-                "description": "Video width in pixels"
-              },
-              "height": {
-                "type": "integer",
-                "description": "Video height in pixels"
-              },
-              "aspectRatio": {
-                "type": "string",
-                "description": "Aspect ratio (e.g., \"16:9\", \"1:1\")"
-              }
-            }
+          "aspectRatio": {
+            "$ref": "#/components/schemas/AspectRatio"
           },
           "videoInfo": {
             "type": "object",
@@ -1138,19 +1121,52 @@
             "type": "string",
             "description": "Video file format (e.g., \"mp4\", \"webm\")"
           }
-        }
+        },
+        "required": [],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "mediaType": {
+                  "const": "set"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "setUrl"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "mediaType": {
+                  "const": "color"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "visualStyleObj"
+              ]
+            }
+          }
+        ]
       },
       "MultiImage": {
         "type": "object",
         "properties": {
-          "image": {
-            "$ref": "#/components/schemas/Image"
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Image"
+            },
+            "description": "Array of image objects"
           },
-          "minImages": {
-            "type": "integer"
-          },
-          "maxImages": {
-            "type": "integer"
+          "numImages": {
+            "type": "integer",
+            "description": "The exact number of images required"
           }
         }
       },
@@ -1200,25 +1216,11 @@
           "setUrl": {
             "type": "string"
           },
-          "visualStyle": {
-            "$ref": "#/components/schemas/VisualStyle"
+          "visualStyleObj": {
+            "$ref": "#/components/schemas/VisualStyleObj"
           },
-          "dimensions": {
-            "type": "object",
-            "properties": {
-              "width": {
-                "type": "integer",
-                "description": "Image width in pixels"
-              },
-              "height": {
-                "type": "integer",
-                "description": "Image height in pixels"
-              },
-              "aspectRatio": {
-                "type": "string",
-                "description": "Aspect ratio (e.g., \"16:9\", \"1:1\")"
-              }
-            }
+          "aspectRatio": {
+            "$ref": "#/components/schemas/AspectRatio"
           },
           "resolution": {
             "type": "string",
@@ -1228,7 +1230,33 @@
             "type": "string",
             "description": "Image file format (e.g., \"jpeg\", \"png\")"
           }
-        }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "mediaType": {
+                  "const": "color"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "visualStyleObj"
+              ]
+            }
+          }
+        ]
+      },
+      "AspectRatio": {
+        "type": "string",
+        "enum": [
+          "square",
+          "portrait",
+          "landscape",
+          "story"
+        ],
+        "description": "Aspect ratio (e.g., \"square\", \"portrait\", \"landscape\", \"story\")"
       },
       "Rectangle": {
         "type": "object",
@@ -1409,9 +1437,11 @@
             "description": "Human-readable error message"
           },
           "details": {
-            "type": "string",
-            "description": "Optional additional error details",
-            "nullable": true
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Optional additional error details"
           }
         },
         "required": [
@@ -1420,25 +1450,16 @@
         ],
         "description": "Standard error response object"
       },
-      "ContentType": {
-        "type": "string",
-        "enum": [
-          "text",
-          "video",
-          "multi-image",
-          "image"
-        ]
-      },
       "ContentItem": {
         "type": "object",
         "properties": {
-          "type": {
+          "contentType": {
             "type": "string",
             "enum": [
               "text",
               "image",
-              "video",
-              "multiImage"
+              "multi-image",
+              "video"
             ]
           },
           "text": {
@@ -1469,12 +1490,12 @@
           }
         ],
         "discriminator": {
-          "propertyName": "type",
+          "propertyName": "contentType",
           "mapping": {
             "text": "#/components/schemas/Text",
             "image": "#/components/schemas/Image",
             "video": "#/components/schemas/Video",
-            "multiImage": "#/components/schemas/MultiImage"
+            "multi-image": "#/components/schemas/MultiImage"
           }
         }
       },

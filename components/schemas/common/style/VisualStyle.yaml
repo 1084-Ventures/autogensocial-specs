@@ -6,4 +6,6 @@ properties:
     $ref: "./OverlayBox.yaml"
   backgroundColor:
     type: string
-    description: Background color
+    description: |
+      Background color. Only relevant when the parent object's mediaType is "color".
+      This property is required if mediaType is "color" in the parent Image or Video object, otherwise it can be omitted.
