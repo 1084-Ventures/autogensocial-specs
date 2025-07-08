@@ -1,8 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# Optionally, check formatting (Prettier)
-npx prettier --check "**/*.yaml"
-
-# Lint & validate OpenAPI spec (Redocly)
-npm run generate:openapi
+npx lint-staged

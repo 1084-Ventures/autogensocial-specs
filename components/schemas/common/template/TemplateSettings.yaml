@@ -2,7 +2,5 @@ type: object
 properties:
   promptTemplate:
     $ref: "./PromptTemplate.yaml"
-  visualStyle:
-    $ref: "../style/VisualStyleObj.yaml"
   contentItem:
     $ref: "../base/ContentItem.yaml"

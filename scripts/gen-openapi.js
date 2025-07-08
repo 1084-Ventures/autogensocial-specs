@@ -65,7 +65,7 @@ function generateOpenApiSpec(componentsDir, operationsDir, outFile) {
   paths = rewriteRefsToComponents(paths);
 
   const openapi = {
-    openapi: '3.0.3',
+    openapi: '3.1.0',
     info: {
       title: 'AutogenSocial API',
       version: '1.0.0',

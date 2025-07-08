@@ -3,21 +3,13 @@ properties:
   mediaType:
     $ref: "./MediaType.yaml"
   setUrl:
-    type: string
-  visualStyle:
-    $ref: "../style/VisualStyle.yaml"
-  dimensions:
-    type: object
-    properties:
-      width:
-        type: integer
-        description: Video width in pixels
-      height:
-        type: integer
-        description: Video height in pixels
-      aspectRatio:
-        type: string
-        description: Aspect ratio (e.g., "16:9", "1:1")
+    type:
+      - string
+      - 'null'
+  visualStyleObj:
+    $ref: "../style/VisualStyleObj.yaml"
+  aspectRatio:
+    $ref: "./AspectRatio.yaml"
   videoInfo:
     type: object
     properties:
@@ -45,3 +37,19 @@ properties:
   format:
     type: string
     description: Video file format (e.g., "mp4", "webm")
+required: []
+allOf:
+  - if:
+      properties:
+        mediaType:
+          const: set
+    then:
+      required:
+        - setUrl
+  - if:
+      properties:
+        mediaType:
+          const: color
+    then:
+      required:
+        - visualStyleObj
