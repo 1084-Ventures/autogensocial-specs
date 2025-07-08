@@ -455,16 +455,16 @@ components:
       $ref: ./components/schemas/common/schedule/TimeSlot.yaml
     Schedule:
       $ref: ./components/schemas/common/schedule/Schedule.yaml
-    Video:
-      $ref: ./components/schemas/common/media/Video.yaml
-    MultiImage:
-      $ref: ./components/schemas/common/media/MultiImage.yaml
+    VideoTemplate:
+      $ref: ./components/schemas/common/media/VideoTemplate.yaml
+    MultiImageTemplate:
+      $ref: ./components/schemas/common/media/MultiImageTemplate.yaml
     MediaType:
       $ref: ./components/schemas/common/media/MediaType.yaml
     MediaMetadata:
       $ref: ./components/schemas/common/media/MediaMetadata.yaml
-    Image:
-      $ref: ./components/schemas/common/media/Image.yaml
+    ImageTemplate:
+      $ref: ./components/schemas/common/media/ImageTemplate.yaml
     AspectRatio:
       $ref: ./components/schemas/common/media/AspectRatio.yaml
     Rectangle:

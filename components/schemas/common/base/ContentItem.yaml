@@ -5,21 +5,21 @@ properties:
     enum: [text, image, multi-image, video]
   text:
     $ref: "./Text.yaml"
-  image:
-    $ref: "../media/Image.yaml"
-  video:
-    $ref: "../media/Video.yaml"
-  multiImage:
-    $ref: "../media/MultiImage.yaml"
+  imageTemplate:
+    $ref: "../media/ImageTemplate.yaml"
+  videoTemplate:
+    $ref: "../media/VideoTemplate.yaml"
+  multiImageTemplate:
+    $ref: "../media/MultiImageTemplate.yaml"
 oneOf:
   - $ref: "./Text.yaml"
-  - $ref: "../media/Image.yaml"
-  - $ref: "../media/Video.yaml"
-  - $ref: "../media/MultiImage.yaml"
+  - $ref: "../media/ImageTemplate.yaml"
+  - $ref: "../media/VideoTemplate.yaml"
+  - $ref: "../media/MultiImageTemplate.yaml"
 discriminator:
   propertyName: contentType
   mapping:
     text: "./Text.yaml"
-    image: "../media/Image.yaml"
-    video: "../media/Video.yaml"
-    multi-image: "../media/MultiImage.yaml"
+    image: "../media/ImageTemplate.yaml"
+    video: "../media/VideoTemplate.yaml"
+    multi-image: "../media/MultiImageTemplate.yaml"

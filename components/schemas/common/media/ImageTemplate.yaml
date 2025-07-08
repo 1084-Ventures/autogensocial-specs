@@ -8,17 +8,6 @@ properties:
     $ref: "../style/VisualStyleObj.yaml"
   aspectRatio:
     $ref: "./AspectRatio.yaml"
-  resolution:
-    type: string
-    description: Image resolution (e.g., "300dpi")
   format:
     type: string
     description: Image file format (e.g., "jpeg", "png")
-allOf:
-  - if:
-      properties:
-        mediaType:
-          const: color
-    then:
-      required:
-        - visualStyleObj
