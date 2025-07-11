@@ -713,7 +713,7 @@
               "schedule": {
                 "$ref": "#/components/schemas/Schedule"
               },
-              "settings": {
+              "templateSettings": {
                 "$ref": "#/components/schemas/TemplateSettings"
               }
             }
@@ -1601,7 +1601,7 @@
           "schedule": {
             "$ref": "#/components/schemas/Schedule"
           },
-          "settings": {
+          "templateSettings": {
             "$ref": "#/components/schemas/TemplateSettings"
           }
         },
@@ -1643,7 +1643,7 @@
           "schedule": {
             "$ref": "#/components/schemas/Schedule"
           },
-          "settings": {
+          "templateSettings": {
             "$ref": "#/components/schemas/TemplateSettings"
           }
         },
@@ -1704,6 +1704,23 @@
           }
         },
         "description": "Payload for creating a new Brand. 'brandInfo.name' and 'brandInfo.userId' is required.\n"
+      },
+      "ContentOrchestratorRequest": {
+        "type": "object",
+        "required": [
+          "brandId",
+          "templateId"
+        ],
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "description": "The brand partition key in CosmosDB."
+          },
+          "templateId": {
+            "type": "string",
+            "description": "The template id in CosmosDB."
+          }
+        }
       }
     },
     "parameters": {

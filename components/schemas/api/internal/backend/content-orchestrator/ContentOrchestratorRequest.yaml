@@ -1,0 +1,11 @@
+type: object
+required:
+  - brandId
+  - templateId
+properties:
+  brandId:
+    type: string
+    description: The brand partition key in CosmosDB.
+  templateId:
+    type: string
+    description: The template id in CosmosDB.

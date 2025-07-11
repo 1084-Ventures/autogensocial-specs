@@ -17,7 +17,7 @@
             schema:
               type: array
               items:
-                $ref: "../../../components/schemas/api/internal/content-generation-template/ContentGenerationTemplateGet.yaml"
+                $ref: "../../../components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateGet.yaml"
       "400":
         $ref: ../../../components/responses/BadRequest.yaml
       "401":
@@ -32,14 +32,14 @@
       content:
         application/json:
           schema:
-            $ref: "../../../components/schemas/api/internal/content-generation-template/ContentGenerationTemplateCreate.yaml"
+            $ref: "../../../components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateCreate.yaml"
     responses:
       "201":
         description: Content generation template created
         content:
           application/json:
             schema:
-              $ref: "../../../components/schemas/api/internal/content-generation-template/ContentGenerationTemplateResponse.yaml"
+              $ref: "../../../components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateResponse.yaml"
       "400":
         $ref: ../../../components/responses/BadRequest.yaml
       "401":
@@ -62,7 +62,7 @@
         content:
           application/json:
             schema:
-              $ref: "../../../components/schemas/api/internal/content-generation-template/ContentGenerationTemplateGet.yaml"
+              $ref: "../../../components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateGet.yaml"
       "404":
         $ref: ../../../components/responses/NotFound.yaml
       "401":
@@ -83,14 +83,14 @@
       content:
         application/json:
           schema:
-            $ref: "../../../components/schemas/api/internal/content-generation-template/ContentGenerationTemplateUpdate.yaml"
+            $ref: "../../../components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateUpdate.yaml"
     responses:
       "200":
         description: Content generation template updated
         content:
           application/json:
             schema:
-              $ref: "../../../components/schemas/api/internal/content-generation-template/ContentGenerationTemplateResponse.yaml"
+              $ref: "../../../components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateResponse.yaml"
       "400":
         $ref: ../../../components/responses/BadRequest.yaml
       "404":

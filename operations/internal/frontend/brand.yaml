@@ -17,7 +17,7 @@
             schema:
               type: array
               items:
-                $ref: "../../../components/schemas/api/internal/brand/BrandGet.yaml"
+                $ref: "../../../components/schemas/api/internal/frontend/brand/BrandGet.yaml"
       "400":
         $ref: ../../../components/responses/BadRequest.yaml
       "401":
@@ -32,14 +32,14 @@
       content:
         application/json:
           schema:
-            $ref: "../../../components/schemas/api/internal/brand/BrandCreate.yaml"
+            $ref: "../../../components/schemas/api/internal/frontend/brand/BrandCreate.yaml"
     responses:
       "201":
         description: Brand created
         content:
           application/json:
             schema:
-              $ref: "../../../components/schemas/api/internal/brand/BrandResponse.yaml"
+              $ref: "../../../components/schemas/api/internal/frontend/brand/BrandResponse.yaml"
       "400":
         $ref: ../../../components/responses/BadRequest.yaml
       "401":
@@ -62,7 +62,7 @@
         content:
           application/json:
             schema:
-              $ref: "../../../components/schemas/api/internal/brand/BrandGet.yaml"
+              $ref: "../../../components/schemas/api/internal/frontend/brand/BrandGet.yaml"
       "404":
         $ref: "../../../components/responses/NotFound.yaml"
       "401":
@@ -83,14 +83,14 @@
       content:
         application/json:
           schema:
-            $ref: "../../../components/schemas/api/internal/brand/BrandUpdate.yaml"
+            $ref: "../../../components/schemas/api/internal/frontend/brand/BrandUpdate.yaml"
     responses:
       "200":
         description: Brand updated
         content:
           application/json:
             schema:
-              $ref: "../../../components/schemas/api/internal/brand/BrandResponse.yaml"
+              $ref: "../../../components/schemas/api/internal/frontend/brand/BrandResponse.yaml"
       "400":
         $ref: ../../../components/responses/BadRequest.yaml
       "404":

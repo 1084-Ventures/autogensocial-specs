@@ -30,7 +30,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ./components/schemas/api/internal/media/MediaGet.yaml
+                  $ref: ./components/schemas/api/internal/frontend/media/MediaGet.yaml
         '400':
           $ref: ./components/responses/BadRequest.yaml
         '401':
@@ -45,14 +45,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ./components/schemas/api/internal/media/MediaCreate.yaml
+              $ref: ./components/schemas/api/internal/frontend/media/MediaCreate.yaml
       responses:
         '201':
           description: Media created
           content:
             application/json:
               schema:
-                $ref: ./components/schemas/api/internal/media/MediaGet.yaml
+                $ref: ./components/schemas/api/internal/frontend/media/MediaGet.yaml
         '400':
           $ref: ./components/responses/BadRequest.yaml
         '401':
@@ -75,7 +75,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./components/schemas/api/internal/media/MediaGet.yaml
+                $ref: ./components/schemas/api/internal/frontend/media/MediaGet.yaml
         '401':
           $ref: ./components/responses/Unauthorized.yaml
         '404':
@@ -96,14 +96,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ./components/schemas/api/internal/media/MediaUpdate.yaml
+              $ref: ./components/schemas/api/internal/frontend/media/MediaUpdate.yaml
       responses:
         '200':
           description: Media item updated
           content:
             application/json:
               schema:
-                $ref: ./components/schemas/api/internal/media/MediaGet.yaml
+                $ref: ./components/schemas/api/internal/frontend/media/MediaGet.yaml
         '400':
           $ref: ./components/responses/BadRequest.yaml
         '401':
@@ -159,7 +159,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./components/schemas/api/internal/media/MediaAnalyze.yaml
+                $ref: ./components/schemas/api/internal/frontend/media/MediaAnalyze.yaml
         '400':
           $ref: ./components/responses/BadRequest.yaml
         '401':
@@ -185,7 +185,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateGet.yaml
+                  $ref: >-
+                    ./components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateGet.yaml
         '400':
           $ref: ./components/responses/BadRequest.yaml
         '401':
@@ -200,14 +201,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateCreate.yaml
+              $ref: >-
+                ./components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateCreate.yaml
       responses:
         '201':
           description: Content generation template created
           content:
             application/json:
               schema:
-                $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateResponse.yaml
+                $ref: >-
+                  ./components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateResponse.yaml
         '400':
           $ref: ./components/responses/BadRequest.yaml
         '401':
@@ -230,7 +233,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateGet.yaml
+                $ref: >-
+                  ./components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateGet.yaml
         '401':
           $ref: ./components/responses/Unauthorized.yaml
         '404':
@@ -251,14 +255,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateUpdate.yaml
+              $ref: >-
+                ./components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateUpdate.yaml
       responses:
         '200':
           description: Content generation template updated
           content:
             application/json:
               schema:
-                $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateResponse.yaml
+                $ref: >-
+                  ./components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateResponse.yaml
         '400':
           $ref: ./components/responses/BadRequest.yaml
         '401':
@@ -304,7 +310,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ./components/schemas/api/internal/brand/BrandGet.yaml
+                  $ref: ./components/schemas/api/internal/frontend/brand/BrandGet.yaml
         '400':
           $ref: ./components/responses/BadRequest.yaml
         '401':
@@ -319,14 +325,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ./components/schemas/api/internal/brand/BrandCreate.yaml
+              $ref: ./components/schemas/api/internal/frontend/brand/BrandCreate.yaml
       responses:
         '201':
           description: Brand created
           content:
             application/json:
               schema:
-                $ref: ./components/schemas/api/internal/brand/BrandResponse.yaml
+                $ref: ./components/schemas/api/internal/frontend/brand/BrandResponse.yaml
         '400':
           $ref: ./components/responses/BadRequest.yaml
         '401':
@@ -349,7 +355,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./components/schemas/api/internal/brand/BrandGet.yaml
+                $ref: ./components/schemas/api/internal/frontend/brand/BrandGet.yaml
         '401':
           $ref: ./components/responses/Unauthorized.yaml
         '404':
@@ -370,14 +376,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ./components/schemas/api/internal/brand/BrandUpdate.yaml
+              $ref: ./components/schemas/api/internal/frontend/brand/BrandUpdate.yaml
       responses:
         '200':
           description: Brand updated
           content:
             application/json:
               schema:
-                $ref: ./components/schemas/api/internal/brand/BrandResponse.yaml
+                $ref: ./components/schemas/api/internal/frontend/brand/BrandResponse.yaml
         '400':
           $ref: ./components/responses/BadRequest.yaml
         '401':
@@ -498,29 +504,31 @@ components:
     BaseModel:
       $ref: ./components/schemas/common/base/BaseModel.yaml
     MediaUpdate:
-      $ref: ./components/schemas/api/internal/media/MediaUpdate.yaml
+      $ref: ./components/schemas/api/internal/frontend/media/MediaUpdate.yaml
     MediaGet:
-      $ref: ./components/schemas/api/internal/media/MediaGet.yaml
+      $ref: ./components/schemas/api/internal/frontend/media/MediaGet.yaml
     MediaCreate:
-      $ref: ./components/schemas/api/internal/media/MediaCreate.yaml
+      $ref: ./components/schemas/api/internal/frontend/media/MediaCreate.yaml
     MediaAnalyze:
-      $ref: ./components/schemas/api/internal/media/MediaAnalyze.yaml
+      $ref: ./components/schemas/api/internal/frontend/media/MediaAnalyze.yaml
     ContentGenerationTemplateUpdate:
-      $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateUpdate.yaml
+      $ref: ./components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateUpdate.yaml
     ContentGenerationTemplateResponse:
-      $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateResponse.yaml
+      $ref: ./components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateResponse.yaml
     ContentGenerationTemplateGet:
-      $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateGet.yaml
+      $ref: ./components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateGet.yaml
     ContentGenerationTemplateCreate:
-      $ref: ./components/schemas/api/internal/content-generation-template/ContentGenerationTemplateCreate.yaml
+      $ref: ./components/schemas/api/internal/frontend/content-generation-template/ContentGenerationTemplateCreate.yaml
     BrandUpdate:
-      $ref: ./components/schemas/api/internal/brand/BrandUpdate.yaml
+      $ref: ./components/schemas/api/internal/frontend/brand/BrandUpdate.yaml
     BrandResponse:
-      $ref: ./components/schemas/api/internal/brand/BrandResponse.yaml
+      $ref: ./components/schemas/api/internal/frontend/brand/BrandResponse.yaml
     BrandGet:
-      $ref: ./components/schemas/api/internal/brand/BrandGet.yaml
+      $ref: ./components/schemas/api/internal/frontend/brand/BrandGet.yaml
     BrandCreate:
-      $ref: ./components/schemas/api/internal/brand/BrandCreate.yaml
+      $ref: ./components/schemas/api/internal/frontend/brand/BrandCreate.yaml
+    ContentOrchestratorRequest:
+      $ref: ./components/schemas/api/internal/backend/content-orchestrator/ContentOrchestratorRequest.yaml
   parameters:
     pagination:
       $ref: ./components/parameters/pagination.yaml

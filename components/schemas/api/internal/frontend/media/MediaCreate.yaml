@@ -1,5 +1,5 @@
 allOf:
-  - $ref: "../../../documents/MediaDocument.yaml"
+  - $ref: "../../../../documents/MediaDocument.yaml"
   - type: object
     required:
       - brandId
@@ -15,5 +15,5 @@ allOf:
         type: string
         enum: [image, video]
       mediaMetadata:
-        $ref: "../../../common/media/MediaMetadata.yaml"
+        $ref: "../../../../common/media/MediaMetadata.yaml"
     # id, createdAt, updatedAt are set by backend
