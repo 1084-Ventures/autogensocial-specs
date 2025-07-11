@@ -3,10 +3,10 @@ properties:
   brandId:
     type: string
   templateInfo:
-    $ref: "../../../common/template/TemplateInfo.yaml"
+    $ref: "../../../../common/template/TemplateInfo.yaml"
   schedule:
-    $ref: "../../../common/schedule/Schedule.yaml"
-  settings:
-    $ref: "../../../common/template/TemplateSettings.yaml"
+    $ref: "../../../../common/schedule/Schedule.yaml"
+  templateSettings:
+    $ref: "../../../../common/template/TemplateSettings.yaml"
 description: >
   Payload for updating a ContentGenerationTemplateDocument. All fields are optional and may be provided for partial update.

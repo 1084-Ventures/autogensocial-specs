@@ -1,12 +1,53 @@
 
 
+
 # Copilot Agent Coding & Contribution Guidelines
+
 
 This project is **spec-driven**: all API contracts, models, and types are generated from the canonical OpenAPI spec (`specs/openapi-bundled.json`).
 **OpenAPI 3.1.0 is the required spec version.**
 **Never hand-write or edit models/types that duplicate or diverge from the generated ones.**
 
 ---
+
+## Azure Functions (TypeScript) v4 Best Practices for `content-orchestrator`
+
+All Azure Functions in `content-orchestrator` **must** use the [Azure Functions Node.js v4 programming model](https://learn.microsoft.com/en-us/azure/azure-functions/functions-node-upgrade-v4?tabs=v4&pivots=programming-language-typescript) and follow these requirements:
+
+- **Use the latest stable Azure Functions runtime and TypeScript SDK.**
+- **All function code must be in TypeScript and use the v4 programming model:**
+  - Import from `@azure/functions` v4+ (must be in `dependencies` in `package.json`).
+  - Do **not** use or generate `function.json` files; all configuration is code-centric (e.g., `app.http`, `app.timer`).
+  - The function signature must be `(request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit>` for HTTP triggers.
+  - Always return the output from the function (do not set output on `context`).
+  - Use `context.log`, `context.error`, etc. for logging.
+- **Project structure:**
+  - Place all Azure Functions in `content-orchestrator/src/functions/`.
+  - Use only types generated from the OpenAPI spec (`src/generated/models.ts`) for all request and response payloads.
+  - Never hand-write or duplicate models; always import from generated files.
+- **Configuration:**
+  - `host.json` must use extension bundles v4, and `managedDependency` should be enabled.
+  - `package.json` must have a `main` field pointing to your entry point or glob for function files.
+  - Use `local.settings.json` for local development settings (never commit secrets).
+- **Security & Auth:**
+  - Use managed identity for Azure resource access when possible.
+  - Never hardcode credentials; use environment variables or Key Vault.
+- **Observability:**
+  - Use Application Insights for logging and monitoring.
+- **Testing:**
+  - Write unit tests for all function logic using Jest (or preferred runner).
+  - Use the v4 model's ability to create test `InvocationContext` objects for unit tests.
+- **CI/CD:**
+  - Use GitHub Actions for CI/CD.
+  - Lint, test, and validate in CI before merging.
+- **References:**
+  - [Azure Functions Node.js v4 upgrade guide](https://learn.microsoft.com/en-us/azure/azure-functions/functions-node-upgrade-v4?tabs=v4&pivots=programming-language-typescript)
+  - [Azure Functions TypeScript developer guide](https://learn.microsoft.com/azure/azure-functions/functions-reference-node?tabs=v2)
+
+---
+
+---
+
 
 ## Project Structure & Directory Roles
 

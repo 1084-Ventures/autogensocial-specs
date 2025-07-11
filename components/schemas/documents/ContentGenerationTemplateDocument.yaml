@@ -8,5 +8,5 @@ allOf:
         $ref: "../common/template/TemplateInfo.yaml"
       schedule:
         $ref: "../common/schedule/Schedule.yaml"
-      settings:
+      templateSettings:
         $ref: "../common/template/TemplateSettings.yaml"

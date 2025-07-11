@@ -17,7 +17,7 @@
             schema:
               type: array
               items:
-                $ref: ../../../components/schemas/api/internal/media/MediaGet.yaml
+                $ref: ../../../components/schemas/api/internal/frontend/media/MediaGet.yaml
       "400":
         $ref: ../../../components/responses/BadRequest.yaml
       "401":
@@ -32,14 +32,14 @@
       content:
         application/json:
           schema:
-            $ref: ../../../components/schemas/api/internal/media/MediaCreate.yaml
+            $ref: ../../../components/schemas/api/internal/frontend/media/MediaCreate.yaml
     responses:
       "201":
         description: Media created
         content:
           application/json:
             schema:
-              $ref: ../../../components/schemas/api/internal/media/MediaGet.yaml
+              $ref: ../../../components/schemas/api/internal/frontend/media/MediaGet.yaml
       "400":
         $ref: ../../../components/responses/BadRequest.yaml
       "401":
@@ -63,7 +63,7 @@
         content:
           application/json:
             schema:
-              $ref: ../../../components/schemas/api/internal/media/MediaGet.yaml
+              $ref: ../../../components/schemas/api/internal/frontend/media/MediaGet.yaml
       "401":
         $ref: ../../../components/responses/Unauthorized.yaml
       "404":
@@ -84,14 +84,14 @@
       content:
         application/json:
           schema:
-            $ref: ../../../components/schemas/api/internal/media/MediaUpdate.yaml
+            $ref: ../../../components/schemas/api/internal/frontend/media/MediaUpdate.yaml
     responses:
       "200":
         description: Media item updated
         content:
           application/json:
             schema:
-              $ref: ../../../components/schemas/api/internal/media/MediaGet.yaml
+              $ref: ../../../components/schemas/api/internal/frontend/media/MediaGet.yaml
       "400":
         $ref: ../../../components/responses/BadRequest.yaml
       "401":
@@ -148,7 +148,7 @@
         content:
           application/json:
             schema:
-              $ref: ../../../components/schemas/api/internal/media/MediaAnalyze.yaml
+              $ref: ../../../components/schemas/api/internal/frontend/media/MediaAnalyze.yaml
       "400":
         $ref: ../../../components/responses/BadRequest.yaml
       "401":

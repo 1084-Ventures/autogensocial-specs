@@ -1,10 +1,10 @@
 type: object
 properties:
   brandInfo:
-    $ref: "../../../common/base/BrandInfo.yaml"
+    $ref: "../../../../common/base/BrandInfo.yaml"
   socialAccounts:
     type: array
     items:
-      $ref: "../../../common/social/SocialAccountEntry.yaml"
+      $ref: "../../../../common/social/SocialAccountEntry.yaml"
 description: >
   Payload for updating a Brand. All fields are optional and may be provided for partial update.
