@@ -842,10 +842,43 @@
         "type": "object",
         "properties": {
           "font": {
-            "$ref": "#/components/schemas/Font"
+            "type": "object",
+            "properties": {
+              "family": {
+                "type": "string"
+              },
+              "size": {
+                "type": "string"
+              },
+              "weight": {
+                "type": "string",
+                "enum": [
+                  "normal",
+                  "bold"
+                ]
+              },
+              "style": {
+                "type": "string",
+                "enum": [
+                  "normal",
+                  "italic"
+                ]
+              },
+              "color": {
+                "type": "string"
+              }
+            }
           },
           "outline": {
-            "$ref": "#/components/schemas/Outline"
+            "type": "object",
+            "properties": {
+              "color": {
+                "type": "string"
+              },
+              "width": {
+                "type": "integer"
+              }
+            }
           },
           "alignment": {
             "type": "string",
@@ -854,6 +887,12 @@
               "center",
               "right"
             ]
+          },
+          "transparency": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 1
           }
         }
       },
@@ -881,17 +920,6 @@
               "middle",
               "right"
             ]
-          }
-        }
-      },
-      "Outline": {
-        "type": "object",
-        "properties": {
-          "color": {
-            "type": "string"
-          },
-          "width": {
-            "type": "integer"
           }
         }
       },
@@ -926,39 +954,6 @@
             }
           }
         }
-      },
-      "Font": {
-        "type": "object",
-        "properties": {
-          "family": {
-            "type": "string"
-          },
-          "size": {
-            "type": "string"
-          },
-          "weight": {
-            "type": "string",
-            "enum": [
-              "normal",
-              "bold"
-            ]
-          },
-          "style": {
-            "type": "string",
-            "enum": [
-              "normal",
-              "italic"
-            ]
-          }
-        }
-      },
-      "Alignment": {
-        "type": "string",
-        "enum": [
-          "left",
-          "center",
-          "right"
-        ]
       },
       "SocialAccountEntry": {
         "type": "object",

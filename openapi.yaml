@@ -443,14 +443,8 @@ components:
       $ref: ./components/schemas/common/style/TextStyle.yaml
     OverlayBox:
       $ref: ./components/schemas/common/style/OverlayBox.yaml
-    Outline:
-      $ref: ./components/schemas/common/style/Outline.yaml
     Fonts:
       $ref: ./components/schemas/common/style/Fonts.yaml
-    Font:
-      $ref: ./components/schemas/common/style/Font.yaml
-    Alignment:
-      $ref: ./components/schemas/common/style/Alignment.yaml
     SocialAccountEntry:
       $ref: ./components/schemas/common/social/SocialAccountEntry.yaml
     SocialAccount:

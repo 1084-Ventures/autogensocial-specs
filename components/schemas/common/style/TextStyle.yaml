@@ -1,9 +1,32 @@
 type: object
 properties:
   font:
-    $ref: "./Font.yaml"
+    type: object
+    properties:
+      family:
+        type: string
+      size:
+        type: string
+      weight:
+        type: string
+        enum: [normal, bold]
+      style:
+        type: string
+        enum: [normal, italic]
+      color:
+        type: string
   outline:
-    $ref: "./Outline.yaml"
+    type: object
+    properties:
+      color:
+        type: string
+      width:
+        type: integer
   alignment:
     type: string
     enum: [left, center, right]
+  transparency:
+    type: number
+    minimum: 0
+    maximum: 1
+    default: 1
