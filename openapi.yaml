@@ -457,12 +457,12 @@ components:
       $ref: ./components/schemas/common/schedule/Schedule.yaml
     VideoTemplate:
       $ref: ./components/schemas/common/media/VideoTemplate.yaml
-    MultiImageTemplate:
-      $ref: ./components/schemas/common/media/MultiImageTemplate.yaml
     MediaType:
       $ref: ./components/schemas/common/media/MediaType.yaml
     MediaMetadata:
       $ref: ./components/schemas/common/media/MediaMetadata.yaml
+    ImagesTemplate:
+      $ref: ./components/schemas/common/media/ImagesTemplate.yaml
     ImageTemplate:
       $ref: ./components/schemas/common/media/ImageTemplate.yaml
     AspectRatio:

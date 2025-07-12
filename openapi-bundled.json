@@ -1106,22 +1106,6 @@
           }
         ]
       },
-      "MultiImageTemplate": {
-        "type": "object",
-        "properties": {
-          "imageTemplates": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ImageTemplate"
-            },
-            "description": "Array of image objects"
-          },
-          "numImages": {
-            "type": "integer",
-            "description": "The exact number of images required"
-          }
-        }
-      },
       "MediaType": {
         "type": "string",
         "enum": [
@@ -1156,6 +1140,22 @@
           },
           "cognitiveData": {
             "$ref": "#/components/schemas/CognitiveData"
+          }
+        }
+      },
+      "ImagesTemplate": {
+        "type": "object",
+        "properties": {
+          "imageTemplates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImageTemplate"
+            },
+            "description": "Array of image objects"
+          },
+          "numImages": {
+            "type": "integer",
+            "description": "The exact number of images required"
           }
         }
       },
@@ -1389,22 +1389,18 @@
             "type": "string",
             "enum": [
               "text",
-              "image",
-              "multi-image",
+              "images",
               "video"
             ]
           },
           "text": {
             "$ref": "#/components/schemas/Text"
           },
-          "imageTemplate": {
-            "$ref": "#/components/schemas/ImageTemplate"
-          },
           "videoTemplate": {
             "$ref": "#/components/schemas/VideoTemplate"
           },
-          "multiImageTemplate": {
-            "$ref": "#/components/schemas/MultiImageTemplate"
+          "imagesTemplate": {
+            "$ref": "#/components/schemas/ImagesTemplate"
           }
         },
         "oneOf": [
@@ -1412,22 +1408,18 @@
             "$ref": "#/components/schemas/Text"
           },
           {
-            "$ref": "#/components/schemas/ImageTemplate"
-          },
-          {
             "$ref": "#/components/schemas/VideoTemplate"
           },
           {
-            "$ref": "#/components/schemas/MultiImageTemplate"
+            "$ref": "#/components/schemas/ImagesTemplate"
           }
         ],
         "discriminator": {
           "propertyName": "contentType",
           "mapping": {
             "text": "#/components/schemas/Text",
-            "image": "#/components/schemas/ImageTemplate",
             "video": "#/components/schemas/VideoTemplate",
-            "multi-image": "#/components/schemas/MultiImageTemplate"
+            "images": "#/components/schemas/ImagesTemplate"
           }
         }
       },
