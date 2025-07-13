@@ -707,6 +707,11 @@
               "brandId": {
                 "type": "string"
               },
+              "lastExecutionTime": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Last time the template was executed"
+              },
               "templateInfo": {
                 "$ref": "#/components/schemas/TemplateInfo"
               },

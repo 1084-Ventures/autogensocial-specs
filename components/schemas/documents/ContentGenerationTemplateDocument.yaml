@@ -4,6 +4,10 @@ allOf:
     properties:
       brandId:
         type: string
+      lastExecutionTime:
+        type: string
+        format: date-time
+        description: Last time the template was executed
       templateInfo:
         $ref: "../common/template/TemplateInfo.yaml"
       schedule:
