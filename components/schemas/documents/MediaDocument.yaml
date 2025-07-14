@@ -11,5 +11,7 @@ allOf:
         enum:
           - image
           - video
+      usageCount:
+        type: integer
       mediaMetadata:
         $ref: "../common/media/MediaMetadata.yaml"

@@ -689,6 +689,9 @@
                   "video"
                 ]
               },
+              "usageCount": {
+                "type": "integer"
+              },
               "mediaMetadata": {
                 "$ref": "#/components/schemas/MediaMetadata"
               }
