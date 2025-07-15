@@ -142,7 +142,7 @@ paths:
   /media/analyze:
     post:
       operationId: analyzeMedia
-      summary: Analyze a media file (image or video)
+      summary: Analyze a media item (image) using AI/Cognitive Services
       requestBody:
         required: true
         content:
@@ -152,18 +152,29 @@ paths:
               properties:
                 imageBase64:
                   type: string
-                  description: Base64-encoded image data
+                  description: Base64-encoded image data (optionally with data URL prefix)
+              required:
+                - imageBase64
       responses:
         '200':
-          description: Analysis results for the media file
+          description: Analysis result
           content:
             application/json:
               schema:
-                $ref: ./components/schemas/api/internal/frontend/media/MediaAnalyze.yaml
+                $ref: ./components/schemas/common/cognitive/CognitiveData.yaml
         '400':
           $ref: ./components/responses/BadRequest.yaml
         '401':
           $ref: ./components/responses/Unauthorized.yaml
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
         '429':
           $ref: ./components/responses/RateLimitExceeded.yaml
   /content-generation-templates:
