@@ -1,0 +1,39 @@
+# Media Analyze endpoint for analyzing media (e.g., images) using cognitive services
+/media/analyze:
+  post:
+    operationId: analyzeMedia
+    summary: Analyze a media item (image) using AI/Cognitive Services
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              imageBase64:
+                type: string
+                description: Base64-encoded image data (optionally with data URL prefix)
+            required:
+              - imageBase64
+    responses:
+      "200":
+        description: Analysis result
+        content:
+          application/json:
+            schema:
+              $ref: ../../../components/schemas/common/cognitive/CognitiveData.yaml
+      "400":
+        $ref: ../../../components/responses/BadRequest.yaml
+      "401":
+        $ref: ../../../components/responses/Unauthorized.yaml
+      "405":
+        description: Method Not Allowed
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+      "429":
+        $ref: ../../../components/responses/RateLimitExceeded.yaml

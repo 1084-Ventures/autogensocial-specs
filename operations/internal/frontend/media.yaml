@@ -127,31 +127,3 @@
         $ref: ../../../components/responses/NotFound.yaml
       "429":
         $ref: ../../../components/responses/RateLimitExceeded.yaml
-
-/media/analyze:
-  post:
-    operationId: analyzeMedia
-    summary: Analyze a media file (image or video)
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              imageBase64:
-                type: string
-                description: Base64-encoded image data
-    responses:
-      "200":
-        description: Analysis results for the media file
-        content:
-          application/json:
-            schema:
-              $ref: ../../../components/schemas/api/internal/frontend/media/MediaAnalyze.yaml
-      "400":
-        $ref: ../../../components/responses/BadRequest.yaml
-      "401":
-        $ref: ../../../components/responses/Unauthorized.yaml
-      "429":
-        $ref: ../../../components/responses/RateLimitExceeded.yaml
