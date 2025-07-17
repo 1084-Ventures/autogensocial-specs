@@ -442,8 +442,6 @@ components:
       $ref: ./components/schemas/common/template/TemplateSettings.yaml
     TemplateInfo:
       $ref: ./components/schemas/common/template/TemplateInfo.yaml
-    PromptVariable:
-      $ref: ./components/schemas/common/template/PromptVariable.yaml
     PromptTemplate:
       $ref: ./components/schemas/common/template/PromptTemplate.yaml
     VisualStyleObj:

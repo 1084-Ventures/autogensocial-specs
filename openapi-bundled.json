@@ -798,42 +798,27 @@
           }
         }
       },
-      "PromptVariable": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "values": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
       "PromptTemplate": {
         "type": "object",
         "properties": {
-          "systemPrompt": {
-            "type": "string"
-          },
           "userPrompt": {
-            "type": "string"
-          },
-          "temperature": {
-            "type": "number"
-          },
-          "maxTokens": {
-            "type": "integer"
-          },
-          "model": {
             "type": "string"
           },
           "variables": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/PromptVariable"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "values": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
             }
           }
         }
