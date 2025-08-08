@@ -1,0 +1,8 @@
+type: object
+description: Request to get a brand by brandId.
+properties:
+  brandId:
+    type: string
+    description: Unique identifier for the brand.
+required:
+  - brandId

@@ -1,0 +1,12 @@
+type: object
+description: Response payload containing the generated post copy.
+properties:
+  postText:
+    type: string
+    description: The generated post text.
+  metadata:
+    type: object
+    description: Additional metadata about the generated post.
+    additionalProperties: true
+required:
+  - postText

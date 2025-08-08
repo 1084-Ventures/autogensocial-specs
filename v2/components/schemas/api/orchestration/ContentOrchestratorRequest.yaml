@@ -1,0 +1,11 @@
+type: object
+required:
+  - brandId
+  - postPlanId
+properties:
+  brandId:
+    type: string
+    description: The brand partition key in CosmosDB.
+  postPlanId:
+    type: string
+    description: The postPlan id in CosmosDB.

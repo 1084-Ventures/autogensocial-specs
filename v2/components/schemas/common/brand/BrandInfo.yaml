@@ -1,0 +1,9 @@
+type: object
+properties:
+  name:
+    type: string
+  description:
+    type: string
+    description: A brief description to inform the AI agent about the brand to assist in content generation.
+  style:
+    $ref: './BrandStyle.yaml'

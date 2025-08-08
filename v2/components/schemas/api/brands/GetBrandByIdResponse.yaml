@@ -1,0 +1,7 @@
+type: object
+description: Response containing the brand details.
+properties:
+  brand:
+    $ref: "../../documents/BrandDocument.yaml"
+required:
+  - brand

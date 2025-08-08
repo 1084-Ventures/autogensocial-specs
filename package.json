@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "description": "OpenAPI specs utilities and scripts",
   "scripts": {
-    "api:lint": "redocly lint openapi.yaml",
+    "api:lint:v1": "redocly lint openapi.yaml",
+    "api:lint:v2": "redocly lint v2/openapi.yaml --extends recommended-strict",
     "api:bundle": "redocly bundle openapi.yaml --output openapi-bundled.json",
+    "api:bundle:v2": "redocly bundle v2/openapi.yaml --output v2/openapi-bundled.json",
     "api:validate": "redocly lint --extends recommended-strict openapi.yaml",
+    "api:validate:v2": "redocly lint --extends recommended-strict v2/openapi.yaml",
     "gen:diagrams": "node scripts/gen-diagrams.js",
     "prepack": "npm run api:bundle && npm run gen:diagrams",
-    "generate:openapi": "node scripts/gen-openapi.js && npm run api:lint && npm run api:validate && redocly bundle openapi.yaml -o openapi-bundled.json && swagger-cli validate openapi-bundled.json"
+    "generate:openapi:v1": "node scripts/gen-openapi.js && npm run api:lint && npm run api:validate && redocly bundle openapi.yaml -o openapi-bundled.json && swagger-cli validate openapi-bundled.json",
+    "generate:openapi:v2": "node scripts/gen-openapi-v2.js && npm run api:lint:v2 && npm run api:validate:v2 && npm run api:bundle:v2 && swagger-cli validate v2/openapi-bundled.json"
   },
   "license": "MIT",
   "dependencies": {

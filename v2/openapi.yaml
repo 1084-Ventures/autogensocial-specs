@@ -1,0 +1,62 @@
+openapi: 3.1.0
+info:
+  title: AutogenSocial API
+  version: 2.0.0
+  description: OpenAPI specification for the AutogenSocial API. This file references all modular components and operations.
+  license:
+    name: MIT
+    url: https://opensource.org/license/mit/
+servers:
+  - url: https://autogensocial-api.1084ventures.com
+security:
+  - bearerAuth: []
+paths:
+  /v2/brands/{brandId}:
+    $ref: ./operations/brands/get-brand-by-id.yaml
+components:
+  schemas:
+    PostPlanDocument:
+      $ref: ./components/schemas/documents/PostPlanDocument.yaml
+    BrandDocument:
+      $ref: ./components/schemas/documents/BrandDocument.yaml
+    SocialAccountEntry:
+      $ref: ./components/schemas/common/social/SocialAccountEntry.yaml
+    SocialAccount:
+      $ref: ./components/schemas/common/social/SocialAccount.yaml
+    Platform:
+      $ref: ./components/schemas/common/social/Platform.yaml
+    PostPlan:
+      $ref: ./components/schemas/common/postplan/PostPlan.yaml
+    BrandStyle:
+      $ref: ./components/schemas/common/brand/BrandStyle.yaml
+    BrandInfo:
+      $ref: ./components/schemas/common/brand/BrandInfo.yaml
+    Metadata:
+      $ref: ./components/schemas/common/base/Metadata.yaml
+    Error:
+      $ref: ./components/schemas/common/base/Error.yaml
+    BaseModel:
+      $ref: ./components/schemas/common/base/BaseModel.yaml
+    ContentOrchestratorRequest:
+      $ref: ./components/schemas/api/orchestration/ContentOrchestratorRequest.yaml
+    GetBrandByIdResponse:
+      $ref: ./components/schemas/api/brands/GetBrandByIdResponse.yaml
+    GetBrandByIdRequest:
+      $ref: ./components/schemas/api/brands/GetBrandByIdRequest.yaml
+  parameters:
+    pagination:
+      $ref: ./components/parameters/pagination.yaml
+  responses:
+    Unauthorized:
+      $ref: ./components/responses/Unauthorized.yaml
+    RateLimitExceeded:
+      $ref: ./components/responses/RateLimitExceeded.yaml
+    NotFound:
+      $ref: ./components/responses/NotFound.yaml
+    BadRequest:
+      $ref: ./components/responses/BadRequest.yaml
+  securitySchemes:
+    bearerAuth:
+      $ref: ./components/securitySchemes/bearerAuth.yaml
+    apiKeyAuth:
+      $ref: ./components/securitySchemes/apiKeyAuth.yaml

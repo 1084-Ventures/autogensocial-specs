@@ -1,0 +1,8 @@
+description: Authentication required
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/common/base/Error.yaml"
+    example:
+      code: UNAUTHORIZED
+      message: Valid API key required

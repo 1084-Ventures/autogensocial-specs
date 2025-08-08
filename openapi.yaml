@@ -530,6 +530,10 @@ components:
       $ref: ./components/schemas/api/internal/frontend/brand/BrandGet.yaml
     BrandCreate:
       $ref: ./components/schemas/api/internal/frontend/brand/BrandCreate.yaml
+    GeneratePostCopyResponse:
+      $ref: ./components/schemas/api/internal/backend/GeneratePostCopyResponse.yaml
+    GeneratePostCopyRequest:
+      $ref: ./components/schemas/api/internal/backend/GeneratePostCopyRequest.yaml
     ContentOrchestratorRequest:
       $ref: ./components/schemas/api/internal/backend/content-orchestrator/ContentOrchestratorRequest.yaml
   parameters:

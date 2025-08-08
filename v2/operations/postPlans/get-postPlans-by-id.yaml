@@ -1,0 +1,27 @@
+get:
+  summary: Get a postPlan by postPlanId
+  operationId: getPostPlanById
+  parameters:
+    - name: postPlanId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique identifier for the postPlan.
+  responses:
+    '200':
+      description: PostPlan found
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/api/postPlans/GetPostPlanByIdResponse.yaml'
+    '400':
+      $ref: '../../components/responses/BadRequest.yaml'
+    '401':
+      $ref: '../../components/responses/Unauthorized.yaml'
+    '404':
+      $ref: '../../components/responses/NotFound.yaml'
+    '429':
+      $ref: '../../components/responses/RateLimitExceeded.yaml'
+  security:
+    - bearerAuth: []

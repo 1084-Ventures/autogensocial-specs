@@ -1,0 +1,29 @@
+allOf:
+  - $ref: "../common/base/BaseModel.yaml"
+  - type: object
+    properties:
+      brandId:
+        type: string
+      postPlan:
+        $ref: "../common/postplan/PostPlan.yaml"
+      lastExecutedAt:
+        type: string
+        format: date-time
+        description: Timestamp of the last execution of this post plan
+      status:
+        type: string
+        enum: [draft, active, paused, completed]
+      executionHistory:
+        type: array
+        items:
+          type: object
+          properties:
+            executedAt:
+              type: string
+              format: date-time
+            status:
+              type: string
+              enum: [success, failure, pending]
+            details:
+              type: string
+              description: Additional details about the execution

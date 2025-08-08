@@ -1,0 +1,8 @@
+description: Invalid request parameters
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/common/base/Error.yaml"
+    example:
+      code: INVALID_INPUT
+      message: Invalid request parameters

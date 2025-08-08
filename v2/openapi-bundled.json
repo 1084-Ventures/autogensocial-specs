@@ -1,0 +1,612 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "AutogenSocial API",
+    "version": "2.0.0",
+    "description": "OpenAPI specification for the AutogenSocial API. This file references all modular components and operations.",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/license/mit/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://autogensocial-api.1084ventures.com"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/v2/brands/{brandId}": {
+      "get": {
+        "summary": "Get a brand by brandId",
+        "operationId": "getBrandById",
+        "parameters": [
+          {
+            "name": "brandId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the brand."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Brand found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBrandByIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PostPlanDocument": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "brandId": {
+                "type": "string"
+              },
+              "postPlan": {
+                "$ref": "#/components/schemas/PostPlan"
+              },
+              "lastExecutedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp of the last execution of this post plan"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "draft",
+                  "active",
+                  "paused",
+                  "completed"
+                ]
+              },
+              "executionHistory": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "executedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success",
+                        "failure",
+                        "pending"
+                      ]
+                    },
+                    "details": {
+                      "type": "string",
+                      "description": "Additional details about the execution"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "BrandDocument": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "userId": {
+                "type": "string"
+              },
+              "brandInfo": {
+                "$ref": "#/components/schemas/BrandInfo"
+              },
+              "socialAccounts": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SocialAccountEntry"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "SocialAccountEntry": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "$ref": "#/components/schemas/Platform"
+          },
+          "account": {
+            "$ref": "#/components/schemas/SocialAccount"
+          }
+        }
+      },
+      "SocialAccount": {
+        "type": "object",
+        "required": [
+          "platformAccountId",
+          "accessToken"
+        ],
+        "properties": {
+          "platformAccountId": {
+            "type": "string",
+            "description": "Unique identifier for the account on the platform (e.g., userId, pageId, open_id)"
+          },
+          "handle": {
+            "type": "string",
+            "description": "Public-facing handle (e.g., @username)"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username or login/display name for the account"
+          },
+          "profileUrl": {
+            "type": "string",
+            "description": "URL to the user's or page's profile"
+          },
+          "accessToken": {
+            "type": "string",
+            "description": "OAuth access token for API access"
+          },
+          "expiryDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Token expiration timestamp"
+          },
+          "extra": {
+            "type": "object",
+            "description": "Platform-specific additional fields (e.g., pageId for Facebook, refreshToken for TikTok)",
+            "additionalProperties": true
+          }
+        }
+      },
+      "Platform": {
+        "type": "string",
+        "enum": [
+          "instagram",
+          "facebook",
+          "x",
+          "youtube",
+          "tiktok"
+        ]
+      },
+      "PostPlan": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string",
+                "description": "A detailed description to inform the AI agent about the post plan to assist in content generation."
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "image",
+                  "multi-image",
+                  "video"
+                ]
+              },
+              "socialAccounts": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Platform"
+                }
+              }
+            }
+          },
+          "schedule": {
+            "type": "object",
+            "properties": {
+              "frequency": {
+                "type": "string",
+                "enum": [
+                  "multiple_per_day",
+                  "daily",
+                  "alternate_days",
+                  "bi_weekly",
+                  "weekly",
+                  "monthly"
+                ]
+              },
+              "startDate": {
+                "type": "string",
+                "format": "date"
+              },
+              "endDate": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          },
+          "content": {
+            "type": "object",
+            "properties": {
+              "topics": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "hashtags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "callToAction": {
+                "type": "string"
+              }
+            }
+          },
+          "media": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "enum": [
+                  "selected",
+                  "uploaded",
+                  "online",
+                  "ai_generated"
+                ]
+              },
+              "mediaRefs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Reference IDs or URLs to the media assets"
+                }
+              },
+              "mediaStructure": {
+                "type": "string",
+                "description": "The structure or layout of the media content"
+              }
+            }
+          }
+        }
+      },
+      "BrandStyle": {
+        "type": "object",
+        "properties": {
+          "colors": {
+            "type": "object",
+            "properties": {
+              "primary": {
+                "type": "string",
+                "description": "Primary brand color in hex format"
+              },
+              "secondary": {
+                "type": "string",
+                "description": "Secondary brand color in hex format"
+              },
+              "accent1": {
+                "type": "string",
+                "description": "Accent brand color in hex format"
+              },
+              "accent2": {
+                "type": "string",
+                "description": "Additional accent brand color in hex format"
+              },
+              "accent3": {
+                "type": "string",
+                "description": "Another accent brand color in hex format"
+              },
+              "accent4": {
+                "type": "string",
+                "description": "Yet another accent brand color in hex format"
+              },
+              "accent5": {
+                "type": "string",
+                "description": "Final accent brand color in hex format"
+              },
+              "textOnPrimary": {
+                "type": "string",
+                "description": "Text color to use on primary background"
+              },
+              "textOnSecondary": {
+                "type": "string",
+                "description": "Text color to use on secondary background"
+              }
+            }
+          },
+          "fonts": {
+            "type": "object",
+            "properties": {
+              "body": {
+                "type": "string",
+                "description": "Font family for body text"
+              },
+              "heading": {
+                "type": "string",
+                "description": "Font family for headings"
+              }
+            }
+          },
+          "logo": {
+            "type": "string",
+            "description": "URL or path to the brand logo image"
+          }
+        }
+      },
+      "BrandInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "description": "A brief description to inform the AI agent about the brand to assist in content generation."
+          },
+          "style": {
+            "$ref": "#/components/schemas/BrandStyle"
+          }
+        }
+      },
+      "Metadata": {
+        "type": "object",
+        "required": [
+          "createdDate",
+          "updatedDate",
+          "isActive"
+        ],
+        "properties": {
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Creation timestamp"
+          },
+          "updatedDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Last update timestamp"
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "Whether the record is active or soft-deleted"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code identifier"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable error message"
+          },
+          "details": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Optional additional error details"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "description": "Standard error response object"
+      },
+      "BaseModel": {
+        "type": "object",
+        "required": [
+          "id",
+          "metadata"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier for the record"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          }
+        }
+      },
+      "ContentOrchestratorRequest": {
+        "type": "object",
+        "required": [
+          "brandId",
+          "postPlanId"
+        ],
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "description": "The brand partition key in CosmosDB."
+          },
+          "postPlanId": {
+            "type": "string",
+            "description": "The postPlan id in CosmosDB."
+          }
+        }
+      },
+      "GetBrandByIdResponse": {
+        "type": "object",
+        "description": "Response containing the brand details.",
+        "properties": {
+          "brand": {
+            "$ref": "#/components/schemas/BrandDocument"
+          }
+        },
+        "required": [
+          "brand"
+        ]
+      },
+      "GetBrandByIdRequest": {
+        "type": "object",
+        "description": "Request to get a brand by brandId.",
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "description": "Unique identifier for the brand."
+          }
+        },
+        "required": [
+          "brandId"
+        ]
+      }
+    },
+    "parameters": {
+      "pagination": {
+        "name": "Pagination",
+        "in": "query",
+        "description": "Pagination and sorting options",
+        "required": false,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "offset": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            },
+            "sortBy": {
+              "type": "string",
+              "enum": [
+                "createdAt",
+                "updatedAt",
+                "name"
+              ],
+              "default": "createdAt"
+            },
+            "sortOrder": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "default": "desc"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Authentication required",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "code": "UNAUTHORIZED",
+              "message": "Valid API key required"
+            }
+          }
+        }
+      },
+      "RateLimitExceeded": {
+        "description": "Rate limit exceeded",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "code": "RATE_LIMIT_EXCEEDED",
+              "message": "Rate limit exceeded"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "code": "RESOURCE_NOT_FOUND",
+              "message": "The requested resource was not found"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Invalid request parameters",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "code": "INVALID_INPUT",
+              "message": "Invalid request parameters"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "description": "api key authentication for all endpoints",
+        "name": "x-api-key",
+        "in": "header",
+        "x-example": "your-api-key-here"
+      }
+    }
+  }
+}
