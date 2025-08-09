@@ -20,6 +20,48 @@
     }
   ],
   "paths": {
+    "/v2/posts": {
+      "post": {
+        "operationId": "createPost",
+        "summary": "Create a new post",
+        "description": "Creates a new post for a brand, including generated copy, media, and scheduling details.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Post created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      }
+    },
     "/v2/brands/{brandId}": {
       "get": {
         "summary": "Get a brand by brandId",
@@ -120,6 +162,33 @@
                     }
                   }
                 }
+              }
+            }
+          }
+        ]
+      },
+      "PostDocument": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "brandId": {
+                "type": "string"
+              },
+              "postCopy": {
+                "$ref": "#/components/schemas/postCopy"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "draft",
+                  "scheduled",
+                  "posted",
+                  "failed"
+                ]
               }
             }
           }
@@ -309,6 +378,26 @@
           }
         }
       },
+      "postCopy": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The content of the post."
+          },
+          "comment": {
+            "type": "string",
+            "description": "A comment on the post."
+          },
+          "hashtags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of hashtags associated with the post."
+          }
+        }
+      },
       "BrandStyle": {
         "type": "object",
         "properties": {
@@ -451,6 +540,51 @@
             "$ref": "#/components/schemas/Metadata"
           }
         }
+      },
+      "postResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the post."
+          },
+          "brandId": {
+            "type": "string"
+          },
+          "contentCopy": {
+            "$ref": "#/components/schemas/postCopy"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "scheduled",
+              "posted",
+              "failed"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "brandId",
+          "contentCopy"
+        ]
+      },
+      "postRequest": {
+        "type": "object",
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "description": "The brand this post belongs to."
+          },
+          "contentCopy": {
+            "$ref": "#/components/schemas/postCopy"
+          }
+        },
+        "required": [
+          "brandId",
+          "contentCopy"
+        ]
       },
       "ContentOrchestratorRequest": {
         "type": "object",

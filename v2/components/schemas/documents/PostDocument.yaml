@@ -1,0 +1,11 @@
+allOf:
+  - $ref: "../common/base/BaseModel.yaml"
+  - type: object
+    properties:
+      brandId:
+        type: string
+      postCopy:
+        $ref: "../common/post/postCopy.yaml"
+      status:
+        type: string
+        enum: [draft, scheduled, posted, failed]

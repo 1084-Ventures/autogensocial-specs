@@ -1,0 +1,10 @@
+type: object
+properties:
+  brandId:
+    type: string
+    description: The brand this post belongs to.
+  contentCopy:
+    $ref: '../../common/post/postCopy.yaml'
+required:
+  - brandId
+  - contentCopy

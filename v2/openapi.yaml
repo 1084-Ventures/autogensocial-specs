@@ -11,12 +11,18 @@ servers:
 security:
   - bearerAuth: []
 paths:
+  /v2/posts:
+    post:
+      $ref: ./operations/posts/create-post.yaml
   /v2/brands/{brandId}:
-    $ref: ./operations/brands/get-brand-by-id.yaml
+    get:
+      $ref: ./operations/brands/get-brand-by-id.yaml
 components:
   schemas:
     PostPlanDocument:
       $ref: ./components/schemas/documents/PostPlanDocument.yaml
+    PostDocument:
+      $ref: ./components/schemas/documents/PostDocument.yaml
     BrandDocument:
       $ref: ./components/schemas/documents/BrandDocument.yaml
     SocialAccountEntry:
@@ -27,6 +33,8 @@ components:
       $ref: ./components/schemas/common/social/Platform.yaml
     PostPlan:
       $ref: ./components/schemas/common/postplan/PostPlan.yaml
+    postCopy:
+      $ref: ./components/schemas/common/post/postCopy.yaml
     BrandStyle:
       $ref: ./components/schemas/common/brand/BrandStyle.yaml
     BrandInfo:
@@ -37,6 +45,10 @@ components:
       $ref: ./components/schemas/common/base/Error.yaml
     BaseModel:
       $ref: ./components/schemas/common/base/BaseModel.yaml
+    postResponse:
+      $ref: ./components/schemas/api/posts/postResponse.yaml
+    postRequest:
+      $ref: ./components/schemas/api/posts/postRequest.yaml
     ContentOrchestratorRequest:
       $ref: ./components/schemas/api/orchestration/ContentOrchestratorRequest.yaml
     GetBrandByIdResponse:

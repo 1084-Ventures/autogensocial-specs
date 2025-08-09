@@ -1,0 +1,13 @@
+type: object
+properties:
+  content:
+    type: string
+    description: "The content of the post."
+  comment:
+    type: string
+    description: "A comment on the post."
+  hashtags:
+    type: array
+    items:
+      type: string
+    description: "A list of hashtags associated with the post."
