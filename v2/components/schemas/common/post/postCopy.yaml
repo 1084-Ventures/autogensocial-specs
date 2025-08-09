@@ -11,3 +11,7 @@ properties:
     items:
       type: string
     description: "A list of hashtags associated with the post."
+required:
+  - content
+  - comment
+  - hashtags

@@ -5,7 +5,7 @@ properties:
     description: Unique identifier for the post.
   brandId:
     type: string
-  contentCopy:
+  postCopy:
     $ref: '../../common/post/postCopy.yaml'
   status:
     type: string
@@ -13,4 +13,4 @@ properties:
 required:
   - id
   - brandId
-  - contentCopy
+  - postCopy

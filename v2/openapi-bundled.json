@@ -396,7 +396,12 @@
             },
             "description": "A list of hashtags associated with the post."
           }
-        }
+        },
+        "required": [
+          "content",
+          "comment",
+          "hashtags"
+        ]
       },
       "BrandStyle": {
         "type": "object",
@@ -551,7 +556,7 @@
           "brandId": {
             "type": "string"
           },
-          "contentCopy": {
+          "postCopy": {
             "$ref": "#/components/schemas/postCopy"
           },
           "status": {
@@ -567,7 +572,7 @@
         "required": [
           "id",
           "brandId",
-          "contentCopy"
+          "postCopy"
         ]
       },
       "postRequest": {
@@ -577,13 +582,13 @@
             "type": "string",
             "description": "The brand this post belongs to."
           },
-          "contentCopy": {
+          "postCopy": {
             "$ref": "#/components/schemas/postCopy"
           }
         },
         "required": [
           "brandId",
-          "contentCopy"
+          "postCopy"
         ]
       },
       "ContentOrchestratorRequest": {
