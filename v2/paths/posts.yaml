@@ -1,0 +1,3 @@
+/v2/posts:
+  post:
+    $ref: '../operations/posts/create-post.yaml'

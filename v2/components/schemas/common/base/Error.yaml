@@ -1,0 +1,17 @@
+type: object
+properties:
+  code:
+    type: string
+    description: Error code identifier
+  message:
+    type: string
+    description: Human-readable error message
+  details:
+    type:
+      - string
+      - 'null'
+    description: Optional additional error details
+required:
+  - code
+  - message
+description: Standard error response object

@@ -1,0 +1,17 @@
+type: object
+required:
+  - createdDate
+  - updatedDate
+  - isActive
+properties:
+  createdDate:
+    type: string
+    format: date-time
+    description: Creation timestamp
+  updatedDate:
+    type: string
+    format: date-time
+    description: Last update timestamp
+  isActive:
+    type: boolean
+    description: Whether the record is active or soft-deleted

@@ -1,0 +1,56 @@
+type: object
+properties:
+  info:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+        description: A detailed description to inform the AI agent about the post plan to assist in content generation.
+      type:
+        type: string
+        enum: [image, multi-image, video]
+      socialAccounts:
+        type: array
+        items:
+          $ref: "../social/Platform.yaml"
+  schedule:
+    type: object
+    properties:
+      frequency:
+        type: string
+        enum: [multiple_per_day, daily, alternate_days, bi_weekly, weekly, monthly]
+      startDate:
+        type: string
+        format: date
+      endDate:
+        type: string
+        format: date
+  content:
+    type: object
+    properties:
+      topics:
+        type: array
+        items:
+          type: string
+      hashtags:
+        type: array
+        items:
+          type: string
+      callToAction:
+        type: string
+  media:
+    type: object
+    properties:
+      source:
+        type: string
+        enum: [selected, uploaded, online, ai_generated]
+      mediaRefs:
+        type: array
+        items:
+          type: string
+          description: Reference IDs or URLs to the media assets
+      mediaStructure:
+        type: string
+        description: The structure or layout of the media content

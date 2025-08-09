@@ -1,0 +1,44 @@
+type: object
+properties:
+  colors:
+    type: object
+    properties:
+      primary:
+        type: string
+        description: Primary brand color in hex format
+      secondary:
+        type: string
+        description: Secondary brand color in hex format
+      accent1:
+        type: string
+        description: Accent brand color in hex format
+      accent2:
+        type: string
+        description: Additional accent brand color in hex format
+      accent3:
+        type: string
+        description: Another accent brand color in hex format
+      accent4:
+        type: string
+        description: Yet another accent brand color in hex format
+      accent5:
+        type: string
+        description: Final accent brand color in hex format
+      textOnPrimary:
+        type: string
+        description: Text color to use on primary background
+      textOnSecondary:
+        type: string
+        description: Text color to use on secondary background
+  fonts:
+    type: object
+    properties:
+      body:
+        type: string
+        description: Font family for body text
+      heading:
+        type: string
+        description: Font family for headings
+  logo:
+    type: string
+    description: URL or path to the brand logo image

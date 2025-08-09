@@ -1,6 +1,3 @@
-
-
-
 # Copilot Agent Coding & Contribution Guidelines
 
 
@@ -277,6 +274,95 @@ Refer to the [Azure Functions TypeScript developer guide](https://learn.microsof
 
 ---
 
+---
+
+## Foundry Agents & Function Tools Guidelines
+
+### Overview
+
+This project uses **Azure Foundry agents** to orchestrate business logic and workflows via dynamic function calling.  
+All custom operations (tools) are wrapped using the `FunctionTool` mechanism, enabling agents to invoke them dynamically and in a spec-driven manner.
+
+---
+
+### Agent & Tool Structure
+
+- **Function Tools:**  
+  - Place reusable business logic (e.g., CosmosDB queries, OpenAI calls) in `/src/tools/`.
+  - Each tool must be wrapped with `FunctionTool` from `@azure/ai-agents` for dynamic invocation.
+  - Tool definitions must strictly follow the OpenAPI contract for parameters and return types.
+  - Always use types imported from the generated models (`src/generated/models.ts`).
+
+- **Agent Registration:**  
+  - Register all tools in `/src/agent/definitions.ts` (or equivalent).
+  - Each tool must have a `ToolDefinition` describing its name, description, parameters, and required fields.
+  - Export each tool as a named export for agent discovery.
+
+- **Function Calling:**  
+  - Agents invoke tools using the function calling mechanism, passing validated arguments as per the OpenAPI spec.
+  - Tools must return only the fields and status codes defined in the OpenAPI spec.
+  - All error responses must use the generated error models.
+
+---
+
+### Example: Registering a Function Tool
+
+```typescript
+import { FunctionTool, ToolDefinition } from "@azure/ai-agents";
+import { getTemplateConfig } from "../tools/getTemplateConfig";
+import { components } from "../generated/models";
+
+const getTemplateConfigDefinition: ToolDefinition = {
+  name: "getTemplateConfig",
+  description: "Retrieve the template configuration for a given brand and template.",
+  parameters: {
+    type: "object",
+    properties: {
+      brandId: { type: "string" },
+      templateId: { type: "string" }
+    },
+    required: ["brandId", "templateId"]
+  }
+};
+
+export const getTemplateConfigTool = new FunctionTool({
+  definitions: [getTemplateConfigDefinition],
+  functions: {
+    getTemplateConfig: (args: { brandId: string; templateId: string }) =>
+      getTemplateConfig(args.brandId, args.templateId)
+  }
+});
+```
+
+---
+
+### Integration with Azure Functions
+
+- **Expose tools as Azure Functions HTTP triggers** when they need to be invoked externally or by other services.
+- Use the Azure Functions v4 programming model and only generated types for request/response.
+- Place all Azure Functions in `/src/functions/`.
+- Validate all incoming requests against the generated types before processing.
+- Use environment variables for secrets/configuration; never hardcode credentials.
+
+---
+
+### Testing & CI/CD
+
+- Write unit tests for all function tools and agent logic using Jest.
+- Use mocks and generated types for assertions.
+- Validate, lint, and test in CI before merging.
+
+---
+
+### Summary
+
+- All agent tools must be spec-driven, type-safe, and registered for dynamic invocation.
+- Never hand-write or duplicate models; always use generated types.
+- Follow OpenAPI contracts for all tool definitions and responses.
+- Integrate tools with Azure Functions as needed, following Azure best practices.
+
+---
+
 ## Do Not
 
 - Do not hand-write or edit generated model files.  
@@ -289,11 +375,11 @@ Refer to the [Azure Functions TypeScript developer guide](https://learn.microsof
 
 ## References
 
-- [Material Design Guidelines](https://material.angular.io/)
-- [Azure Static Web Apps Documentation](https://learn.microsoft.com/azure/static-web-apps/)
-- [Azure Functions Best Practices](https://learn.microsoft.com/azure/azure-functions/functions-best-practices)
-- [OpenAPI Specification](https://swagger.io/specification/)
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [Material Design Guidelines](https://material.angular.io/)  
+- [Azure Static Web Apps Documentation](https://learn.microsoft.com/azure/static-web-apps/)  
+- [Azure Functions Best Practices](https://learn.microsoft.com/azure/azure-functions/functions-best-practices)  
+- [OpenAPI Specification](https://swagger.io/specification/)  
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)  
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/)
 
 ---
@@ -429,6 +515,93 @@ Refer to the [Azure Functions TypeScript developer guide](https://learn.microsof
 
 ---
 
+## Foundry Agents & Function Tools Guidelines
+
+### Overview
+
+This project uses **Azure Foundry agents** to orchestrate business logic and workflows via dynamic function calling.  
+All custom operations (tools) are wrapped using the `FunctionTool` mechanism, enabling agents to invoke them dynamically and in a spec-driven manner.
+
+---
+
+### Agent & Tool Structure
+
+- **Function Tools:**  
+  - Place reusable business logic (e.g., CosmosDB queries, OpenAI calls) in `/src/tools/`.
+  - Each tool must be wrapped with `FunctionTool` from `@azure/ai-agents` for dynamic invocation.
+  - Tool definitions must strictly follow the OpenAPI contract for parameters and return types.
+  - Always use types imported from the generated models (`src/generated/models.ts`).
+
+- **Agent Registration:**  
+  - Register all tools in `/src/agent/definitions.ts` (or equivalent).
+  - Each tool must have a `ToolDefinition` describing its name, description, parameters, and required fields.
+  - Export each tool as a named export for agent discovery.
+
+- **Function Calling:**  
+  - Agents invoke tools using the function calling mechanism, passing validated arguments as per the OpenAPI spec.
+  - Tools must return only the fields and status codes defined in the OpenAPI spec.
+  - All error responses must use the generated error models.
+
+---
+
+### Example: Registering a Function Tool
+
+```typescript
+import { FunctionTool, ToolDefinition } from "@azure/ai-agents";
+import { getTemplateConfig } from "../tools/getTemplateConfig";
+import { components } from "../generated/models";
+
+const getTemplateConfigDefinition: ToolDefinition = {
+  name: "getTemplateConfig",
+  description: "Retrieve the template configuration for a given brand and template.",
+  parameters: {
+    type: "object",
+    properties: {
+      brandId: { type: "string" },
+      templateId: { type: "string" }
+    },
+    required: ["brandId", "templateId"]
+  }
+};
+
+export const getTemplateConfigTool = new FunctionTool({
+  definitions: [getTemplateConfigDefinition],
+  functions: {
+    getTemplateConfig: (args: { brandId: string; templateId: string }) =>
+      getTemplateConfig(args.brandId, args.templateId)
+  }
+});
+```
+
+---
+
+### Integration with Azure Functions
+
+- **Expose tools as Azure Functions HTTP triggers** when they need to be invoked externally or by other services.
+- Use the Azure Functions v4 programming model and only generated types for request/response.
+- Place all Azure Functions in `/src/functions/`.
+- Validate all incoming requests against the generated types before processing.
+- Use environment variables for secrets/configuration; never hardcode credentials.
+
+---
+
+### Testing & CI/CD
+
+- Write unit tests for all function tools and agent logic using Jest.
+- Use mocks and generated types for assertions.
+- Validate, lint, and test in CI before merging.
+
+---
+
+### Summary
+
+- All agent tools must be spec-driven, type-safe, and registered for dynamic invocation.
+- Never hand-write or duplicate models; always use generated types.
+- Follow OpenAPI contracts for all tool definitions and responses.
+- Integrate tools with Azure Functions as needed, following Azure best practices.
+
+---
+
 ## Do Not
 
 - Do not hand-write or edit generated model files.  
@@ -451,4 +624,4 @@ Refer to the [Azure Functions TypeScript developer guide](https://learn.microsof
 ---
 
 **Summary:**  
-All code must be spec-driven, type-
+All code must be spec-driven, type-safe, and follow the OpenAPI contract and Azure/Angular/TypeScript best practices outlined above.

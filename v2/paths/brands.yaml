@@ -1,0 +1,3 @@
+/v2/brands/{brandId}:
+  get:
+    $ref: '../operations/brands/get-brand-by-id.yaml'

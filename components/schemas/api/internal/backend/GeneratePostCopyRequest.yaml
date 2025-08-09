@@ -1,0 +1,16 @@
+type: object
+description: Request payload for generating post copy.
+properties:
+  brandId:
+    type: string
+    description: Unique identifier for the brand.
+  templateId:
+    type: string
+    description: Identifier for the template to use.
+  inputData:
+    type: object
+    description: Arbitrary input data for post generation (e.g., campaign, audience, etc.).
+    additionalProperties: true
+required:
+  - brandId
+  - templateId

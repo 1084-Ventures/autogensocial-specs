@@ -1,0 +1,16 @@
+type: object
+properties:
+  id:
+    type: string
+    description: Unique identifier for the post.
+  brandId:
+    type: string
+  postCopy:
+    $ref: '../../common/post/postCopy.yaml'
+  status:
+    type: string
+    enum: [draft, scheduled, posted, failed]
+required:
+  - id
+  - brandId
+  - postCopy

@@ -1709,6 +1709,47 @@
         },
         "description": "Payload for creating a new Brand. 'brandInfo.name' and 'brandInfo.userId' is required.\n"
       },
+      "GeneratePostCopyResponse": {
+        "type": "object",
+        "description": "Response payload containing the generated post copy.",
+        "properties": {
+          "postText": {
+            "type": "string",
+            "description": "The generated post text."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Additional metadata about the generated post.",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "postText"
+        ]
+      },
+      "GeneratePostCopyRequest": {
+        "type": "object",
+        "description": "Request payload for generating post copy.",
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "description": "Unique identifier for the brand."
+          },
+          "templateId": {
+            "type": "string",
+            "description": "Identifier for the template to use."
+          },
+          "inputData": {
+            "type": "object",
+            "description": "Arbitrary input data for post generation (e.g., campaign, audience, etc.).",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "brandId",
+          "templateId"
+        ]
+      },
       "ContentOrchestratorRequest": {
         "type": "object",
         "required": [

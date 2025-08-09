@@ -1,0 +1,28 @@
+type: object
+required:
+  - platformAccountId
+  - accessToken
+properties:
+  platformAccountId:
+    type: string
+    description: Unique identifier for the account on the platform (e.g., userId, pageId, open_id)
+  handle:
+    type: string
+    description: Public-facing handle (e.g., @username)
+  username:
+    type: string
+    description: Username or login/display name for the account
+  profileUrl:
+    type: string
+    description: URL to the user's or page's profile
+  accessToken:
+    type: string
+    description: OAuth access token for API access
+  expiryDate:
+    type: string
+    format: date-time
+    description: Token expiration timestamp
+  extra:
+    type: object
+    description: Platform-specific additional fields (e.g., pageId for Facebook, refreshToken for TikTok)
+    additionalProperties: true

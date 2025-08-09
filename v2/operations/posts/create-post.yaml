@@ -1,0 +1,25 @@
+operationId: createPost
+summary: Create a new post
+description: Creates a new post for a brand, including generated copy, media, and scheduling details.
+parameters: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../../components/schemas/api/posts/postRequest.yaml'
+responses:
+  '201':
+    description: Post created successfully
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/api/posts/postResponse.yaml'
+  '400':
+    $ref: '../../components/responses/BadRequest.yaml'
+  '401':
+    $ref: '../../components/responses/Unauthorized.yaml'
+  '404':
+    $ref: '../../components/responses/NotFound.yaml'
+  '429':
+    $ref: '../../components/responses/RateLimitExceeded.yaml'

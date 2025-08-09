@@ -1,0 +1,26 @@
+summary: Get a brand by brandId
+operationId: getBrandById
+parameters:
+  - name: brandId
+    in: path
+    required: true
+    schema:
+      type: string
+    description: Unique identifier for the brand.
+responses:
+  '200':
+    description: Brand found
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/api/brands/GetBrandByIdResponse.yaml'
+  '400':
+    $ref: '../../components/responses/BadRequest.yaml'
+  '401':
+    $ref: '../../components/responses/Unauthorized.yaml'
+  '404':
+    $ref: '../../components/responses/NotFound.yaml'
+  '429':
+    $ref: '../../components/responses/RateLimitExceeded.yaml'
+security:
+  - bearerAuth: []
